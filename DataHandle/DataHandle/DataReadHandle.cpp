@@ -1,3 +1,11 @@
+//
+//  DataReadHandle.cpp
+//  DataHandle
+//
+//  Created by Alkenso on 5/5/17.
+//
+//
+
 #include "DataReadHandle.h"
 
 void datarw::DataReadHandle::skipNextBytes(const uint64_t skipSize)

@@ -1,3 +1,11 @@
+//
+//  DataHandleUtils.cpp
+//  DataHandle
+//
+//  Created by Alkenso on 5/5/17.
+//
+//
+
 #include "DataHandleUtils.h"
 
 bool datarw::utils::RangesIntersects(const datarw::Range& range1, const datarw::Range& range2)

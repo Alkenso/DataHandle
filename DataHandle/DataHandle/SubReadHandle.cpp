@@ -1,3 +1,11 @@
+//
+//  SubReadHandle.cpp
+//  DataHandle
+//
+//  Created by Alkenso on 5/5/17.
+//
+//
+
 #include "SubReadHandle.h"
 
 datarw::SubReadHandle::SubReadHandle(DataReadHandle& parentReader, Range dataRange)
