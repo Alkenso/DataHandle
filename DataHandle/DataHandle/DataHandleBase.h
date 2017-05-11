@@ -13,13 +13,6 @@
 
 namespace datarw
 {
-    enum class SeekMode
-    {
-        Begin,
-        Current,
-        End
-    };
-    
     class DataHandleBase
     {
     public:
