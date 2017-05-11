@@ -12,14 +12,6 @@ The main advantage is the extensibility of the solution: under the common interf
  - data of different formats having a nonlinear structure
  - any other data formats
 
-## Short description
-The main interface files are DataReadHandle and DataWriteHandle.
-All child classes responsible for the particular data format or type processing must be inherited from them.
-
-The data source class MUST redefine only 2 methods:
- - obtaining the full size of the data (in the final form)
- - read / write data from Range (position; length) to a specific address
-
 ## Reading and writing data
 Reading and writing is allowed to read to and write from:
  - C-style arrays char / signed char / unsigned char / std :: byte (C ++ 17)
@@ -42,3 +34,11 @@ The base _DataWriteHandle_ defines methods that provide:
  - data writing it certain position
  - sequential data writing
  - selective / sequential recording of LE / BE values
+
+## Implementing support of new data formats and types
+The main interface files are DataReadHandle and DataWriteHandle.
+All child classes responsible for the particular data format or type processing must be inherited from them.
+
+The data source class MUST redefine only 2 methods:
+ - obtaining the full size of the data (in the final form)
+ - read / write data from Range (position; length) to a specific address
