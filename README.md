@@ -28,15 +28,16 @@ Reading and writing is allowed to read to and write from:
  
 Reading and writing is restricted to ensure that the data will be read / written from a continuous byte array.
 
+
 **Base classes**
 
-The base DataReadHandle defines methods that provide:
+The base _DataReadHandle_ defines methods that provide:
  - obtaining the full size of the data (in the final form)
  - selective reading of data from the range
  - sequential reading of data
  - selective / sequential reading of LE / BE values
 
-The base class DataWriteHandle defines methods that provide:
+The base _DataWriteHandle_ defines methods that provide:
  - obtaining the full current data size (in the final form)
  - data writing it certain position
  - sequential data writing
