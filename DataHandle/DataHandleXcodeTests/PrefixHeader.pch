@@ -1,0 +1,18 @@
+//
+//  PrefixHeader.pch
+//  MySDKProj
+//
+//  Created by alk on 5/7/17.
+//
+//
+
+#ifndef PrefixHeader_pch
+#define PrefixHeader_pch
+
+#ifdef __cplusplus
+
+#include <gtest/gtest.h>
+
+#endif
+
+#endif /* PrefixHeader_pch */
