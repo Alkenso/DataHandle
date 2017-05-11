@@ -35,6 +35,6 @@ The base DataReadHandle defines methods that provide:
 
 The base class DataWriteHandle defines methods that provide:
  - obtaining the full current data size (in the final form)
- - data writing it certain position
- - sequential data writing
- - selective / sequential recording of LE / BE values
+ - data writing it certain position
+ - sequential data writing
+ - selective / sequential recording of LE / BE values
