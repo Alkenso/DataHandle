@@ -1,0 +1,18 @@
+//
+//  AlkWorkspaceConfig.xcconfig
+//  DataHandle
+//
+//  Created by alk on 5/7/17.
+//
+//
+
+SDK_PATH = $(HOME)/Dropbox
+
+SDK_3RD_PARTY_INCLUDE_PATH = $(SDK_PATH)/3rdPartySDK/include
+SDK_3RD_PARTY_LIB_PATH = $(SDK_PATH)/3rdPartySDK/lib/$(CONFIGURATION)
+
+SDK_ALK_PROCUCT_INCLUDE_INSTALL_PATH = $(SDK_PATH)/AlkSDK/include/$(PRODUCT_NAME)
+SDK_ALK_PROCUCT_LIB_INSTALL_PATH = $(SDK_PATH)/AlkSDK/lib/$(CONFIGURATION)
+
+SDK_ALK_INCLUDE_PATH = $(SDK_PATH)/AlkSDK/include
+SDK_ALK_LIB_PATH = $(SDK_PATH)/AlkSDK/lib/$(CONFIGURATION)
