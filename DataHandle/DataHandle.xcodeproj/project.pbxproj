@@ -124,7 +124,7 @@
 		490A77881EBF125300C1564F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		490A77931EBF129600C1564F /* PrefixHeader.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PrefixHeader.pch; sourceTree = "<group>"; };
 		490A77951EBF37D800C1564F /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = System/Library/Frameworks/Cocoa.framework; sourceTree = SDKROOT; };
-		490A77CA1EBF8C3300C1564F /* BuildConfig.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; name = BuildConfig.xcconfig; path = ../BuildConfig.xcconfig; sourceTree = SOURCE_ROOT; };
+		490A77CA1EBF8C3300C1564F /* BuildConfig.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; lineEnding = 0; name = BuildConfig.xcconfig; path = ../BuildConfig.xcconfig; sourceTree = SOURCE_ROOT; xcLanguageSpecificationIdentifier = xcode.lang.xcconfig; };
 		490A77DC1EBF986700C1564F /* DataHandleUtilsTest.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = DataHandleUtilsTest.cpp; sourceTree = "<group>"; };
 		490A78071EC2286000C1564F /* DataHandleBase.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DataHandleBase.h; sourceTree = "<group>"; };
 		490A78081EC2286000C1564F /* DataHandleBase.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = DataHandleBase.cpp; sourceTree = "<group>"; };
@@ -574,7 +574,7 @@
 				INFOPLIST_FILE = DataHandleXcodeTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/../Frameworks";
 				LIBRARY_SEARCH_PATHS = (
-					"$(inherited)",
+					"$(SDK_3RD_PARTY_LIB_PATH)",
 					"$(SDK_ALK_LIB_PATH)",
 				);
 				MACOSX_DEPLOYMENT_TARGET = 10.11;
@@ -613,7 +613,7 @@
 				INFOPLIST_FILE = DataHandleXcodeTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/../Frameworks";
 				LIBRARY_SEARCH_PATHS = (
-					"$(inherited)",
+					"$(SDK_3RD_PARTY_LIB_PATH)",
 					"$(SDK_ALK_LIB_PATH)",
 				);
 				MACOSX_DEPLOYMENT_TARGET = 10.11;
@@ -731,6 +731,8 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
+				HEADER_SEARCH_PATHS = "";
+				LIBRARY_SEARCH_PATHS = "";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = macosx;
 			};
@@ -767,6 +769,8 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
+				HEADER_SEARCH_PATHS = "";
+				LIBRARY_SEARCH_PATHS = "";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = macosx;
 			};
