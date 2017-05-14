@@ -1,0 +1,11 @@
+//
+//  BuildConfig.xcconfig
+//  DataHandle
+//
+//  Created by Alkenso on 5/14/17.
+//
+//
+
+GTEST_PATH = $(HOME)/Dropbox/3rdPartySDK
+GTEST_INCLUDE_PATH = $(GTEST_PATH)/include
+GTEST_LIB_PATH = $(GTEST_PATH)/lib/$(CONFIGURATION)
