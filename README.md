@@ -46,6 +46,8 @@ The data source class MUST redefine only 2 methods:
 ## Example
 
 Let's figured out that there is some message that can be sent and received in some way as serialized sequence of bytes.
+
+```c++
 Message is simple structure:
 struct Message
 {
@@ -94,10 +96,12 @@ int main(void)
     
     SendMessage(responseBlob);
 }
+```
 
 **But...there is more...**
 Assume that the message is received as compressed, encrypted or compressed + encrypted blob
 
+```c++
 class CryptoReader : public datarw::DataReadHandle
 {
 public:
@@ -137,6 +141,7 @@ int main(void)
         return 1;
     }
 }
+```
 
 __Note:__
 __Originally, we have to decompress, decrypt, etc before performing any data manipulations.__
