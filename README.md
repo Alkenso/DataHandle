@@ -98,7 +98,7 @@ int main(void)
 }
 ```
 
-**But...there is more...**
+**But, there is more...**
 
 Assume that the message is received as compressed, encrypted or compressed + encrypted blob
 
@@ -144,9 +144,6 @@ int main(void)
 }
 ```
 
-__Note:__
-__Originally, we have to decompress, decrypt, etc before performing any data manipulations.__
-__It's ok if we need all data content, but there are cases when only small part of data is needed.__
-
-## Work in progress:
-  - add Xcode tests integration (in progress)
+_Note:_
+_Originally, we have to decompress, decrypt, etc before performing any data manipulations._
+_It's ok if we need all data content, but there are cases when only small part of data is needed._
