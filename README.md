@@ -42,3 +42,105 @@ All child classes responsible for the particular data format or type processing 
 The data source class MUST redefine only 2 methods:
  - obtaining the full size of the data (in the final form)
  - read / write data from Range (position; length) to a specific address
+
+## Example
+
+Let's figured out that there is some message that can be sent and received in some way as serialized sequence of bytes.
+Message is simple structure:
+struct Message
+{
+    uint32_t size;
+    char username[16];
+    unsigned char key[32];
+};
+
+bool ReadMessage(datarw::DataReadHandle& blobReader, Message& m)
+{
+    m.size = blobReader.readNextValue<uint32_t>();
+    if (m.size != blob.size())
+    {
+        return false;
+    }
+    
+    blobReader.readNextData(16, m.username);
+    blobReader.readNextData(32, m.key);
+}
+
+void WriteMessage(datarw::DataWriteHandle>& blobWriter, const Message& m)
+{
+    blobWriter.skipNextBytes(sizeof(uint32_t));
+    blobWriter.writeData(m.username, 16);
+    blobWriter.writeData(m.key, 32);
+    
+    blobWriter.insertValue<uint32_t>(blob.size(), 0); // write correct message size
+}
+
+int main(void)
+{
+    ...
+    const std::vector<unsigned char> blob = ReceiveMessage(...);
+    Message m = {};
+    datarw::VectorReadHandle reader(blob);
+    if (!ReadMessage(reader, m))
+    {
+        PrintError("Unable to read message");
+        return 1;
+    }
+    
+    const Message response = PrepareResponseMessage(...);
+    std::vector<unsigned char> responseBlob;
+    datarw::VectorWriteHandle writer(responseBlob);
+    WriteMessage(writer, response);
+    
+    SendMessage(responseBlob);
+}
+
+**But...there is more...**
+Assume that the message is received as compressed, encrypted or compressed + encrypted blob
+
+class CryptoReader : public datarw::DataReadHandle
+{
+public:
+    CryptoReader(datawr::DataReadHandle& parentReader, ...);
+...
+};
+
+class ZipReader : public datarw::DataReadHandle
+{
+public:
+    ZipReader(datawr::DataReadHandle& parentReader, ...);
+...
+};
+
+int main(void)
+{
+    Message m = {};
+    
+    // Case 1: encrypted data
+    const std::vector<unsigned char> blob = ReceiveEncryptedMessage(...);
+    datarw::VectorReadHandle reader(blob);
+    CryptoReader cryptoReader(reader, ...);
+    if (!ReadMessage(cryptoReader, m))
+    {
+        PrintError("Unable to read encrypted message");
+        return 1;
+    }
+    
+    // Case 2: encrypted compressed data
+    const std::vector<unsigned char> blob = ReceiveCompressedEncryptedMessage(...);
+    datarw::VectorReadHandle reader(blob);
+    ZipReader zipReader(reader, ...);
+    CryptoReader cryptoReader(zipReader, ...);
+    if (!ReadMessage(cryptoReader, m))
+    {
+        PrintError("Unable to read encrypted compressed message");
+        return 1;
+    }
+}
+
+__Note:__
+__Originally, we have to decompress, decrypt, etc before performing any data manipulations.__
+__It's ok if we need all data content, but there are cases when only small part of data is needed.__
+
+## Work in progress:
+  - add Xcode tests integration (in progress)
