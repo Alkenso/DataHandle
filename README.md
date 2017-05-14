@@ -99,6 +99,7 @@ int main(void)
 ```
 
 **But...there is more...**
+
 Assume that the message is received as compressed, encrypted or compressed + encrypted blob
 
 ```c++
