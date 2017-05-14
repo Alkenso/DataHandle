@@ -6,49 +6,20 @@ At hte beginning, the library was designed for convenient parsing of data and th
 With functional growth, DataHandle makes it convenient to work with data of absolutely different nature.
 
 Originally, DataHandle provides the ability to work with the most popular data sources.
-The main advantage is the extensibility of the solution: under the common interface, it could provide work with:
+The main advantage is the extensibility: under the common interface, it could provide work with:
  - encrypted data
  - packed / unpacked data
  - data of different formats having a nonlinear structure
+ - files
+ - process memory
  - any other data formats
-
-## Reading and writing data
-Reading and writing is allowed to read to and write from:
- - C-style arrays char / signed char / unsigned char / std :: byte (C ++ 17)
- - std :: vector <char / signed char / unsigned char / std :: byte (C ++ 17)>
- - std :: string
- 
-Reading and writing is restricted to ensure that the data will be read / written from a continuous byte array.
-
-
-**Base classes**
-
-The base _DataReadHandle_ defines methods that provide:
- - obtaining the full size of the data (in the final form)
- - selective reading of data from the range
- - sequential reading of data
- - selective / sequential reading of LE / BE values
-
-The base _DataWriteHandle_ defines methods that provide:
- - obtaining the full current data size (in the final form)
- - data writing it certain position
- - sequential data writing
- - selective / sequential recording of LE / BE values
-
-## Implementing support of new data formats and types
-The main interface files are DataReadHandle and DataWriteHandle.
-All child classes responsible for the particular data format or type processing must be inherited from them.
-
-The data source class MUST redefine only 2 methods:
- - obtaining the full size of the data (in the final form)
- - read / write data from Range (position; length) to a specific address
 
 ## Example
 
 Let's figured out that there is some message that can be sent and received in some way as serialized sequence of bytes.
 
 ```c++
-Message is simple structure:
+// Message is simple structure:
 struct Message
 {
     uint32_t size;
@@ -147,3 +118,34 @@ int main(void)
 _Note:_
 _Usually all data should be decompressed, decrypted, etc before performing any manipulations with it._
 _It's ok all content is useful, but there are cases when only (small) part of data is needed._
+
+## Reading and writing data
+Reading and writing is allowed to read to and write from:
+ - C-style arrays char / signed char / unsigned char / std :: byte (C ++ 17)
+ - std :: vector <char / signed char / unsigned char / std :: byte (C ++ 17)>
+ - std :: string
+ 
+Reading and writing is restricted to ensure that the data will be read / written from a continuous byte array.
+
+
+**Base classes**
+
+The base _DataReadHandle_ defines methods that provide:
+ - obtaining the full size of the data (in the final form)
+ - selective reading of data from the range
+ - sequential reading of data
+ - selective / sequential reading of LE / BE values
+
+The base _DataWriteHandle_ defines methods that provide:
+ - obtaining the full current data size (in the final form)
+ - data writing it certain position
+ - sequential data writing
+ - selective / sequential recording of LE / BE values
+
+## Implementing support of new data formats and types
+The main interface files are DataReadHandle and DataWriteHandle.
+All child classes responsible for the particular data format or type processing must be inherited from them.
+
+The data source class MUST redefine only 2 methods:
+ - obtaining the full size of the data (in the final form)
+ - read / write data from Range (position; length) to a specific address
