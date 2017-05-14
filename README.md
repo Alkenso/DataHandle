@@ -145,5 +145,5 @@ int main(void)
 ```
 
 _Note:_
-_Originally, we have to decompress, decrypt, etc before performing any data manipulations._
-_It's ok if we need all data content, but there are cases when only small part of data is needed._
+_Usually all data should be decompressed, decrypted, etc before performing any manipulations with it._
+_It's ok all content is useful, but there are cases when only (small) part of data is needed._
