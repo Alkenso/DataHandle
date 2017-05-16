@@ -48,12 +48,15 @@ namespace datarw
     namespace utils
     {
         template<typename T>
-        T ReverseValueByteOrder(T value)
-        {
-            uint8_t* valuePtr = reinterpret_cast<uint8_t*>(&value);
-            std::reverse(valuePtr, valuePtr + sizeof(value));
-            
-            return value;
-        }
+        T ReverseValueByteOrder(T value);
     }
+}
+
+template<typename T>
+T datarw::utils::ReverseValueByteOrder(T value)
+{
+    uint8_t* valuePtr = reinterpret_cast<uint8_t*>(&value);
+    std::reverse(valuePtr, valuePtr + sizeof(value));
+    
+    return value;
 }

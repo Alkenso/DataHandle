@@ -7,26 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		490A77231EB9CEED00C1564F /* PrefixHeader.pch in Headers */ = {isa = PBXBuildFile; fileRef = 490A77221EB9CEED00C1564F /* PrefixHeader.pch */; };
+		490A77231EB9CEED00C1564F /* PrefixHeader.pch in Headers */ = {isa = PBXBuildFile; fileRef = 490A77221EB9CEED00C1564F /* PrefixHeader.pch */; settings = {ATTRIBUTES = (Private, ); }; };
 		490A77271EBC91A600C1564F /* libDataHandle.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 492707151DDAF63900450519 /* libDataHandle.a */; };
-		490A772A1EBDB29F00C1564F /* StreamReadHandle.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4927072B1DDAF67F00450519 /* StreamReadHandle.cpp */; };
-		490A772D1EBDB91B00C1564F /* StreamWriteHandle.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 490A772B1EBDB91B00C1564F /* StreamWriteHandle.cpp */; };
-		490A772E1EBDB91B00C1564F /* StreamWriteHandle.h in Headers */ = {isa = PBXBuildFile; fileRef = 490A772C1EBDB91B00C1564F /* StreamWriteHandle.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		490A78091EC2286000C1564F /* DataHandleBase.h in Headers */ = {isa = PBXBuildFile; fileRef = 490A78071EC2286000C1564F /* DataHandleBase.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		490A780A1EC2286000C1564F /* DataHandleBase.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 490A78081EC2286000C1564F /* DataHandleBase.cpp */; };
-		492707231DDAF67300450519 /* DataReadHandle.h in Headers */ = {isa = PBXBuildFile; fileRef = 492707211DDAF67300450519 /* DataReadHandle.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		492707241DDAF67300450519 /* DataWriteHandle.h in Headers */ = {isa = PBXBuildFile; fileRef = 492707221DDAF67300450519 /* DataWriteHandle.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		492707341DDAF67F00450519 /* DataReadHandle.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 492707251DDAF67F00450519 /* DataReadHandle.cpp */; };
-		492707351DDAF67F00450519 /* DataWriteHandle.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 492707261DDAF67F00450519 /* DataWriteHandle.cpp */; };
-		492707371DDAF67F00450519 /* ContainerReadHandle.h in Headers */ = {isa = PBXBuildFile; fileRef = 492707281DDAF67F00450519 /* ContainerReadHandle.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		492707391DDAF67F00450519 /* ContainerWriteHandle.h in Headers */ = {isa = PBXBuildFile; fileRef = 4927072A1DDAF67F00450519 /* ContainerWriteHandle.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		4927073B1DDAF67F00450519 /* StreamReadHandle.h in Headers */ = {isa = PBXBuildFile; fileRef = 4927072C1DDAF67F00450519 /* StreamReadHandle.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		492707401DDAF67F00450519 /* SharedDataHandle.h in Headers */ = {isa = PBXBuildFile; fileRef = 492707311DDAF67F00450519 /* SharedDataHandle.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		492707411DDAF67F00450519 /* SubReadHandle.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 492707321DDAF67F00450519 /* SubReadHandle.cpp */; };
-		492707421DDAF67F00450519 /* SubReadHandle.h in Headers */ = {isa = PBXBuildFile; fileRef = 492707331DDAF67F00450519 /* SubReadHandle.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		492707441DDAF68A00450519 /* DataTypes.h in Headers */ = {isa = PBXBuildFile; fileRef = 492707431DDAF68A00450519 /* DataTypes.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		4990339D1EC45A7F0014611A /* StreamHandleBase.h in Headers */ = {isa = PBXBuildFile; fileRef = 490A780D1EC39BA100C1564F /* StreamHandleBase.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		49C2712D1EC891DB00B27DB7 /* RawBytesReadHandle.h in Headers */ = {isa = PBXBuildFile; fileRef = 490A77241EBC889600C1564F /* RawBytesReadHandle.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		49C271561EC8959800B27DB7 /* PrefixHeader.pch in Headers */ = {isa = PBXBuildFile; fileRef = 49C271551EC8959800B27DB7 /* PrefixHeader.pch */; };
 		49C2715C1EC896E900B27DB7 /* CommonReadHandleTest.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 49C271571EC896E900B27DB7 /* CommonReadHandleTest.cpp */; };
 		49C2715D1EC896E900B27DB7 /* CommonWriteHandleTest.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 49C271581EC896E900B27DB7 /* CommonWriteHandleTest.cpp */; };
@@ -35,6 +17,29 @@
 		49C271601EC896E900B27DB7 /* DataHandleUtilsTest.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 49C2715B1EC896E900B27DB7 /* DataHandleUtilsTest.cpp */; };
 		49C2717C1EC89F7E00B27DB7 /* libDataHandleTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 49C271421EC894AF00B27DB7 /* libDataHandleTests.a */; };
 		49C2717F1EC8A3F800B27DB7 /* Dummy.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 49C2717E1EC8A3F800B27DB7 /* Dummy.cpp */; };
+		49C271E91ECA504F00B27DB7 /* ContainerReadHandleInternal.h in Headers */ = {isa = PBXBuildFile; fileRef = 49C271E41ECA504F00B27DB7 /* ContainerReadHandleInternal.h */; settings = {ATTRIBUTES = (Private, ); }; };
+		49C271EA1ECA504F00B27DB7 /* ContainerWriteHandleInternal.h in Headers */ = {isa = PBXBuildFile; fileRef = 49C271E51ECA504F00B27DB7 /* ContainerWriteHandleInternal.h */; settings = {ATTRIBUTES = (Private, ); }; };
+		49C271EB1ECA504F00B27DB7 /* DataReadHandleInternal.h in Headers */ = {isa = PBXBuildFile; fileRef = 49C271E61ECA504F00B27DB7 /* DataReadHandleInternal.h */; settings = {ATTRIBUTES = (Private, ); }; };
+		49C271EC1ECA504F00B27DB7 /* DataWriteHandleInternal.h in Headers */ = {isa = PBXBuildFile; fileRef = 49C271E71ECA504F00B27DB7 /* DataWriteHandleInternal.h */; settings = {ATTRIBUTES = (Private, ); }; };
+		49C271ED1ECA504F00B27DB7 /* RawBytesReadHandleInternal.h in Headers */ = {isa = PBXBuildFile; fileRef = 49C271E81ECA504F00B27DB7 /* RawBytesReadHandleInternal.h */; settings = {ATTRIBUTES = (Private, ); }; };
+		49C271F41ECA557C00B27DB7 /* DataHandleBase.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 49C271EE1ECA557C00B27DB7 /* DataHandleBase.cpp */; };
+		49C271F51ECA557C00B27DB7 /* DataReadHandle.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 49C271EF1ECA557C00B27DB7 /* DataReadHandle.cpp */; };
+		49C271F61ECA557C00B27DB7 /* DataWriteHandle.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 49C271F01ECA557C00B27DB7 /* DataWriteHandle.cpp */; };
+		49C271F71ECA557C00B27DB7 /* StreamReadHandle.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 49C271F11ECA557C00B27DB7 /* StreamReadHandle.cpp */; };
+		49C271F81ECA557C00B27DB7 /* StreamWriteHandle.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 49C271F21ECA557C00B27DB7 /* StreamWriteHandle.cpp */; };
+		49C271F91ECA557C00B27DB7 /* SubReadHandle.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 49C271F31ECA557C00B27DB7 /* SubReadHandle.cpp */; };
+		49C272041ECA558700B27DB7 /* ContainerReadHandle.h in Headers */ = {isa = PBXBuildFile; fileRef = 49C271FA1ECA558700B27DB7 /* ContainerReadHandle.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		49C272051ECA558700B27DB7 /* ContainerWriteHandle.h in Headers */ = {isa = PBXBuildFile; fileRef = 49C271FB1ECA558700B27DB7 /* ContainerWriteHandle.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		49C272061ECA558700B27DB7 /* DataReadHandle.h in Headers */ = {isa = PBXBuildFile; fileRef = 49C271FC1ECA558700B27DB7 /* DataReadHandle.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		49C272071ECA558700B27DB7 /* DataTypes.h in Headers */ = {isa = PBXBuildFile; fileRef = 49C271FD1ECA558700B27DB7 /* DataTypes.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		49C272081ECA558700B27DB7 /* DataWriteHandle.h in Headers */ = {isa = PBXBuildFile; fileRef = 49C271FE1ECA558700B27DB7 /* DataWriteHandle.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		49C272091ECA558700B27DB7 /* RawBytesReadHandle.h in Headers */ = {isa = PBXBuildFile; fileRef = 49C271FF1ECA558700B27DB7 /* RawBytesReadHandle.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		49C2720A1ECA558700B27DB7 /* SharedDataHandle.h in Headers */ = {isa = PBXBuildFile; fileRef = 49C272001ECA558700B27DB7 /* SharedDataHandle.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		49C2720B1ECA558700B27DB7 /* StreamReadHandle.h in Headers */ = {isa = PBXBuildFile; fileRef = 49C272011ECA558700B27DB7 /* StreamReadHandle.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		49C2720C1ECA558700B27DB7 /* StreamWriteHandle.h in Headers */ = {isa = PBXBuildFile; fileRef = 49C272021ECA558700B27DB7 /* StreamWriteHandle.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		49C2720D1ECA558700B27DB7 /* SubReadHandle.h in Headers */ = {isa = PBXBuildFile; fileRef = 49C272031ECA558700B27DB7 /* SubReadHandle.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		49C272101ECA559600B27DB7 /* DataHandleBase.h in Headers */ = {isa = PBXBuildFile; fileRef = 49C2720E1ECA559600B27DB7 /* DataHandleBase.h */; settings = {ATTRIBUTES = (Private, ); }; };
+		49C272111ECA559600B27DB7 /* StreamHandleBase.h in Headers */ = {isa = PBXBuildFile; fileRef = 49C2720F1ECA559600B27DB7 /* StreamHandleBase.h */; settings = {ATTRIBUTES = (Private, ); }; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -69,28 +74,9 @@
 /* Begin PBXFileReference section */
 		490A77191EB9BF1000C1564F /* DataHandleTestsRunner */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = DataHandleTestsRunner; sourceTree = BUILT_PRODUCTS_DIR; };
 		490A77201EB9BF2A00C1564F /* PrefixHeader.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PrefixHeader.pch; sourceTree = "<group>"; };
-		490A77221EB9CEED00C1564F /* PrefixHeader.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PrefixHeader.pch; sourceTree = "<group>"; };
-		490A77241EBC889600C1564F /* RawBytesReadHandle.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RawBytesReadHandle.h; sourceTree = "<group>"; };
-		490A772B1EBDB91B00C1564F /* StreamWriteHandle.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = StreamWriteHandle.cpp; sourceTree = "<group>"; };
-		490A772C1EBDB91B00C1564F /* StreamWriteHandle.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StreamWriteHandle.h; sourceTree = "<group>"; };
+		490A77221EB9CEED00C1564F /* PrefixHeader.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PrefixHeader.pch; path = include/DataHandle/internal/PrefixHeader.pch; sourceTree = "<group>"; };
 		490A772F1EBDC45500C1564F /* TestData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TestData.h; path = ../DataHandleTests/TestData.h; sourceTree = "<group>"; };
-		490A77951EBF37D800C1564F /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = System/Library/Frameworks/Cocoa.framework; sourceTree = SDKROOT; };
-		490A78071EC2286000C1564F /* DataHandleBase.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DataHandleBase.h; sourceTree = "<group>"; };
-		490A78081EC2286000C1564F /* DataHandleBase.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = DataHandleBase.cpp; sourceTree = "<group>"; };
-		490A780D1EC39BA100C1564F /* StreamHandleBase.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = StreamHandleBase.h; sourceTree = "<group>"; };
 		492707151DDAF63900450519 /* libDataHandle.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libDataHandle.a; sourceTree = BUILT_PRODUCTS_DIR; };
-		492707211DDAF67300450519 /* DataReadHandle.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DataReadHandle.h; sourceTree = "<group>"; };
-		492707221DDAF67300450519 /* DataWriteHandle.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DataWriteHandle.h; sourceTree = "<group>"; };
-		492707251DDAF67F00450519 /* DataReadHandle.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = DataReadHandle.cpp; sourceTree = "<group>"; };
-		492707261DDAF67F00450519 /* DataWriteHandle.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = DataWriteHandle.cpp; sourceTree = "<group>"; };
-		492707281DDAF67F00450519 /* ContainerReadHandle.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ContainerReadHandle.h; sourceTree = "<group>"; };
-		4927072A1DDAF67F00450519 /* ContainerWriteHandle.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ContainerWriteHandle.h; sourceTree = "<group>"; };
-		4927072B1DDAF67F00450519 /* StreamReadHandle.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = StreamReadHandle.cpp; sourceTree = "<group>"; };
-		4927072C1DDAF67F00450519 /* StreamReadHandle.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StreamReadHandle.h; sourceTree = "<group>"; };
-		492707311DDAF67F00450519 /* SharedDataHandle.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SharedDataHandle.h; sourceTree = "<group>"; };
-		492707321DDAF67F00450519 /* SubReadHandle.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = SubReadHandle.cpp; sourceTree = "<group>"; };
-		492707331DDAF67F00450519 /* SubReadHandle.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SubReadHandle.h; sourceTree = "<group>"; };
-		492707431DDAF68A00450519 /* DataTypes.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DataTypes.h; sourceTree = "<group>"; };
 		49ACA6E91EC88BD00045A496 /* Tests.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Tests.xcconfig; sourceTree = "<group>"; };
 		49C271421EC894AF00B27DB7 /* libDataHandleTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libDataHandleTests.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		49C271551EC8959800B27DB7 /* PrefixHeader.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PrefixHeader.pch; path = DataHandleTests/PrefixHeader.pch; sourceTree = SOURCE_ROOT; };
@@ -100,6 +86,29 @@
 		49C2715A1EC896E900B27DB7 /* ConcreteWriteHandleTest.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = ConcreteWriteHandleTest.cpp; path = DataHandleTests/ConcreteWriteHandleTest.cpp; sourceTree = SOURCE_ROOT; };
 		49C2715B1EC896E900B27DB7 /* DataHandleUtilsTest.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = DataHandleUtilsTest.cpp; path = DataHandleTests/DataHandleUtilsTest.cpp; sourceTree = SOURCE_ROOT; };
 		49C2717E1EC8A3F800B27DB7 /* Dummy.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Dummy.cpp; sourceTree = "<group>"; };
+		49C271E41ECA504F00B27DB7 /* ContainerReadHandleInternal.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ContainerReadHandleInternal.h; path = include/DataHandle/internal/ContainerReadHandleInternal.h; sourceTree = "<group>"; };
+		49C271E51ECA504F00B27DB7 /* ContainerWriteHandleInternal.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ContainerWriteHandleInternal.h; path = include/DataHandle/internal/ContainerWriteHandleInternal.h; sourceTree = "<group>"; };
+		49C271E61ECA504F00B27DB7 /* DataReadHandleInternal.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DataReadHandleInternal.h; path = include/DataHandle/internal/DataReadHandleInternal.h; sourceTree = "<group>"; };
+		49C271E71ECA504F00B27DB7 /* DataWriteHandleInternal.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DataWriteHandleInternal.h; path = include/DataHandle/internal/DataWriteHandleInternal.h; sourceTree = "<group>"; };
+		49C271E81ECA504F00B27DB7 /* RawBytesReadHandleInternal.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = RawBytesReadHandleInternal.h; path = include/DataHandle/internal/RawBytesReadHandleInternal.h; sourceTree = "<group>"; };
+		49C271EE1ECA557C00B27DB7 /* DataHandleBase.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = DataHandleBase.cpp; path = src/DataHandleBase.cpp; sourceTree = "<group>"; };
+		49C271EF1ECA557C00B27DB7 /* DataReadHandle.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = DataReadHandle.cpp; path = src/DataReadHandle.cpp; sourceTree = "<group>"; };
+		49C271F01ECA557C00B27DB7 /* DataWriteHandle.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = DataWriteHandle.cpp; path = src/DataWriteHandle.cpp; sourceTree = "<group>"; };
+		49C271F11ECA557C00B27DB7 /* StreamReadHandle.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = StreamReadHandle.cpp; path = src/StreamReadHandle.cpp; sourceTree = "<group>"; };
+		49C271F21ECA557C00B27DB7 /* StreamWriteHandle.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = StreamWriteHandle.cpp; path = src/StreamWriteHandle.cpp; sourceTree = "<group>"; };
+		49C271F31ECA557C00B27DB7 /* SubReadHandle.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = SubReadHandle.cpp; path = src/SubReadHandle.cpp; sourceTree = "<group>"; };
+		49C271FA1ECA558700B27DB7 /* ContainerReadHandle.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ContainerReadHandle.h; path = include/DataHandle/ContainerReadHandle.h; sourceTree = "<group>"; };
+		49C271FB1ECA558700B27DB7 /* ContainerWriteHandle.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ContainerWriteHandle.h; path = include/DataHandle/ContainerWriteHandle.h; sourceTree = "<group>"; };
+		49C271FC1ECA558700B27DB7 /* DataReadHandle.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DataReadHandle.h; path = include/DataHandle/DataReadHandle.h; sourceTree = "<group>"; };
+		49C271FD1ECA558700B27DB7 /* DataTypes.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DataTypes.h; path = include/DataHandle/DataTypes.h; sourceTree = "<group>"; };
+		49C271FE1ECA558700B27DB7 /* DataWriteHandle.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DataWriteHandle.h; path = include/DataHandle/DataWriteHandle.h; sourceTree = "<group>"; };
+		49C271FF1ECA558700B27DB7 /* RawBytesReadHandle.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = RawBytesReadHandle.h; path = include/DataHandle/RawBytesReadHandle.h; sourceTree = "<group>"; };
+		49C272001ECA558700B27DB7 /* SharedDataHandle.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SharedDataHandle.h; path = include/DataHandle/SharedDataHandle.h; sourceTree = "<group>"; };
+		49C272011ECA558700B27DB7 /* StreamReadHandle.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = StreamReadHandle.h; path = include/DataHandle/StreamReadHandle.h; sourceTree = "<group>"; };
+		49C272021ECA558700B27DB7 /* StreamWriteHandle.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = StreamWriteHandle.h; path = include/DataHandle/StreamWriteHandle.h; sourceTree = "<group>"; };
+		49C272031ECA558700B27DB7 /* SubReadHandle.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SubReadHandle.h; path = include/DataHandle/SubReadHandle.h; sourceTree = "<group>"; };
+		49C2720E1ECA559600B27DB7 /* DataHandleBase.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DataHandleBase.h; path = include/DataHandle/internal/DataHandleBase.h; sourceTree = "<group>"; };
+		49C2720F1ECA559600B27DB7 /* StreamHandleBase.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = StreamHandleBase.h; path = include/DataHandle/internal/StreamHandleBase.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -132,18 +141,16 @@
 		3C7B2DFC1E9571490015E93A /* Public Headers */ = {
 			isa = PBXGroup;
 			children = (
-				492707431DDAF68A00450519 /* DataTypes.h */,
-				490A78071EC2286000C1564F /* DataHandleBase.h */,
-				492707211DDAF67300450519 /* DataReadHandle.h */,
-				492707221DDAF67300450519 /* DataWriteHandle.h */,
-				492707281DDAF67F00450519 /* ContainerReadHandle.h */,
-				4927072A1DDAF67F00450519 /* ContainerWriteHandle.h */,
-				490A77241EBC889600C1564F /* RawBytesReadHandle.h */,
-				490A780D1EC39BA100C1564F /* StreamHandleBase.h */,
-				4927072C1DDAF67F00450519 /* StreamReadHandle.h */,
-				490A772C1EBDB91B00C1564F /* StreamWriteHandle.h */,
-				492707331DDAF67F00450519 /* SubReadHandle.h */,
-				492707311DDAF67F00450519 /* SharedDataHandle.h */,
+				49C271FD1ECA558700B27DB7 /* DataTypes.h */,
+				49C271FC1ECA558700B27DB7 /* DataReadHandle.h */,
+				49C271FE1ECA558700B27DB7 /* DataWriteHandle.h */,
+				49C271FA1ECA558700B27DB7 /* ContainerReadHandle.h */,
+				49C271FB1ECA558700B27DB7 /* ContainerWriteHandle.h */,
+				49C271FF1ECA558700B27DB7 /* RawBytesReadHandle.h */,
+				49C272011ECA558700B27DB7 /* StreamReadHandle.h */,
+				49C272021ECA558700B27DB7 /* StreamWriteHandle.h */,
+				49C272001ECA558700B27DB7 /* SharedDataHandle.h */,
+				49C272031ECA558700B27DB7 /* SubReadHandle.h */,
 			);
 			name = "Public Headers";
 			sourceTree = "<group>";
@@ -151,12 +158,12 @@
 		3C7B2DFE1E9571600015E93A /* Sources */ = {
 			isa = PBXGroup;
 			children = (
-				490A78081EC2286000C1564F /* DataHandleBase.cpp */,
-				492707251DDAF67F00450519 /* DataReadHandle.cpp */,
-				492707261DDAF67F00450519 /* DataWriteHandle.cpp */,
-				4927072B1DDAF67F00450519 /* StreamReadHandle.cpp */,
-				490A772B1EBDB91B00C1564F /* StreamWriteHandle.cpp */,
-				492707321DDAF67F00450519 /* SubReadHandle.cpp */,
+				49C271EE1ECA557C00B27DB7 /* DataHandleBase.cpp */,
+				49C271EF1ECA557C00B27DB7 /* DataReadHandle.cpp */,
+				49C271F01ECA557C00B27DB7 /* DataWriteHandle.cpp */,
+				49C271F11ECA557C00B27DB7 /* StreamReadHandle.cpp */,
+				49C271F21ECA557C00B27DB7 /* StreamWriteHandle.cpp */,
+				49C271F31ECA557C00B27DB7 /* SubReadHandle.cpp */,
 			);
 			name = Sources;
 			sourceTree = "<group>";
@@ -188,14 +195,6 @@
 			path = DataHandleTestsRunner;
 			sourceTree = SOURCE_ROOT;
 		};
-		490A77941EBF37D800C1564F /* Frameworks */ = {
-			isa = PBXGroup;
-			children = (
-				490A77951EBF37D800C1564F /* Cocoa.framework */,
-			);
-			name = Frameworks;
-			sourceTree = "<group>";
-		};
 		4927070A1DDAF61E00450519 = {
 			isa = PBXGroup;
 			children = (
@@ -204,7 +203,6 @@
 				49C271431EC894AF00B27DB7 /* DataHandleTests */,
 				490A771A1EB9BF1000C1564F /* DataHandleTestsRunner */,
 				492707161DDAF63900450519 /* Products */,
-				490A77941EBF37D800C1564F /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -222,18 +220,10 @@
 			isa = PBXGroup;
 			children = (
 				3C7B2DFC1E9571490015E93A /* Public Headers */,
+				49C271E31ECA503B00B27DB7 /* Private Headers */,
 				3C7B2DFE1E9571600015E93A /* Sources */,
-				492707471DDAF71800450519 /* Support */,
 			);
 			path = DataHandle;
-			sourceTree = "<group>";
-		};
-		492707471DDAF71800450519 /* Support */ = {
-			isa = PBXGroup;
-			children = (
-				490A77221EB9CEED00C1564F /* PrefixHeader.pch */,
-			);
-			name = Support;
 			sourceTree = "<group>";
 		};
 		49C271431EC894AF00B27DB7 /* DataHandleTests */ = {
@@ -250,6 +240,21 @@
 			path = DataHandleTests;
 			sourceTree = "<group>";
 		};
+		49C271E31ECA503B00B27DB7 /* Private Headers */ = {
+			isa = PBXGroup;
+			children = (
+				490A77221EB9CEED00C1564F /* PrefixHeader.pch */,
+				49C2720E1ECA559600B27DB7 /* DataHandleBase.h */,
+				49C271E61ECA504F00B27DB7 /* DataReadHandleInternal.h */,
+				49C271E71ECA504F00B27DB7 /* DataWriteHandleInternal.h */,
+				49C271E41ECA504F00B27DB7 /* ContainerReadHandleInternal.h */,
+				49C271E51ECA504F00B27DB7 /* ContainerWriteHandleInternal.h */,
+				49C271E81ECA504F00B27DB7 /* RawBytesReadHandleInternal.h */,
+				49C2720F1ECA559600B27DB7 /* StreamHandleBase.h */,
+			);
+			name = "Private Headers";
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXHeadersBuildPhase section */
@@ -257,19 +262,24 @@
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				490A78091EC2286000C1564F /* DataHandleBase.h in Headers */,
-				492707231DDAF67300450519 /* DataReadHandle.h in Headers */,
-				492707371DDAF67F00450519 /* ContainerReadHandle.h in Headers */,
-				49C2712D1EC891DB00B27DB7 /* RawBytesReadHandle.h in Headers */,
-				490A772E1EBDB91B00C1564F /* StreamWriteHandle.h in Headers */,
-				4990339D1EC45A7F0014611A /* StreamHandleBase.h in Headers */,
-				4927073B1DDAF67F00450519 /* StreamReadHandle.h in Headers */,
-				492707401DDAF67F00450519 /* SharedDataHandle.h in Headers */,
-				492707241DDAF67300450519 /* DataWriteHandle.h in Headers */,
-				492707421DDAF67F00450519 /* SubReadHandle.h in Headers */,
-				492707441DDAF68A00450519 /* DataTypes.h in Headers */,
-				492707391DDAF67F00450519 /* ContainerWriteHandle.h in Headers */,
+				49C272071ECA558700B27DB7 /* DataTypes.h in Headers */,
+				49C272061ECA558700B27DB7 /* DataReadHandle.h in Headers */,
+				49C272081ECA558700B27DB7 /* DataWriteHandle.h in Headers */,
+				49C272041ECA558700B27DB7 /* ContainerReadHandle.h in Headers */,
+				49C272051ECA558700B27DB7 /* ContainerWriteHandle.h in Headers */,
+				49C272091ECA558700B27DB7 /* RawBytesReadHandle.h in Headers */,
+				49C2720B1ECA558700B27DB7 /* StreamReadHandle.h in Headers */,
+				49C2720C1ECA558700B27DB7 /* StreamWriteHandle.h in Headers */,
+				49C2720D1ECA558700B27DB7 /* SubReadHandle.h in Headers */,
+				49C2720A1ECA558700B27DB7 /* SharedDataHandle.h in Headers */,
 				490A77231EB9CEED00C1564F /* PrefixHeader.pch in Headers */,
+				49C272101ECA559600B27DB7 /* DataHandleBase.h in Headers */,
+				49C272111ECA559600B27DB7 /* StreamHandleBase.h in Headers */,
+				49C271EC1ECA504F00B27DB7 /* DataWriteHandleInternal.h in Headers */,
+				49C271EA1ECA504F00B27DB7 /* ContainerWriteHandleInternal.h in Headers */,
+				49C271E91ECA504F00B27DB7 /* ContainerReadHandleInternal.h in Headers */,
+				49C271ED1ECA504F00B27DB7 /* RawBytesReadHandleInternal.h in Headers */,
+				49C271EB1ECA504F00B27DB7 /* DataReadHandleInternal.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -309,7 +319,6 @@
 				492707131DDAF63900450519 /* Headers */,
 				492707111DDAF63900450519 /* Sources */,
 				492707121DDAF63900450519 /* Frameworks */,
-				49D85EF61DE71BA900A58A74 /* ShellScript */,
 			);
 			buildRules = (
 			);
@@ -378,22 +387,6 @@
 		};
 /* End PBXProject section */
 
-/* Begin PBXShellScriptBuildPhase section */
-		49D85EF61DE71BA900A58A74 /* ShellScript */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "rm -rf \"${SDK_ALK_PROCUCT_INCLUDE_INSTALL_PATH}\"\nrm -f \"${SDK_ALK_PROCUCT_LIB_INSTALL_PATH}/lib${PRODUCT_NAME}.a\"";
-		};
-/* End PBXShellScriptBuildPhase section */
-
 /* Begin PBXSourcesBuildPhase section */
 		490A77151EB9BF1000C1564F /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
@@ -407,12 +400,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				490A772A1EBDB29F00C1564F /* StreamReadHandle.cpp in Sources */,
-				492707411DDAF67F00450519 /* SubReadHandle.cpp in Sources */,
-				490A780A1EC2286000C1564F /* DataHandleBase.cpp in Sources */,
-				490A772D1EBDB91B00C1564F /* StreamWriteHandle.cpp in Sources */,
-				492707351DDAF67F00450519 /* DataWriteHandle.cpp in Sources */,
-				492707341DDAF67F00450519 /* DataReadHandle.cpp in Sources */,
+				49C271F41ECA557C00B27DB7 /* DataHandleBase.cpp in Sources */,
+				49C271F71ECA557C00B27DB7 /* StreamReadHandle.cpp in Sources */,
+				49C271F91ECA557C00B27DB7 /* SubReadHandle.cpp in Sources */,
+				49C271F61ECA557C00B27DB7 /* DataWriteHandle.cpp in Sources */,
+				49C271F81ECA557C00B27DB7 /* StreamWriteHandle.cpp in Sources */,
+				49C271F51ECA557C00B27DB7 /* DataReadHandle.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -469,7 +462,6 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				HEADER_SEARCH_PATHS = "$(GTEST_INCLUDE_PATH)";
 				LIBRARY_SEARCH_PATHS = "$(GTEST_LIB_PATH)";
-				MACOSX_DEPLOYMENT_TARGET = 10.11;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				OTHER_LDFLAGS = (
 					"-Wl,-all_load",
@@ -501,7 +493,6 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				HEADER_SEARCH_PATHS = "$(GTEST_INCLUDE_PATH)";
 				LIBRARY_SEARCH_PATHS = "$(GTEST_LIB_PATH)";
-				MACOSX_DEPLOYMENT_TARGET = 10.11;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				OTHER_LDFLAGS = (
 					"-Wl,-all_load",
@@ -531,7 +522,7 @@
 				GCC_C_LANGUAGE_STANDARD = c99;
 				GCC_NO_COMMON_BLOCKS = YES;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = "$(PROJECT_DIR)/$(PRODUCT_NAME)/PrefixHeader.pch";
+				GCC_PREFIX_HEADER = "$(PROJECT_DIR)/$(PRODUCT_NAME)/$(INTERMEDIATE_PCH_PATH)/PrefixHeader.pch";
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNDECLARED_SELECTOR = YES;
@@ -539,6 +530,7 @@
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_PARAMETER = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
+				INTERMEDIATE_PCH_PATH = "";
 				MACOSX_DEPLOYMENT_TARGET = 10.8;
 				ONLY_ACTIVE_ARCH = YES;
 			};
@@ -561,7 +553,7 @@
 				GCC_C_LANGUAGE_STANDARD = c99;
 				GCC_NO_COMMON_BLOCKS = YES;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = "$(PROJECT_DIR)/$(PRODUCT_NAME)/PrefixHeader.pch";
+				GCC_PREFIX_HEADER = "$(PROJECT_DIR)/$(PRODUCT_NAME)/$(INTERMEDIATE_PCH_PATH)/PrefixHeader.pch";
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNDECLARED_SELECTOR = YES;
@@ -569,6 +561,7 @@
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_PARAMETER = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
+				INTERMEDIATE_PCH_PATH = "";
 				MACOSX_DEPLOYMENT_TARGET = 10.8;
 			};
 			name = Release;
@@ -609,8 +602,10 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
+				INTERMEDIATE_PCH_PATH = "include/$(PRODUCT_NAME)/internal";
+				PRIVATE_HEADERS_FOLDER_PATH = "$(PUBLIC_HEADERS_FOLDER_PATH)/internal";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PUBLIC_HEADERS_FOLDER_PATH = "/incude/$(PRODUCT_NAME)";
+				PUBLIC_HEADERS_FOLDER_PATH = "/include/$(PRODUCT_NAME)";
 				SDKROOT = macosx;
 			};
 			name = Debug;
@@ -646,8 +641,10 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
+				INTERMEDIATE_PCH_PATH = "include/$(PRODUCT_NAME)/internal";
+				PRIVATE_HEADERS_FOLDER_PATH = "$(PUBLIC_HEADERS_FOLDER_PATH)/internal";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PUBLIC_HEADERS_FOLDER_PATH = "/incude/$(PRODUCT_NAME)";
+				PUBLIC_HEADERS_FOLDER_PATH = "/include/$(PRODUCT_NAME)";
 				SDKROOT = macosx;
 			};
 			name = Release;
@@ -679,7 +676,6 @@
 				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				HEADER_SEARCH_PATHS = "$(GTEST_INCLUDE_PATH)";
-				MACOSX_DEPLOYMENT_TARGET = 10.11;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = macosx;
@@ -708,7 +704,6 @@
 				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				HEADER_SEARCH_PATHS = "$(GTEST_INCLUDE_PATH)";
-				MACOSX_DEPLOYMENT_TARGET = 10.11;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = macosx;

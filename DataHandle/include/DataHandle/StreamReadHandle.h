@@ -11,7 +11,7 @@
 #include <istream>
 
 #include <DataHandle/DataReadHandle.h>
-#include <DataHandle/StreamHandleBase.h>
+#include <DataHandle/internal/StreamHandleBase.h>
 
 namespace datarw
 {
