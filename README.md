@@ -30,7 +30,7 @@ struct Message
 bool ReadMessage(datarw::DataReadHandle& blobReader, Message& m)
 {
     m.size = blobReader.readNextValue<uint32_t>();
-    if (m.size != blob.size())
+    if (m.size != blobReader.getDataSize())
     {
         return false;
     }
