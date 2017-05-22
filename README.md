@@ -30,7 +30,7 @@ struct Message
 bool ReadMessage(datarw::DataReadHandle& blobReader, Message& m)
 {
     m.size = blobReader.readNextValue<uint32_t>();
-    if (m.size != blob.size())
+    if (m.size != blobReader.getDataSize())
     {
         return false;
     }
@@ -149,3 +149,7 @@ All child classes responsible for the particular data format or type processing 
 The data source class MUST redefine only 2 methods:
  - obtaining the full size of the data (in the final form)
  - read / write data from Range (position; length) to a specific address
+
+## Future plans
+ - add project files of popular IDEs: Visual Studio, Qt Creator (in progress)
+ - add building with Cmake
