@@ -2,7 +2,7 @@
 DataHandle provides unified processing of completely different data sources under a single interface.
 Generally DataHandle consists of two parts: data reading and data writing.
 
-At hte beginning, the library was designed for convenient parsing of data and the arrangement of new data.
+At the beginning, this library was designed for convenient parsing of data and the arrangement of new data.
 With functional growth, DataHandle makes it convenient to work with data of absolutely different nature.
 
 Originally, DataHandle provides the ability to work with the most popular data sources.
