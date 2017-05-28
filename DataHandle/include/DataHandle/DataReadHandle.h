@@ -49,11 +49,11 @@ namespace datarw
         BufferTypename<Buffer> readAllData();
         
         template<typename T>
-        T peekValue(int64_t offset);
+        T peekValueLE(int64_t offset);
         template<typename T>
-        T peekValueFromCurrent(int64_t offset);
+        T peekValueFromCurrentLE(int64_t offset);
         template<typename T>
-        T readNextValue();
+        T readNextValueLE();
         
         template<typename T>
         T peekValueBE(int64_t offset);
@@ -79,6 +79,13 @@ namespace datarw
         void peekDataInternal(const Range& range, unsigned char* buffer, const bool usePosition);
         void readNextDataInternal(const uint64_t dataSize, unsigned char* buffer);
         uint64_t seekPosition(const uint64_t offset, const bool usePosition, const bool seekForce = false);
+        
+        template<typename T>
+        T peekValue(int64_t offset, const bool reverseByteOrder);
+        template<typename T>
+        T peekValueFromCurrent(int64_t offset, const bool reverseByteOrder);
+        template<typename T>
+        T readNextValue(const bool reverseByteOrder);
         
     private:
         uint64_t m_sizePosition;

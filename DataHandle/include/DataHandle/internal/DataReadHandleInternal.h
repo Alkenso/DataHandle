@@ -99,45 +99,63 @@ datarw::BufferTypename<Buffer> datarw::DataReadHandle::readAllData()
 }
 
 template<typename T>
-T datarw::DataReadHandle::peekValue(int64_t offset)
+T datarw::DataReadHandle::peekValueLE(int64_t offset)
 {
-    T value;
-    memset(&value, 0, sizeof(T));
-    peekData(Range(offset, sizeof(T)), reinterpret_cast<unsigned char*>(&value));
-    
-    return value;
+    return peekValue<T>(offset, IS_BIG_ENDIAN);
 }
 
 template<typename T>
-T datarw::DataReadHandle::peekValueFromCurrent(int64_t offset)
+T datarw::DataReadHandle::peekValueFromCurrentLE(int64_t offset)
 {
-    return peekValue<T>(tellPosition() + offset);
+    return peekValueFromCurrent<T>(offset, IS_BIG_ENDIAN);
 }
 
 template<typename T>
-T datarw::DataReadHandle::readNextValue()
+T datarw::DataReadHandle::readNextValueLE()
 {
-    T value;
-    memset(&value, 0, sizeof(T));
-    readNextData(sizeof(T), reinterpret_cast<unsigned char*>(&value));
-    
-    return value;
+    return readNextValue<T>(IS_BIG_ENDIAN);
 }
 
 template<typename T>
 T datarw::DataReadHandle::peekValueBE(int64_t offset)
 {
-    return utils::ReverseValueByteOrder<T>(peekValue<T>(offset));
+    return peekValue<T>(offset, !IS_BIG_ENDIAN);
 }
 
 template<typename T>
 T datarw::DataReadHandle::peekValueFromCurrentBE(int64_t offset)
 {
-    return utils::ReverseValueByteOrder<T>(peekValueFromCurrent<T>(offset));
+    return peekValueFromCurrent<T>(offset, !IS_BIG_ENDIAN);
 }
 
 template<typename T>
 T datarw::DataReadHandle::readNextValueBE()
 {
-    return utils::ReverseValueByteOrder<T>(readNextValue<T>());
+    return readNextValue<T>(!IS_BIG_ENDIAN);
+}
+
+template<typename T>
+T datarw::DataReadHandle::peekValue(int64_t offset, const bool reverseByteOrder)
+{
+    T value;
+    memset(&value, 0, sizeof(T));
+    peekData(Range(offset, sizeof(T)), reinterpret_cast<unsigned char*>(&value));
+    
+    return reverseByteOrder ? utils::ReverseValueByteOrder<T>(value) : value;
+}
+
+template<typename T>
+T datarw::DataReadHandle::peekValueFromCurrent(int64_t offset, const bool reverseByteOrder)
+{
+    return peekValue<T>(tellPosition() + offset, reverseByteOrder);
+}
+
+template<typename T>
+T datarw::DataReadHandle::readNextValue(const bool reverseByteOrder)
+{
+    T value;
+    memset(&value, 0, sizeof(T));
+    readNextData(sizeof(T), reinterpret_cast<unsigned char*>(&value));
+    
+    return reverseByteOrder ? utils::ReverseValueByteOrder<T>(value) : value;
 }

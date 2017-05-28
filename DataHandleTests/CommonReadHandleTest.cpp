@@ -348,7 +348,7 @@ TEST(DataReadHandle, PeekValue_Uint16)
     datarw::VectorReadHandle reader(dataToRead);
     
     const uint16_t expectedValue = 655;
-    EXPECT_EQ(reader.peekValue<uint16_t>(valueOffset), expectedValue);
+    EXPECT_EQ(reader.peekValueLE<uint16_t>(valueOffset), expectedValue);
 }
 
 TEST(DataReadHandle, PeekValue_Uint32)
@@ -359,7 +359,7 @@ TEST(DataReadHandle, PeekValue_Uint32)
     datarw::VectorReadHandle reader(dataToRead);
     
     const uint32_t expectedValue = 1888777;
-    EXPECT_EQ(reader.peekValue<uint32_t>(valueOffset), expectedValue);
+    EXPECT_EQ(reader.peekValueLE<uint32_t>(valueOffset), expectedValue);
 }
 
 TEST(DataReadHandle, PeekValue_Uint64)
@@ -370,7 +370,7 @@ TEST(DataReadHandle, PeekValue_Uint64)
     datarw::VectorReadHandle reader(dataToRead);
     
     const uint64_t expectedValue = 111999222888;
-    EXPECT_EQ(reader.peekValue<uint64_t>(valueOffset), expectedValue);
+    EXPECT_EQ(reader.peekValueLE<uint64_t>(valueOffset), expectedValue);
 }
 
 TEST(DataReadHandle, PeekValue_InOffset)
@@ -378,8 +378,8 @@ TEST(DataReadHandle, PeekValue_InOffset)
     datarw::VectorReadHandle readerLE(datarw::testing::g_valuesLE);
     datarw::VectorReadHandle readerBE(datarw::testing::g_valuesBE);
     
-    ASSERT_EQ(readerLE.peekValue<uint32_t>(0), datarw::testing::g_value0);
-    ASSERT_EQ(readerLE.peekValue<uint64_t>(4), datarw::testing::g_value1);
+    ASSERT_EQ(readerLE.peekValueLE<uint32_t>(0), datarw::testing::g_value0);
+    ASSERT_EQ(readerLE.peekValueLE<uint64_t>(4), datarw::testing::g_value1);
     EXPECT_EQ(readerLE.getRemainingSize(), 12);
     
     ASSERT_EQ(readerBE.peekValueBE<uint32_t>(0), datarw::testing::g_value0);
@@ -397,7 +397,7 @@ TEST(DataReadHandle, PeekValueFromCurrent)
     
     const int64_t valueOffset = 2;
     
-    ASSERT_EQ(readerLE.peekValueFromCurrent<uint64_t>(valueOffset), datarw::testing::g_value1);
+    ASSERT_EQ(readerLE.peekValueFromCurrentLE<uint64_t>(valueOffset), datarw::testing::g_value1);
     EXPECT_EQ(readerLE.getRemainingSize(), 10);
     
     ASSERT_EQ(readerBE.peekValueFromCurrentBE<uint64_t>(valueOffset), datarw::testing::g_value1);
@@ -409,8 +409,8 @@ TEST(DataReadHandle, ReadNextValue)
     datarw::VectorReadHandle readerLE(datarw::testing::g_valuesLE);
     datarw::VectorReadHandle readerBE(datarw::testing::g_valuesBE);
     
-    EXPECT_EQ(readerLE.readNextValue<uint32_t>(), datarw::testing::g_value0);
-    EXPECT_EQ(readerLE.readNextValue<uint64_t>(), datarw::testing::g_value1);
+    EXPECT_EQ(readerLE.readNextValueLE<uint32_t>(), datarw::testing::g_value0);
+    EXPECT_EQ(readerLE.readNextValueLE<uint64_t>(), datarw::testing::g_value1);
     EXPECT_EQ(readerLE.getRemainingSize(), 0);
     
     EXPECT_EQ(readerBE.readNextValueBE<uint32_t>(), datarw::testing::g_value0);
@@ -423,7 +423,7 @@ TEST(DataReadHandle, PeekDataOutOfRange)
     datarw::VectorReadHandle valueReader(datarw::testing::g_valuesLE);  // size = 12
     datarw::VectorReadHandle bufferReader(datarw::testing::g_testData); // size = 32
     
-    EXPECT_THROW(valueReader.peekValue<uint64_t>(10), std::out_of_range);
+    EXPECT_THROW(valueReader.peekValueLE<uint64_t>(10), std::out_of_range);
     
     datarw::ByteBuffer buf;
     EXPECT_THROW(bufferReader.peekData(datarw::Range(16, 20), buf), std::out_of_range);
