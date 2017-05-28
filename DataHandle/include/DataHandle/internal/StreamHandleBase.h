@@ -31,6 +31,7 @@ namespace datarw
         
     protected:
         StreamType& m_stream;
+        bool m_streamIsDirty;
     };
 }
 
@@ -38,17 +39,13 @@ template <typename Parent, typename StreamType>
 datarw::StreamHandleBase<Parent, StreamType>::StreamHandleBase(StreamType& stream, const bool streamIsDirty)
 : Parent()
 , m_stream(stream)
-{
-    if (streamIsDirty)
-    {
-        resetStreamIfNeeded(true, 0);
-    }
-}
+, m_streamIsDirty(streamIsDirty)
+{}
 
 template <typename Parent, typename StreamType>
 void datarw::StreamHandleBase<Parent, StreamType>::resetStreamIfNeeded(const bool force, const uint64_t position)
 {
-    if (force)
+    if (force || m_streamIsDirty)
     {
         m_stream.clear();
         seek(m_stream, position, std::ios::seekdir::beg);
