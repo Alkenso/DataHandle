@@ -35,12 +35,12 @@ namespace datarw
         void writeString(const std::string& str, const bool withNullTerminator = false);
         
         template<typename T>
-        void insertValue(const T& value, const int64_t offset);
+        void insertValueLE(const T& value, const uint64_t offset);
         template<typename T>
-        void writeValue(const T& value);
+        void writeValueLE(const T& value);
         
         template<typename T>
-        void insertValueBE(const T& value, const int64_t offset);
+        void insertValueBE(const T& value, const uint64_t offset);
         template<typename T>
         void writeValueBE(const T& value);
         
@@ -57,6 +57,11 @@ namespace datarw
         void insertDataInternal(const unsigned char* data, const uint64_t dataSize, const uint64_t offset, const bool usePosition);
         uint64_t seekPosition(const uint64_t offset, const bool usePosition);
         void initPosition();
+        
+        template<typename T>
+        void insertValue(const T& value, const uint64_t offset, const bool reverseByteOrder);
+        template<typename T>
+        void writeValue(const T& value, const bool reverseByteOrder);
         
     private:
         uint64_t m_position;

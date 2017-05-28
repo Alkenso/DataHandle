@@ -133,7 +133,7 @@ TEST(DataWriteHandle, InsertValue)
     datarw::VectorWriteHandle writerBE(datarw::testing::g_fourZeroes);
     
     const size_t offset = 2;
-    writerLE.insertValue(datarw::testing::g_value0, offset);
+    writerLE.insertValueLE(datarw::testing::g_value0, offset);
     writerBE.insertValueBE(datarw::testing::g_value0, offset);
     
     EXPECT_EQ(writerLE.getContainer(), datarw::ByteBuffer({ 0x00, 0x00, 0x00, 0x00, 0xff, 0xff }));
@@ -145,8 +145,8 @@ TEST(DataWriteHandle, WriteValue)
     datarw::VectorWriteHandle writerLE;
     datarw::VectorWriteHandle writerBE;
     
-    writerLE.writeValue(datarw::testing::g_value0);
-    writerLE.writeValue(datarw::testing::g_value1);
+    writerLE.writeValueLE(datarw::testing::g_value0);
+    writerLE.writeValueLE(datarw::testing::g_value1);
     writerBE.writeValueBE(datarw::testing::g_value0);
     writerBE.writeValueBE(datarw::testing::g_value1);
     

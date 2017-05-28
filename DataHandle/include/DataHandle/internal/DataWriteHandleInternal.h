@@ -33,25 +33,39 @@ void datarw::DataWriteHandle::writeData(const Buffer& buffer)
 }
 
 template<typename T>
-void datarw::DataWriteHandle::insertValue(const T& value, const int64_t offset)
+void datarw::DataWriteHandle::insertValueLE(const T& value, const uint64_t offset)
 {
-    insertData(reinterpret_cast<const unsigned char*>(&value), sizeof(T), offset);
+    insertValue<T>(value, offset, IS_BIG_ENDIAN);
 }
 
 template<typename T>
-void datarw::DataWriteHandle::writeValue(const T& value)
+void datarw::DataWriteHandle::writeValueLE(const T& value)
 {
-    writeData(reinterpret_cast<const unsigned char*>(&value), sizeof(T));
+    writeValue<T>(value, IS_BIG_ENDIAN);
 }
 
 template<typename T>
-void datarw::DataWriteHandle::insertValueBE(const T& value, const int64_t offset)
+void datarw::DataWriteHandle::insertValueBE(const T& value, const uint64_t offset)
 {
-    insertValue<T>(utils::ReverseValueByteOrder(value), offset);
+    insertValue<T>(value, offset, !IS_BIG_ENDIAN);
 }
 
 template<typename T>
 void datarw::DataWriteHandle::writeValueBE(const T& value)
 {
-    writeValue<T>(utils::ReverseValueByteOrder(value));
+    writeValue<T>(value, !IS_BIG_ENDIAN);
+}
+
+template<typename T>
+void datarw::DataWriteHandle::insertValue(const T& value, const uint64_t offset, const bool reverseByteOrder)
+{
+    const T& theValue = reverseByteOrder ? utils::ReverseValueByteOrder<T>(value) : value;
+    insertData(reinterpret_cast<const unsigned char*>(&theValue), sizeof(T), offset);
+}
+
+template<typename T>
+void datarw::DataWriteHandle::writeValue(const T& value, const bool reverseByteOrder)
+{
+    const T& theValue = reverseByteOrder ? utils::ReverseValueByteOrder<T>(value) : value;
+    writeData(reinterpret_cast<const unsigned char*>(&theValue), sizeof(T));
 }
