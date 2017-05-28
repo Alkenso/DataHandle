@@ -120,7 +120,7 @@ TEST(SubReadHandle, CtorOffsetBased)
 TEST(SubReadHandle, CtorOffsetBased_ParentNotRelated)
 {
     datarw::VectorReadHandle reader(datarw::testing::g_testData);
-    reader.skipNextBytes(10);
+    reader.skipBytes(10);
     datarw::SubReadHandle subReader(reader, 16, false);
     
     const uint64_t expectedSubDataSize = 16;
@@ -138,7 +138,7 @@ TEST(SubReadHandle, CtorOffsetBased_ParentNotRelated)
 TEST(SubReadHandle, CtorOffsetBased_ParentRelated)
 {
     datarw::VectorReadHandle reader(datarw::testing::g_testData);
-    reader.skipNextBytes(8);
+    reader.skipBytes(8);
     datarw::SubReadHandle subReader(reader, 8, true);
     
     const uint64_t expectedSubDataSize = 16;
@@ -161,7 +161,7 @@ TEST(SubReadHandle, InvalidParam)
     
     EXPECT_THROW(datarw::SubReadHandle subReader(reader, 33), std::out_of_range);
     
-    reader.skipNextBytes(16); // position == 16
+    reader.skipBytes(16); // position == 16
     EXPECT_THROW(datarw::SubReadHandle(reader, 20, true), std::out_of_range);
 }
 
@@ -213,7 +213,7 @@ TEST(StreamReadHandle, DirtyStream)
     datarw::StreamReadHandle readerSsFinished(ssFinished, true);
     ASSERT_EQ(readerSsFinished.getRemainingSize(), datarw::testing::g_testString.size());
     ASSERT_EQ(readerSsFinished.getDataSize(), datarw::testing::g_testString.size());
-    EXPECT_EQ(readerSsFinished.readNextData<std::string>(5), "ABCDE");
+    EXPECT_EQ(readerSsFinished.readData<std::string>(5), "ABCDE");
     
     
     std::stringstream ssPartialRead(datarw::testing::g_testString);
@@ -221,7 +221,7 @@ TEST(StreamReadHandle, DirtyStream)
     datarw::StreamReadHandle readerSsPartialRead(ssPartialRead, true);
     ASSERT_EQ(readerSsPartialRead.getRemainingSize(), datarw::testing::g_testString.size());
     ASSERT_EQ(readerSsPartialRead.getDataSize(), datarw::testing::g_testString.size());
-    EXPECT_EQ(readerSsPartialRead.readNextData<std::string>(5), "ABCDE");
+    EXPECT_EQ(readerSsPartialRead.readData<std::string>(5), "ABCDE");
 }
 
 TEST(StreamReadHandle, SeekTell)
@@ -230,13 +230,13 @@ TEST(StreamReadHandle, SeekTell)
     datarw::StreamReadHandle reader(ssData);
     ASSERT_EQ(reader.getRemainingSize(), 32);
     
-    reader.skipNextBytes(3);
+    reader.skipBytes(3);
     EXPECT_EQ(reader.getRemainingSize(), 29);
     
-    reader.skipNextBytes(5);
+    reader.skipBytes(5);
     EXPECT_EQ(reader.getRemainingSize(), 24);
     
-    reader.skipNextBytes(2);
+    reader.skipBytes(2);
     EXPECT_EQ(reader.getRemainingSize(), 22);
 }
 
@@ -246,18 +246,18 @@ TEST(StreamReadHandle, Mixed_Seek_Peek_ReadNext)
     datarw::StreamReadHandle reader(ssData);
     ASSERT_EQ(reader.getRemainingSize(), 32);
     
-    EXPECT_EQ(reader.readNextData<datarw::ByteBuffer>(3), datarw::ByteBuffer({ 0x09, 0x76, 0xC6 }));
+    EXPECT_EQ(reader.readData<datarw::ByteBuffer>(3), datarw::ByteBuffer({ 0x09, 0x76, 0xC6 }));
     EXPECT_EQ(reader.getRemainingSize(), 29);
     
-    reader.skipNextBytes(16);
+    reader.skipBytes(16);
     EXPECT_EQ(reader.getRemainingSize(), 13);
-    EXPECT_EQ(reader.readNextData<datarw::ByteBuffer>(3), datarw::ByteBuffer({ 0xB7, 0x20, 0x13 }));
+    EXPECT_EQ(reader.readData<datarw::ByteBuffer>(3), datarw::ByteBuffer({ 0xB7, 0x20, 0x13 }));
     EXPECT_EQ(reader.getRemainingSize(), 10);
     
     EXPECT_EQ(reader.peekData<datarw::ByteBuffer>(datarw::Range(0, 3)), datarw::ByteBuffer({ 0x09, 0x76, 0xC6 }));
     EXPECT_EQ(reader.getRemainingSize(), 10);
     
-    EXPECT_EQ(reader.readNextData<datarw::ByteBuffer>(3), datarw::ByteBuffer({ 0x42, 0xF3, 0x98 }));
+    EXPECT_EQ(reader.readData<datarw::ByteBuffer>(3), datarw::ByteBuffer({ 0x42, 0xF3, 0x98 }));
     EXPECT_EQ(reader.getRemainingSize(), 7);
 }
 
@@ -268,9 +268,9 @@ TEST(SequentialReadHandle, OneEntry)
     
     ASSERT_EQ(seqReader.getDataSize(), datarw::testing::g_testData.size());
     
-    EXPECT_EQ(seqReader.readNextData<datarw::ByteBuffer>(4), datarw::ByteBuffer({ 0x09, 0x76, 0xC6, 0xEE }));
+    EXPECT_EQ(seqReader.readData<datarw::ByteBuffer>(4), datarw::ByteBuffer({ 0x09, 0x76, 0xC6, 0xEE }));
     EXPECT_EQ(seqReader.peekData<datarw::ByteBuffer>(datarw::Range(2, 3)), datarw::ByteBuffer({ 0xC6, 0xEE, 0xF6 }));
-    EXPECT_EQ(seqReader.readNextData<datarw::ByteBuffer>(6), datarw::ByteBuffer({ 0xF6, 0xB3, 0xF3, 0x8F, 0x79, 0xE6 }));
+    EXPECT_EQ(seqReader.readData<datarw::ByteBuffer>(6), datarw::ByteBuffer({ 0xF6, 0xB3, 0xF3, 0x8F, 0x79, 0xE6 }));
 }
 
 TEST(SequentialReadHandle, TwoOverlapping)
@@ -282,10 +282,10 @@ TEST(SequentialReadHandle, TwoOverlapping)
     
     ASSERT_EQ(seqReader.getDataSize(), 8);
     
-    EXPECT_EQ(seqReader.readNextData<datarw::ByteBuffer>(2), datarw::ByteBuffer({ 0x00, 0x01 }));
-    EXPECT_EQ(seqReader.readNextData<datarw::ByteBuffer>(4), datarw::ByteBuffer({ 0x02, 0x03, 0x04, 0x05 }));
+    EXPECT_EQ(seqReader.readData<datarw::ByteBuffer>(2), datarw::ByteBuffer({ 0x00, 0x01 }));
+    EXPECT_EQ(seqReader.readData<datarw::ByteBuffer>(4), datarw::ByteBuffer({ 0x02, 0x03, 0x04, 0x05 }));
     EXPECT_EQ(seqReader.peekData<datarw::ByteBuffer>(datarw::Range(2, 3)), datarw::ByteBuffer({ 0x02, 0x03, 0x04 }));
-    EXPECT_EQ(seqReader.readNextData<datarw::ByteBuffer>(2), datarw::ByteBuffer({ 0x06, 0x07 }));
+    EXPECT_EQ(seqReader.readData<datarw::ByteBuffer>(2), datarw::ByteBuffer({ 0x06, 0x07 }));
 }
 
 TEST(SequentialReadHandle, MultipleEntries)
@@ -302,11 +302,11 @@ TEST(SequentialReadHandle, MultipleEntries)
     datarw::SequentialReadHandle seqReader({ reader1, reader2, reader3 });
     ASSERT_EQ(seqReader.getDataSize(), 12);
     
-    EXPECT_EQ(seqReader.readNextData<datarw::ByteBuffer>(2), datarw::ByteBuffer({ 0x00, 0x01 }));
-    EXPECT_EQ(seqReader.readNextData<datarw::ByteBuffer>(4), datarw::ByteBuffer({ 0x02, 0x03, 0x04, 0x05 }));
+    EXPECT_EQ(seqReader.readData<datarw::ByteBuffer>(2), datarw::ByteBuffer({ 0x00, 0x01 }));
+    EXPECT_EQ(seqReader.readData<datarw::ByteBuffer>(4), datarw::ByteBuffer({ 0x02, 0x03, 0x04, 0x05 }));
     
     EXPECT_EQ(seqReader.peekData<datarw::ByteBuffer>(datarw::Range(2, 3)), datarw::ByteBuffer({ 0x02, 0x03, 0x04 }));
-    EXPECT_EQ(seqReader.readNextData<datarw::ByteBuffer>(4), datarw::ByteBuffer({ 0x06, 0x07, 0x08, 0x09 }));
+    EXPECT_EQ(seqReader.readData<datarw::ByteBuffer>(4), datarw::ByteBuffer({ 0x06, 0x07, 0x08, 0x09 }));
     
     EXPECT_EQ(seqReader.peekData<datarw::ByteBuffer>(datarw::Range(3, 6)), datarw::ByteBuffer({ 0x03, 0x04, 0x05, 0x06, 0x07, 0x08 }));
     

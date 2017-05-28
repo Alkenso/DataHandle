@@ -35,7 +35,7 @@ TEST(DataWriteHandle, InsertData_URaw)
     unsigned char writeData [dataSize] = { 0x01, 0x02, 0x03, 0x04 };
     const int64_t writeOffset = 2;
     
-    writer.insertData(writeData, dataSize, writeOffset);
+    writer.writeData(writeData, dataSize, writeOffset);
     
     EXPECT_EQ(writer.getContainer(), datarw::ByteBuffer({ 0x00, 0x00, 0x01, 0x02, 0x03, 0x04 }));
 }
@@ -48,7 +48,7 @@ TEST(DataWriteHandle, InsertData_SRaw)
     char writeData[] = "qwe";
     const int64_t writeOffset = 2;
     
-    writer.insertData(writeData, strlen(writeData), writeOffset);
+    writer.writeData(writeData, strlen(writeData), writeOffset);
     
     EXPECT_EQ(writer.getContainer(), datarw::ByteBuffer({ 0x00, 0x00, 0x71, 0x77, 0x65 }));
 }
@@ -61,7 +61,7 @@ TEST(DataWriteHandle, InsertData_ByteBuffer)
     const datarw::ByteBuffer writeData = { 0x01, 0x02, 0x03, 0x04 };
     const int64_t writeOffset = 2;
     
-    writer.insertData(writeData, writeOffset);
+    writer.writeData(writeData, writeOffset);
     
     EXPECT_EQ(writer.getContainer(), datarw::ByteBuffer({ 0x00, 0x00, 0x01, 0x02, 0x03, 0x04 }));
 }
@@ -74,7 +74,7 @@ TEST(DataWriteHandle, InsertData_String)
     const std::string writeData = "qwe";
     const int64_t writeOffset = 2;
     
-    writer.insertData(writeData, writeOffset);
+    writer.writeData(writeData, writeOffset);
     
     EXPECT_EQ(writer.getContainer(), datarw::ByteBuffer({ 0x00, 0x00, 0x71, 0x77, 0x65 }));
 }
@@ -133,8 +133,8 @@ TEST(DataWriteHandle, InsertValue)
     datarw::VectorWriteHandle writerBE(datarw::testing::g_fourZeroes);
     
     const size_t offset = 2;
-    writerLE.insertValueLE(datarw::testing::g_value0, offset);
-    writerBE.insertValueBE(datarw::testing::g_value0, offset);
+    writerLE.writeValueLE(datarw::testing::g_value0, offset);
+    writerBE.writeValueBE(datarw::testing::g_value0, offset);
     
     EXPECT_EQ(writerLE.getContainer(), datarw::ByteBuffer({ 0x00, 0x00, 0x00, 0x00, 0xff, 0xff }));
     EXPECT_EQ(writerBE.getContainer(), datarw::ByteBuffer({ 0x00, 0x00, 0xff, 0xff, 0x00, 0x00 }));
@@ -204,7 +204,7 @@ TEST(DataWriteHandle, InsertString_Terminated)
     datarw::VectorWriteHandle writer(data);
     
     std::string str = "Abc";
-    writer.insertString(str, 2, true);
+    writer.writeString(str, 2, true);
     
     EXPECT_EQ(writer.getContainer(), datarw::ByteBuffer({ 0x00, 0x00, 'A', 'b', 'c', 0x00 }));
 }
@@ -215,8 +215,8 @@ TEST(DataWriteHandle, InvalidData)
     datarw::VectorWriteHandle writer(data);
     
     const unsigned char* nullData = nullptr;
-    EXPECT_NO_THROW(writer.insertData(nullData, 0, 0));
-    EXPECT_THROW(writer.insertData(nullData, 100500, 0), std::invalid_argument);
+    EXPECT_NO_THROW(writer.writeData(nullData, 0, 0));
+    EXPECT_THROW(writer.writeData(nullData, 100500, 0), std::invalid_argument);
     
     EXPECT_NO_THROW(writer.writeData(nullData, 0));
     EXPECT_THROW(writer.writeData(nullData, 100500), std::invalid_argument);
@@ -232,7 +232,7 @@ TEST(DataWriteHandle, WriteInsertMixed)
     ASSERT_EQ(writer.getDataSize(), 5);
     ASSERT_EQ(data, datarw::ByteBuffer({ 0x00, 0x00, 0xff, 0xff, 0xff }));
     
-    writer.insertData(datarw::ByteBuffer{ 0xAA, 0xAA, 0xAA }, 4);
+    writer.writeData(datarw::ByteBuffer{ 0xAA, 0xAA, 0xAA }, 4);
     ASSERT_EQ(writer.getDataSize(), 7);
     ASSERT_EQ(data, datarw::ByteBuffer({ 0x00, 0x00, 0xff, 0xff, 0xAA, 0xAA, 0xAA }));
     

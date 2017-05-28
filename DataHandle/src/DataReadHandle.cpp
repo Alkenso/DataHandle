@@ -27,7 +27,7 @@ uint64_t datarw::DataReadHandle::getDataSize()
     return m_sizePosition;
 }
 
-void datarw::DataReadHandle::skipNextBytes(const uint64_t skipSize)
+void datarw::DataReadHandle::skipBytes(const uint64_t skipSize)
 {
     seekPosition(skipSize, true, true);
 }
@@ -69,7 +69,7 @@ void datarw::DataReadHandle::peekDataInternal(const Range& range, unsigned char*
     }
 }
 
-void datarw::DataReadHandle::readNextDataInternal(const uint64_t dataSize, unsigned char* buffer)
+void datarw::DataReadHandle::readDataInternal(const uint64_t dataSize, unsigned char* buffer)
 {
     peekDataInternal(Range(0, dataSize), buffer, true);
 }

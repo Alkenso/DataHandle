@@ -31,13 +31,13 @@ namespace datarw
         BufferTypename<Buffer> peekData(const Range& range);
         
         template <typename Data, typename = ByteTypename<Data>>
-        void readNextData(const uint64_t dataSize, Data* data);
+        void readData(const uint64_t dataSize, Data* data);
         template <typename Buffer, typename = BufferTypename<Buffer>>
-        void readNextData(const uint64_t dataSize, Buffer& buffer);
+        void readData(const uint64_t dataSize, Buffer& buffer);
         template <typename Buffer, typename = BufferTypename<Buffer>>
-        void appendNextData(const uint64_t dataSize, Buffer& buffer);
+        void appendData(const uint64_t dataSize, Buffer& buffer);
         template <typename Buffer>
-        BufferTypename<Buffer> readNextData(const uint64_t dataSize);
+        BufferTypename<Buffer> readData(const uint64_t dataSize);
         
         template <typename Data, typename = ByteTypename<Data>>
         void readAllData(Data* data);
@@ -53,16 +53,16 @@ namespace datarw
         template<typename T>
         T peekValueFromCurrentLE(int64_t offset);
         template<typename T>
-        T readNextValueLE();
+        T readValueLE();
         
         template<typename T>
         T peekValueBE(int64_t offset);
         template<typename T>
         T peekValueFromCurrentBE(int64_t offset);
         template<typename T>
-        T readNextValueBE();
+        T readValueBE();
         
-        void skipNextBytes(const uint64_t skipSize);
+        void skipBytes(const uint64_t skipSize);
         uint64_t getRemainingSize();
         bool enshureRemainingSize(uint64_t expectedRemainingSize);
         
@@ -77,7 +77,7 @@ namespace datarw
         
     private:
         void peekDataInternal(const Range& range, unsigned char* buffer, const bool usePosition);
-        void readNextDataInternal(const uint64_t dataSize, unsigned char* buffer);
+        void readDataInternal(const uint64_t dataSize, unsigned char* buffer);
         uint64_t seekPosition(const uint64_t offset, const bool usePosition, const bool seekForce = false);
         
         template<typename T>
@@ -85,7 +85,7 @@ namespace datarw
         template<typename T>
         T peekValueFromCurrent(int64_t offset, const bool reverseByteOrder);
         template<typename T>
-        T readNextValue(const bool reverseByteOrder);
+        T readValue(const bool reverseByteOrder);
         
     private:
         uint64_t m_sizePosition;

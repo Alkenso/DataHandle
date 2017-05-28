@@ -39,7 +39,7 @@ const Container& datarw::ContainerWriteHandle<Container>::getContainer()
 }
 
 template <typename Container>
-void datarw::ContainerWriteHandle<Container>::insertDataImpl(const unsigned char* data, const datarw::Range& range)
+void datarw::ContainerWriteHandle<Container>::writeDataImpl(const unsigned char* data, const datarw::Range& range)
 {
     m_containerRef.resize(std::max(static_cast<size_t>(range.position + range.length), m_containerRef.size()));
     std::copy(data, data + static_cast<size_t>(range.length), m_containerRef.begin() + static_cast<size_t>(range.position));

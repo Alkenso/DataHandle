@@ -24,10 +24,10 @@ uint64_t datarw::ParallelWriteHandle::getDataSizeImpl()
     return maxWriterSize;
 }
 
-void datarw::ParallelWriteHandle::insertDataImpl(const unsigned char* data, const Range& range)
+void datarw::ParallelWriteHandle::writeDataImpl(const unsigned char* data, const Range& range)
 {
     for (DataWriteHandle& writer : m_writers)
     {
-        writer.insertData(data, range.length, range.position);
+        writer.writeData(data, range.length, range.position);
     }
 }

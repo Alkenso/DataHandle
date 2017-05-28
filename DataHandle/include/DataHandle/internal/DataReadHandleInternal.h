@@ -39,31 +39,31 @@ datarw::BufferTypename<Buffer> datarw::DataReadHandle::peekData(const Range& ran
 }
 
 template <typename Data, typename>
-void datarw::DataReadHandle::readNextData(const uint64_t dataSize, Data* data)
+void datarw::DataReadHandle::readData(const uint64_t dataSize, Data* data)
 {
-    readNextDataInternal(dataSize, reinterpret_cast<unsigned char*>(data));
+    readDataInternal(dataSize, reinterpret_cast<unsigned char*>(data));
 }
 
 template <typename Buffer, typename>
-void datarw::DataReadHandle::readNextData(const uint64_t dataSize, Buffer& buffer)
+void datarw::DataReadHandle::readData(const uint64_t dataSize, Buffer& buffer)
 {
     buffer.resize(static_cast<size_t>(dataSize));
-    readNextData(dataSize, &buffer[0]);
+    readData(dataSize, &buffer[0]);
 }
 
 template <typename Buffer, typename>
-void datarw::DataReadHandle::appendNextData(const uint64_t dataSize, Buffer& buffer)
+void datarw::DataReadHandle::appendData(const uint64_t dataSize, Buffer& buffer)
 {
     const size_t currentBufferSize = buffer.size();
     buffer.resize(static_cast<size_t>(currentBufferSize + dataSize));
-    readNextData(dataSize, &buffer[currentBufferSize]);
+    readData(dataSize, &buffer[currentBufferSize]);
 }
 
 template <typename Buffer>
-datarw::BufferTypename<Buffer> datarw::DataReadHandle::readNextData(const uint64_t dataSize)
+datarw::BufferTypename<Buffer> datarw::DataReadHandle::readData(const uint64_t dataSize)
 {
     Buffer buffer;
-    readNextData(dataSize, buffer);
+    readData(dataSize, buffer);
     
     return buffer;
 }
@@ -111,9 +111,9 @@ T datarw::DataReadHandle::peekValueFromCurrentLE(int64_t offset)
 }
 
 template<typename T>
-T datarw::DataReadHandle::readNextValueLE()
+T datarw::DataReadHandle::readValueLE()
 {
-    return readNextValue<T>(IS_BIG_ENDIAN);
+    return readValue<T>(IS_BIG_ENDIAN);
 }
 
 template<typename T>
@@ -129,9 +129,9 @@ T datarw::DataReadHandle::peekValueFromCurrentBE(int64_t offset)
 }
 
 template<typename T>
-T datarw::DataReadHandle::readNextValueBE()
+T datarw::DataReadHandle::readValueBE()
 {
-    return readNextValue<T>(!IS_BIG_ENDIAN);
+    return readValue<T>(!IS_BIG_ENDIAN);
 }
 
 template<typename T>
@@ -151,11 +151,11 @@ T datarw::DataReadHandle::peekValueFromCurrent(int64_t offset, const bool revers
 }
 
 template<typename T>
-T datarw::DataReadHandle::readNextValue(const bool reverseByteOrder)
+T datarw::DataReadHandle::readValue(const bool reverseByteOrder)
 {
     T value;
     memset(&value, 0, sizeof(T));
-    readNextData(sizeof(T), reinterpret_cast<unsigned char*>(&value));
+    readData(sizeof(T), reinterpret_cast<unsigned char*>(&value));
     
     return reverseByteOrder ? utils::ReverseValueByteOrder<T>(value) : value;
 }

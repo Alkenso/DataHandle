@@ -9,15 +9,15 @@
 #pragma once
     
 template <typename Data, typename>
-void datarw::DataWriteHandle::insertData(const Data* data, const uint64_t dataSize, const uint64_t offset)
+void datarw::DataWriteHandle::writeData(const Data* data, const uint64_t dataSize, const uint64_t offset)
 {
     insertDataInternal(reinterpret_cast<const unsigned char*>(data), dataSize, offset, false);
 }
 
 template <typename Buffer, typename>
-void datarw::DataWriteHandle::insertData(const Buffer& buffer, int64_t offset)
+void datarw::DataWriteHandle::writeData(const Buffer& buffer, int64_t offset)
 {
-    insertData(buffer.data(), buffer.size(), offset);
+    writeData(buffer.data(), buffer.size(), offset);
 }
 
 template <typename Data, typename>
@@ -33,9 +33,9 @@ void datarw::DataWriteHandle::writeData(const Buffer& buffer)
 }
 
 template<typename T>
-void datarw::DataWriteHandle::insertValueLE(const T& value, const uint64_t offset)
+void datarw::DataWriteHandle::writeValueLE(const T& value, const uint64_t offset)
 {
-    insertValue<T>(value, offset, IS_BIG_ENDIAN);
+    writeValue<T>(value, offset, IS_BIG_ENDIAN);
 }
 
 template<typename T>
@@ -45,9 +45,9 @@ void datarw::DataWriteHandle::writeValueLE(const T& value)
 }
 
 template<typename T>
-void datarw::DataWriteHandle::insertValueBE(const T& value, const uint64_t offset)
+void datarw::DataWriteHandle::writeValueBE(const T& value, const uint64_t offset)
 {
-    insertValue<T>(value, offset, !IS_BIG_ENDIAN);
+    writeValue<T>(value, offset, !IS_BIG_ENDIAN);
 }
 
 template<typename T>
@@ -57,10 +57,10 @@ void datarw::DataWriteHandle::writeValueBE(const T& value)
 }
 
 template<typename T>
-void datarw::DataWriteHandle::insertValue(const T& value, const uint64_t offset, const bool reverseByteOrder)
+void datarw::DataWriteHandle::writeValue(const T& value, const uint64_t offset, const bool reverseByteOrder)
 {
     const T& theValue = reverseByteOrder ? utils::ReverseValueByteOrder<T>(value) : value;
-    insertData(reinterpret_cast<const unsigned char*>(&theValue), sizeof(T), offset);
+    writeData(reinterpret_cast<const unsigned char*>(&theValue), sizeof(T), offset);
 }
 
 template<typename T>

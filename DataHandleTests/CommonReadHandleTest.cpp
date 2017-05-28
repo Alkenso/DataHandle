@@ -148,17 +148,17 @@ TEST(DataReadHandle, ReadNextData_ByteBuffer)
     datarw::ByteBuffer readData3;
     
     readData0.resize(dataSize0);
-    reader.readNextData(dataSize0, readData0.data());
+    reader.readData(dataSize0, readData0.data());
     EXPECT_EQ(readData0, datarw::ByteBuffer({0x09, 0x76}));
     
-    reader.readNextData(dataSize1, readData1);
+    reader.readData(dataSize1, readData1);
     EXPECT_EQ(readData1, datarw::ByteBuffer({0xC6, 0xEE, 0xF6, 0xB3}));
     
     readData2 = { 0x01, 0x02, 0x03 };
-    reader.appendNextData(dataSize2, readData2);
+    reader.appendData(dataSize2, readData2);
     EXPECT_EQ(readData2, datarw::ByteBuffer({0x01, 0x02, 0x03, 0xF3, 0x8F, 0x79, 0xE6, 0x12, 0xCD}));
     
-    readData3 = reader.readNextData<datarw::ByteBuffer>(dataSize3);
+    readData3 = reader.readData<datarw::ByteBuffer>(dataSize3);
     EXPECT_EQ(readData3, datarw::ByteBuffer({0xE2, 0x8A, 0x8C}));
 }
 
@@ -177,17 +177,17 @@ TEST(DataReadHandle, ReadNextData_String)
     std::string readData3;
     
     readData0.resize(dataSize0);
-    reader.readNextData(dataSize0, &readData0[0]);
+    reader.readData(dataSize0, &readData0[0]);
     EXPECT_EQ(readData0, "AB");
     
-    reader.readNextData(dataSize1, readData1);
+    reader.readData(dataSize1, readData1);
     EXPECT_EQ(readData1, "CDEF");
     
     readData2 = "abc";
-    reader.appendNextData(dataSize2, readData2);
+    reader.appendData(dataSize2, readData2);
     EXPECT_EQ(readData2, "abcGHJKLM");
     
-    readData3 = reader.readNextData<std::string>(dataSize3);
+    readData3 = reader.readData<std::string>(dataSize3);
     EXPECT_EQ(readData3, "NOP");
 }
 
@@ -201,8 +201,8 @@ TEST(DataReadHandle, ReadData_ReadBytesToString)
     std::string firstReadData;
     std::string secondReadData;
     
-    reader.readNextData(firstDataSize, firstReadData);
-    reader.readNextData(secondDataSize, secondReadData);
+    reader.readData(firstDataSize, firstReadData);
+    reader.readData(secondDataSize, secondReadData);
     
     const std::string firstExpectedData = "ABCD";
     const std::string secondExpectedData = "EFGHJKL";
@@ -291,13 +291,13 @@ TEST(DataReadHandle, SeekTell)
     datarw::VectorReadHandle reader(datarw::testing::g_testData);
     ASSERT_EQ(reader.getRemainingSize(), 32);
     
-    reader.skipNextBytes(3);
+    reader.skipBytes(3);
     EXPECT_EQ(reader.getRemainingSize(), 29);
     
-    reader.skipNextBytes(5);
+    reader.skipBytes(5);
     EXPECT_EQ(reader.getRemainingSize(), 24);
     
-    reader.skipNextBytes(2);
+    reader.skipBytes(2);
     EXPECT_EQ(reader.getRemainingSize(), 22);
 }
 
@@ -319,7 +319,7 @@ TEST(DataReadHandle, SeekTell_ReadNext)
     const size_t readDataSize = 5;
     const datarw::ByteBuffer expectedReadData = { 0x09, 0x76, 0xC6, 0xEE, 0xF6 };
     
-    datarw::ByteBuffer actualReadData = reader.readNextData<datarw::ByteBuffer>(readDataSize);
+    datarw::ByteBuffer actualReadData = reader.readData<datarw::ByteBuffer>(readDataSize);
     ASSERT_EQ(actualReadData, expectedReadData);
     
     EXPECT_EQ(reader.getRemainingSize(), 27);
@@ -331,8 +331,8 @@ TEST(DataReadHandle, EnshureRemainingSize)
     datarw::ByteBuffer buffer16Bytes(bufferSize, 0x00);
     
     datarw::VectorReadHandle reader(buffer16Bytes);
-    reader.readNextData<datarw::ByteBuffer>(4);
-    reader.readNextData<datarw::ByteBuffer>(8);
+    reader.readData<datarw::ByteBuffer>(4);
+    reader.readData<datarw::ByteBuffer>(8);
     
     EXPECT_TRUE(reader.enshureRemainingSize(4));
     EXPECT_TRUE(reader.enshureRemainingSize(2));
@@ -392,8 +392,8 @@ TEST(DataReadHandle, PeekValueFromCurrent)
     datarw::VectorReadHandle readerLE(datarw::testing::g_valuesLE);
     datarw::VectorReadHandle readerBE(datarw::testing::g_valuesBE);
     const uint64_t seekOffset = 2;
-    readerLE.skipNextBytes(seekOffset);
-    readerBE.skipNextBytes(seekOffset);
+    readerLE.skipBytes(seekOffset);
+    readerBE.skipBytes(seekOffset);
     
     const int64_t valueOffset = 2;
     
@@ -409,12 +409,12 @@ TEST(DataReadHandle, ReadNextValue)
     datarw::VectorReadHandle readerLE(datarw::testing::g_valuesLE);
     datarw::VectorReadHandle readerBE(datarw::testing::g_valuesBE);
     
-    EXPECT_EQ(readerLE.readNextValueLE<uint32_t>(), datarw::testing::g_value0);
-    EXPECT_EQ(readerLE.readNextValueLE<uint64_t>(), datarw::testing::g_value1);
+    EXPECT_EQ(readerLE.readValueLE<uint32_t>(), datarw::testing::g_value0);
+    EXPECT_EQ(readerLE.readValueLE<uint64_t>(), datarw::testing::g_value1);
     EXPECT_EQ(readerLE.getRemainingSize(), 0);
     
-    EXPECT_EQ(readerBE.readNextValueBE<uint32_t>(), datarw::testing::g_value0);
-    EXPECT_EQ(readerBE.readNextValueBE<uint64_t>(), datarw::testing::g_value1);
+    EXPECT_EQ(readerBE.readValueBE<uint32_t>(), datarw::testing::g_value0);
+    EXPECT_EQ(readerBE.readValueBE<uint64_t>(), datarw::testing::g_value1);
     EXPECT_EQ(readerBE.getRemainingSize(), 0);
 }
 
@@ -433,9 +433,9 @@ TEST(DataReadHandle, ReadNextDataOutOfRange)
 {
     datarw::VectorReadHandle bufferReader(datarw::testing::g_testData); // size = 32
     
-    EXPECT_NO_THROW(bufferReader.readNextData<datarw::ByteBuffer>(15));
-    EXPECT_NO_THROW(bufferReader.readNextData<datarw::ByteBuffer>(15));
-    EXPECT_THROW(bufferReader.readNextData<datarw::ByteBuffer>(15), std::out_of_range);
+    EXPECT_NO_THROW(bufferReader.readData<datarw::ByteBuffer>(15));
+    EXPECT_NO_THROW(bufferReader.readData<datarw::ByteBuffer>(15));
+    EXPECT_THROW(bufferReader.readData<datarw::ByteBuffer>(15), std::out_of_range);
 }
 
 TEST(DataReadHandle, NullBuffer)

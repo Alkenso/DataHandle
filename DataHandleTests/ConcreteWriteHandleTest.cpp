@@ -101,7 +101,7 @@ TEST(StreamWriteHandle, InsertData)
     datarw::StreamWriteHandle writerData(ssData);
     
     writerData.writeData(datarw::testing::g_fourZeroes);
-    writerData.insertData(datarw::ByteBuffer({ 0xff, 0xff, 0xff }), 2);
+    writerData.writeData(datarw::ByteBuffer({ 0xff, 0xff, 0xff }), 2);
     
     const std::string& data = ssData.str();
     EXPECT_EQ(datarw::ByteBuffer(data.begin(), data.end()), datarw::ByteBuffer({ 0x00, 0x00, 0xff, 0xff, 0xff }));
@@ -132,7 +132,7 @@ TEST(ParallelWriteHandle, CommonTest)
     writer.writeData(datarw::ByteBuffer{ 0x00, 0x00, 0xff, 0xff, 0xff });
     ASSERT_EQ(writer.getDataSize(), 5);
     
-    writer.insertData(datarw::ByteBuffer{ 0xAA, 0xAA, 0xAA }, 4);
+    writer.writeData(datarw::ByteBuffer{ 0xAA, 0xAA, 0xAA }, 4);
     ASSERT_EQ(writer.getDataSize(), 7);
     
     const datarw::ByteBuffer expectedData{ 0x00, 0x00, 0xff, 0xff, 0xAA, 0xAA, 0xAA };

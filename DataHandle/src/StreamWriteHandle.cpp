@@ -12,7 +12,7 @@ datarw::StreamWriteHandle::StreamWriteHandle(std::ostream& stream, const bool st
 : StreamHandleBase<datarw::DataWriteHandle, std::ostream>(stream, streamIsDirty)
 {}
 
-void datarw::StreamWriteHandle::insertDataImpl(const unsigned char* data, const Range& range)
+void datarw::StreamWriteHandle::writeDataImpl(const unsigned char* data, const Range& range)
 {
     resetStreamIfNeeded(false, range.position);
     

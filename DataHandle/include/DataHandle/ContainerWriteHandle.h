@@ -24,7 +24,7 @@ namespace datarw
         const Container& getContainer();
 
     private:
-        virtual void insertDataImpl(const unsigned char* data, const datarw::Range& range) final;
+        virtual void writeDataImpl(const unsigned char* data, const datarw::Range& range) final;
         virtual uint64_t getDataSizeImpl() final;
 
     private:
