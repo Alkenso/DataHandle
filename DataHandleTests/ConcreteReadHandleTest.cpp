@@ -8,7 +8,7 @@
 
 #include <DataHandle/ContainerReadHandle.h>
 #include <DataHandle/RawBytesReadHandle.h>
-#include <DataHandle/SubReadHandle.h>
+#include <DataHandle/SubRangeReadHandle.h>
 #include <DataHandle/SharedDataHandle.h>
 #include <DataHandle/StreamReadHandle.h>
 #include <DataHandle/ComposeReadHandle.h>
@@ -83,10 +83,10 @@ TEST(RawBytesReadHandle, CreateWithBufferNoCopy)
     EXPECT_EQ(actualReadData, dataToRead);
 }
 
-TEST(SubReadHandle, CtorRangeBased)
+TEST(SubRangeReadHandle, CtorRangeBased)
 {
     datarw::VectorReadHandle reader(datarw::testing::g_testData, false);
-    datarw::SubReadHandle subReader(reader, datarw::Range(16, 8));
+    datarw::SubRangeReadHandle subReader(reader, datarw::Range(16, 8));
     
     const uint64_t expectedSubDataSize = 8;
     ASSERT_EQ(subReader.getDataSize(), expectedSubDataSize);
@@ -100,10 +100,10 @@ TEST(SubReadHandle, CtorRangeBased)
     EXPECT_EQ(actualReadData, expectedData);
 }
 
-TEST(SubReadHandle, CtorOffsetBased)
+TEST(SubRangeReadHandle, CtorOffsetBased)
 {
     datarw::VectorReadHandle reader(datarw::testing::g_testData);
-    datarw::SubReadHandle subReader(reader, 16);
+    datarw::SubRangeReadHandle subReader(reader, 16);
     
     const uint64_t expectedSubDataSize = 16;
     ASSERT_EQ(subReader.getDataSize(), expectedSubDataSize);
@@ -117,11 +117,11 @@ TEST(SubReadHandle, CtorOffsetBased)
     EXPECT_EQ(actualReadData, expectedData);
 }
 
-TEST(SubReadHandle, CtorOffsetBased_ParentNotRelated)
+TEST(SubRangeReadHandle, CtorOffsetBased_ParentNotRelated)
 {
     datarw::VectorReadHandle reader(datarw::testing::g_testData);
     reader.skipBytes(10);
-    datarw::SubReadHandle subReader(reader, 16, false);
+    datarw::SubRangeReadHandle subReader(reader, 16, false);
     
     const uint64_t expectedSubDataSize = 16;
     ASSERT_EQ(subReader.getDataSize(), expectedSubDataSize);
@@ -135,11 +135,11 @@ TEST(SubReadHandle, CtorOffsetBased_ParentNotRelated)
     EXPECT_EQ(actualReadData, expectedData);
 }
 
-TEST(SubReadHandle, CtorOffsetBased_ParentRelated)
+TEST(SubRangeReadHandle, CtorOffsetBased_ParentRelated)
 {
     datarw::VectorReadHandle reader(datarw::testing::g_testData);
     reader.skipBytes(8);
-    datarw::SubReadHandle subReader(reader, 8, true);
+    datarw::SubRangeReadHandle subReader(reader, 8, true);
     
     const uint64_t expectedSubDataSize = 16;
     ASSERT_EQ(subReader.getDataSize(), expectedSubDataSize);
@@ -153,16 +153,16 @@ TEST(SubReadHandle, CtorOffsetBased_ParentRelated)
     EXPECT_EQ(actualReadData, expectedData);
 }
 
-TEST(SubReadHandle, InvalidParam)
+TEST(SubRangeReadHandle, InvalidParam)
 {
     datarw::VectorReadHandle reader(datarw::testing::g_testData, false); // size == 32
     const datarw::Range rangeOutOfDataBounds(16, 17);
-    EXPECT_THROW(datarw::SubReadHandle subReader(reader, rangeOutOfDataBounds), std::out_of_range);
+    EXPECT_THROW(datarw::SubRangeReadHandle subReader(reader, rangeOutOfDataBounds), std::out_of_range);
     
-    EXPECT_THROW(datarw::SubReadHandle subReader(reader, 33), std::out_of_range);
+    EXPECT_THROW(datarw::SubRangeReadHandle subReader(reader, 33), std::out_of_range);
     
     reader.skipBytes(16); // position == 16
-    EXPECT_THROW(datarw::SubReadHandle(reader, 20, true), std::out_of_range);
+    EXPECT_THROW(datarw::SubRangeReadHandle(reader, 20, true), std::out_of_range);
 }
 
 TEST(SharedReadHandle, CommonTest)
@@ -170,7 +170,7 @@ TEST(SharedReadHandle, CommonTest)
     std::shared_ptr<datarw::DataReadHandle> sharedSubReader = nullptr;
     {
         std::shared_ptr<datarw::DataReadHandle> baseReader(new datarw::VectorReadHandle(datarw::testing::g_testData, true));
-        sharedSubReader.reset(new datarw::SharedReadHandle<datarw::SubReadHandle>(baseReader, datarw::Range(16, 8)));
+        sharedSubReader.reset(new datarw::SharedReadHandle<datarw::SubRangeReadHandle>(baseReader, datarw::Range(16, 8)));
 
         ASSERT_EQ(baseReader.use_count(), 2); // means that SharedReader owns it's parent - baseReader
     }

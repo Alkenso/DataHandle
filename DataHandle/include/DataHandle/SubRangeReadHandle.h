@@ -1,5 +1,5 @@
 //
-//  SubReadHandle.h
+//  SubRangeReadHandle.h
 //  DataHandle
 //
 //  Created by Alkenso on 5/5/17.
@@ -12,11 +12,11 @@
 
 namespace datarw
 {
-    class SubReadHandle : public DataReadHandle
+    class SubRangeReadHandle : public DataReadHandle
     {
     public:
-        SubReadHandle(DataReadHandle& parentReader, const Range dataRange);
-        SubReadHandle(DataReadHandle& parentReader, const uint64_t additionalOffset, const bool relativeToParent = false);
+        SubRangeReadHandle(DataReadHandle& parentReader, const Range dataRange);
+        SubRangeReadHandle(DataReadHandle& parentReader, const uint64_t additionalOffset, const bool relativeToParent = false);
 
     private:
         virtual void peekDataImpl(const Range& range, unsigned char* buffer) final;

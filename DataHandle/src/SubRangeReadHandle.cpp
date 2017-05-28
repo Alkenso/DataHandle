@@ -1,14 +1,14 @@
 //
-//  SubReadHandle.cpp
+//  SubRangeReadHandle.cpp
 //  DataHandle
 //
 //  Created by Alkenso on 5/5/17.
 //
 //
 
-#include "SubReadHandle.h"
+#include "SubRangeReadHandle.h"
 
-datarw::SubReadHandle::SubReadHandle(DataReadHandle& parentReader, Range dataRange)
+datarw::SubRangeReadHandle::SubRangeReadHandle(DataReadHandle& parentReader, Range dataRange)
 : DataReadHandle()
 , m_parentReader(parentReader)
 , m_dataRange(dataRange)
@@ -19,7 +19,7 @@ datarw::SubReadHandle::SubReadHandle(DataReadHandle& parentReader, Range dataRan
     }
 }
 
-datarw::SubReadHandle::SubReadHandle(DataReadHandle& parentReader, const uint64_t additionalOffset, const bool relativeToParent /* = false */)
+datarw::SubRangeReadHandle::SubRangeReadHandle(DataReadHandle& parentReader, const uint64_t additionalOffset, const bool relativeToParent /* = false */)
 : DataReadHandle()
 , m_parentReader(parentReader)
 , m_dataRange()
@@ -38,13 +38,13 @@ datarw::SubReadHandle::SubReadHandle(DataReadHandle& parentReader, const uint64_
     m_dataRange = datarw::Range(subPosition, totalDataSize - subPosition);
 }
 
-void datarw::SubReadHandle::peekDataImpl(const Range& range, unsigned char* buffer)
+void datarw::SubRangeReadHandle::peekDataImpl(const Range& range, unsigned char* buffer)
 {
     const Range subRange(range.position + m_dataRange.position, range.length);
     m_parentReader.peekData(subRange, buffer);
 }
 
-uint64_t datarw::SubReadHandle::getDataSizeImpl()
+uint64_t datarw::SubRangeReadHandle::getDataSizeImpl()
 {
     return m_dataRange.length;
 }
