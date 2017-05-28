@@ -21,6 +21,10 @@ namespace datarw
         explicit StreamReadHandle(std::istream& stream, const bool streamIsDirty = false);
 
     private:
-        virtual void peekDataImpl(const Range& range, unsigned char* buffer) override;
+        virtual void peekDataImpl(const Range& range, unsigned char* buffer) final;
+        
+    private:
+        virtual void seek(std::istream& stream, const int64_t pos, const std::ios::seekdir dir) final;
+        virtual int64_t tell(std::istream& stream) final;
     };
 }

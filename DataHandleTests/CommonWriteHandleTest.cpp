@@ -17,6 +17,15 @@ TEST(DataWriteHandle, GetDataSize)
     EXPECT_EQ(writer.getDataSize(), datarw::testing::g_testData.size());
 }
 
+TEST(DataWriteHandle, GetDataSize_AfterWrite)
+{
+    datarw::ByteBuffer data = datarw::testing::g_testData;
+    datarw::VectorWriteHandle writer;
+    
+    writer.writeData(datarw::testing::g_testData);
+    EXPECT_EQ(writer.getDataSize(), datarw::testing::g_testData.size());
+}
+
 TEST(DataWriteHandle, InsertData_URaw)
 {
     datarw::ByteBuffer data = datarw::testing::g_fourZeroes;
@@ -211,4 +220,23 @@ TEST(DataWriteHandle, InvalidData)
     
     EXPECT_NO_THROW(writer.writeData(nullData, 0));
     EXPECT_THROW(writer.writeData(nullData, 100500), std::invalid_argument);
+}
+
+TEST(DataWriteHandle, WriteInsertMixed)
+{
+    datarw::ByteBuffer data;
+    datarw::VectorWriteHandle writer(data);
+    ASSERT_EQ(writer.getDataSize(), 0);
+    
+    writer.writeData(datarw::ByteBuffer{ 0x00, 0x00, 0xff, 0xff, 0xff });
+    ASSERT_EQ(writer.getDataSize(), 5);
+    ASSERT_EQ(data, datarw::ByteBuffer({ 0x00, 0x00, 0xff, 0xff, 0xff }));
+    
+    writer.insertData(datarw::ByteBuffer{ 0xAA, 0xAA, 0xAA }, 4);
+    ASSERT_EQ(writer.getDataSize(), 7);
+    ASSERT_EQ(data, datarw::ByteBuffer({ 0x00, 0x00, 0xff, 0xff, 0xAA, 0xAA, 0xAA }));
+    
+    writer.writeData(datarw::ByteBuffer{ 0xBB, 0xBB, 0xBB });
+    ASSERT_EQ(writer.getDataSize(), 10);
+    EXPECT_EQ(data, datarw::ByteBuffer({ 0x00, 0x00, 0xff, 0xff, 0xAA, 0xAA, 0xAA, 0xBB, 0xBB, 0xBB }));
 }

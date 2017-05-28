@@ -8,21 +8,8 @@
 
 #include "StreamWriteHandle.h"
 
-namespace
-{
-    void Seek(std::ostream& s, int64_t pos, std::ios::seekdir dir)
-    {
-        s.seekp(pos, dir);
-    }
-    
-    int64_t Tell(std::ostream& s)
-    {
-        return s.tellp();
-    }
-}
-
 datarw::StreamWriteHandle::StreamWriteHandle(std::ostream& stream, const bool streamIsDirty /* = false */)
-: StreamHandleBase<datarw::DataWriteHandle, std::ostream>(stream, Seek, Tell, streamIsDirty)
+: StreamHandleBase<datarw::DataWriteHandle, std::ostream>(stream, streamIsDirty)
 {}
 
 void datarw::StreamWriteHandle::insertDataImpl(const unsigned char* data, const Range& range)
@@ -30,4 +17,14 @@ void datarw::StreamWriteHandle::insertDataImpl(const unsigned char* data, const 
     resetStreamIfNeeded(false, range.position);
     
     m_stream.write(reinterpret_cast<const char*>(data), range.length);
+}
+
+void datarw::StreamWriteHandle::seek(std::ostream& stream, const int64_t pos, const std::ios::seekdir dir)
+{
+    stream.seekp(pos, dir);
+}
+
+int64_t datarw::StreamWriteHandle::tell(std::ostream& stream)
+{
+    return stream.tellp();
 }

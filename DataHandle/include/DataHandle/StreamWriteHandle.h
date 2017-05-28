@@ -21,6 +21,10 @@ namespace datarw
         explicit StreamWriteHandle(std::ostream& stream, const bool streamIsDirty = false);
         
     private:
-        virtual void insertDataImpl(const unsigned char* data, const Range& range) override;
+        virtual void insertDataImpl(const unsigned char* data, const Range& range) final;
+        
+    private:
+        virtual void seek(std::ostream& stream, const int64_t pos, const std::ios::seekdir dir) final;
+        virtual int64_t tell(std::ostream& stream) final;
     };
 }

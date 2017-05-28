@@ -10,6 +10,8 @@
 
 #include <vector>
 
+#define IS_BIG_ENDIAN (*(uint16_t *)"\0\xff" < 0x100)
+
 namespace datarw
 {
     using ByteBuffer = std::vector<unsigned char>;

@@ -14,35 +14,30 @@ namespace datarw
     class StreamHandleBase : public Parent
     {
     public:
-        using SeekFn = std::function<void(StreamType&, int64_t, std::ios::seekdir)>;
-        using TellFn = std::function<int64_t(StreamType&)>;
-        
-        StreamHandleBase(StreamType& stream, SeekFn seekFn, TellFn tellFn, const bool streamIsDirty);
+        StreamHandleBase(StreamType& stream, const bool streamIsDirty);
         
         virtual ~StreamHandleBase() {}
         
     protected:
         void resetStreamIfNeeded(const bool force, const uint64_t position);
         
-    private:
-        virtual uint64_t getDataSizeImpl() override;
-        virtual void seekPositionOptimized(const uint64_t position) override;
+    private: // DataHandleBase
+        virtual uint64_t getDataSizeImpl() final;
+        virtual void seekPositionOptimized(const uint64_t position) final;
+        
+    private: // StreamHandleBase
+        virtual void seek(StreamType& stream, const int64_t pos, const std::ios::seekdir dir) = 0;
+        virtual int64_t tell(StreamType& stream) = 0;
         
     protected:
         StreamType& m_stream;
-        
-    private:
-        SeekFn m_seekFn;
-        TellFn m_tellFn;
     };
 }
 
 template <typename Parent, typename StreamType>
-datarw::StreamHandleBase<Parent, StreamType>::StreamHandleBase(StreamType& stream, SeekFn seekFn, TellFn tellFn, const bool streamIsDirty)
+datarw::StreamHandleBase<Parent, StreamType>::StreamHandleBase(StreamType& stream, const bool streamIsDirty)
 : Parent()
 , m_stream(stream)
-, m_seekFn(seekFn)
-, m_tellFn(tellFn)
 {
     if (streamIsDirty)
     {
@@ -53,10 +48,10 @@ datarw::StreamHandleBase<Parent, StreamType>::StreamHandleBase(StreamType& strea
 template <typename Parent, typename StreamType>
 void datarw::StreamHandleBase<Parent, StreamType>::resetStreamIfNeeded(const bool force, const uint64_t position)
 {
-    if (force || Parent::getSupportExternalDataSourceChanges())
+    if (force)
     {
         m_stream.clear();
-        m_seekFn(m_stream, position, std::ios::seekdir::beg);
+        seek(m_stream, position, std::ios::seekdir::beg);
     }
 }
 
@@ -65,10 +60,10 @@ uint64_t datarw::StreamHandleBase<Parent, StreamType>::getDataSizeImpl()
 {
     resetStreamIfNeeded(false, Parent::tellPosition());
     
-    const auto currentPos = m_tellFn(m_stream);
-    m_seekFn(m_stream, 0, std::ios::seekdir::end);
-    const auto size = m_tellFn(m_stream);
-    m_seekFn(m_stream, currentPos, std::ios::seekdir::beg);
+    const auto currentPos = tell(m_stream);
+    seek(m_stream, 0, std::ios::seekdir::end);
+    const auto size = tell(m_stream);
+    seek(m_stream, currentPos, std::ios::seekdir::beg);
     
     return size;
 }
@@ -78,5 +73,5 @@ void datarw::StreamHandleBase<Parent, StreamType>::seekPositionOptimized(const u
 {
     resetStreamIfNeeded(false, position);
     
-    m_seekFn(m_stream, position, std::ios::seekdir::beg);
+    seek(m_stream, position, std::ios::seekdir::beg);
 }

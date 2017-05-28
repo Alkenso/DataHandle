@@ -18,7 +18,7 @@ namespace datarw
     {
     public:
         template <typename... Args>
-        SharedReadHandle(std::shared_ptr<datarw::DataReadHandle> parentReader, Args&&... args)
+        explicit SharedReadHandle(std::shared_ptr<datarw::DataReadHandle> parentReader, Args&&... args)
         : ChildReader(*parentReader, std::forward<Args>(args)...)
         , m_parentReader(parentReader)
         {}

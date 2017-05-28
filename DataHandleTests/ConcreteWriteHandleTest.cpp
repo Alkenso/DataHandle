@@ -8,6 +8,7 @@
 
 #include <DataHandle/ContainerWriteHandle.h>
 #include <DataHandle/StreamWriteHandle.h>
+#include <DataHandle/ParallelWriteHandle.h>
 
 #include "TestData.h"
 
@@ -116,4 +117,25 @@ TEST(StreamWriteHandle, DirtyStream)
     EXPECT_EQ(writer.getDataSize(), 5);
     writer.writeString("ABCDE");
     EXPECT_EQ(ss.str(), "abcdeABCDE");
+}
+
+TEST(ParallelWriteHandle, CommonTest)
+{
+    datarw::ByteBuffer buf;
+    datarw::VectorWriteHandle writer1(buf);
+    std::stringstream ss;
+    datarw::StreamWriteHandle writer2(ss);
+    
+    datarw::ParallelWriteHandle writer({ writer1, writer2 });
+    ASSERT_EQ(writer.getDataSize(), 0);
+    
+    writer.writeData(datarw::ByteBuffer{ 0x00, 0x00, 0xff, 0xff, 0xff });
+    ASSERT_EQ(writer.getDataSize(), 5);
+    
+    writer.insertData(datarw::ByteBuffer{ 0xAA, 0xAA, 0xAA }, 4);
+    ASSERT_EQ(writer.getDataSize(), 7);
+    
+    const datarw::ByteBuffer expectedData{ 0x00, 0x00, 0xff, 0xff, 0xAA, 0xAA, 0xAA };
+    EXPECT_EQ(buf, expectedData);
+    EXPECT_EQ(ss.str(), std::string(expectedData.begin(), expectedData.end()));
 }

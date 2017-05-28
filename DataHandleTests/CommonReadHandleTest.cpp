@@ -19,31 +19,6 @@ TEST(DataReadHandle, GetDataSize)
     EXPECT_EQ(reader.getDataSize(), dataLength);
 }
 
-TEST(DataReadHandle, SupportsDataSourceChanges)
-{
-    const int initialDataSize = 100;
-    datarw::ByteBuffer someData(initialDataSize);
-    
-    datarw::VectorReadHandle reader(someData);
-    ASSERT_EQ(reader.getDataSize(), initialDataSize);
-    
-    someData.resize(200);
-    ASSERT_FALSE(reader.getSupportExternalDataSourceChanges());
-    EXPECT_EQ(reader.getDataSize(), initialDataSize);
-    
-    reader.setSupportExternalDataSourceChanges(true);
-    ASSERT_TRUE(reader.getSupportExternalDataSourceChanges());
-    EXPECT_EQ(reader.getDataSize(), 200);
-    someData.resize(300);
-    EXPECT_EQ(reader.getDataSize(), 300);
-    
-    reader.setSupportExternalDataSourceChanges(false);
-    someData.resize(400);
-    EXPECT_EQ(reader.getDataSize(), 400);
-    someData.resize(500);
-    EXPECT_EQ(reader.getDataSize(), 400);
-}
-
 TEST(DataReadHandle, ReadDataInRange_URaw)
 {
     datarw::VectorReadHandle reader(datarw::testing::g_testData);

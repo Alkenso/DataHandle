@@ -22,8 +22,8 @@ namespace datarw
         explicit ContainerReadHandle(Container&& bufferData);
 
     private:
-        virtual void peekDataImpl(const Range& range, unsigned char* buffer);
-        virtual uint64_t getDataSizeImpl();
+        virtual void peekDataImpl(const Range& range, unsigned char* buffer) final;
+        virtual uint64_t getDataSizeImpl() final;
 
     private:
         const Container m_bufferData;

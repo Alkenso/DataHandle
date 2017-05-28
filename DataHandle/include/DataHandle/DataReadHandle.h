@@ -19,6 +19,8 @@ namespace datarw
     public:
         virtual ~DataReadHandle() {}
         
+        uint64_t getDataSize();
+        
         template <typename Data, typename = ByteTypename<Data>>
         void peekData(const Range& range, Data* data);
         template <typename Buffer, typename = BufferTypename<Buffer>>
@@ -64,12 +66,25 @@ namespace datarw
         uint64_t getRemainingSize();
         bool enshureRemainingSize(uint64_t expectedRemainingSize);
         
+    protected:
+        DataReadHandle();
+        virtual uint64_t tellPosition() final;
+        
     private:
+        virtual uint64_t getDataSizeImpl() override = 0 ;
         virtual void peekDataImpl(const Range& range, unsigned char* buffer) = 0;
+        virtual void seekPositionOptimized(const uint64_t position) override;
         
     private:
         void peekDataInternal(const Range& range, unsigned char* buffer, const bool usePosition);
         void readNextDataInternal(const uint64_t dataSize, unsigned char* buffer);
+        uint64_t seekPosition(const uint64_t offset, const bool usePosition, const bool seekForce = false);
+        
+    private:
+        uint64_t m_sizePosition;
+        uint64_t m_sizePositionIsSet;
+        uint64_t m_currentPosition;
+        bool m_usePositionIsSet;
     };
 }
 

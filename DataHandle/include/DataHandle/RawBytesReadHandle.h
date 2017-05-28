@@ -19,8 +19,8 @@ namespace datarw
         RawBytesReadHandle(const T* ptr, const uint64_t sizeInBytes, bool copyData = false);
         
     private:
-        virtual void peekDataImpl(const Range& range, unsigned char* buffer);
-        virtual uint64_t getDataSizeImpl();
+        virtual void peekDataImpl(const Range& range, unsigned char* buffer) final;
+        virtual uint64_t getDataSizeImpl() final;
         
     private:
         const datarw::ByteBuffer m_bufferData;

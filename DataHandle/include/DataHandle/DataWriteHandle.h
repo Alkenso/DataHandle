@@ -20,6 +20,8 @@ namespace datarw
     public:
         virtual ~DataWriteHandle() {}
         
+        uint64_t getDataSize();
+        
         template <typename Data, typename = ByteTypename<Data>>
         void insertData(const Data* data, const uint64_t dataSize, const uint64_t offset);
         template <typename Buffer, typename = BufferTypename<Buffer>>
@@ -42,13 +44,23 @@ namespace datarw
         template<typename T>
         void writeValueBE(const T& value);
         
+    protected:
+        DataWriteHandle();
+        virtual uint64_t tellPosition() final;
+        
     private:
+        virtual uint64_t getDataSizeImpl() override = 0;
         virtual void insertDataImpl(const unsigned char* data, const Range& range) = 0;
+        virtual void seekPositionOptimized(const uint64_t position) override;
         
     private:
         void insertDataInternal(const unsigned char* data, const uint64_t dataSize, const uint64_t offset, const bool usePosition);
+        uint64_t seekPosition(const uint64_t offset, const bool usePosition);
+        void initPosition();
         
     private:
+        uint64_t m_position;
+        bool m_usePositionIsSet;
         std::once_flag m_inited;
     };
 }
