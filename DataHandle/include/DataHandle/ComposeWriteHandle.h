@@ -1,5 +1,5 @@
 //
-//  ParallelWriteHandle.h
+//  ComposeWriteHandle.h
 //  DataHandle
 //
 //  Created by alk on 5/22/17.
@@ -12,10 +12,10 @@
 
 namespace datarw
 {
-    class ParallelWriteHandle : public DataWriteHandle
+    class ComposeWriteHandle : public DataWriteHandle
     {
     public:
-        explicit ParallelWriteHandle(std::initializer_list<std::reference_wrapper<DataWriteHandle>> writers);
+        explicit ComposeWriteHandle(std::initializer_list<std::reference_wrapper<DataWriteHandle>> writers);
         
     private:
         virtual uint64_t getDataSizeImpl() final;

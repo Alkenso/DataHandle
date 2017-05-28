@@ -9,10 +9,10 @@
 /* Begin PBXBuildFile section */
 		490A77231EB9CEED00C1564F /* PrefixHeader.pch in Headers */ = {isa = PBXBuildFile; fileRef = 490A77221EB9CEED00C1564F /* PrefixHeader.pch */; settings = {ATTRIBUTES = (Private, ); }; };
 		490A77271EBC91A600C1564F /* libDataHandle.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 492707151DDAF63900450519 /* libDataHandle.a */; };
-		490BD9AF1ED2B40C00911346 /* SequentialReadHandle.h in Headers */ = {isa = PBXBuildFile; fileRef = 490BD9AD1ED2B40C00911346 /* SequentialReadHandle.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		490BD9B01ED2B40C00911346 /* SequentialReadHandle.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 490BD9AE1ED2B40C00911346 /* SequentialReadHandle.cpp */; };
-		490BD9B31ED2B4CA00911346 /* ParallelWriteHandle.h in Headers */ = {isa = PBXBuildFile; fileRef = 490BD9B11ED2B4CA00911346 /* ParallelWriteHandle.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		490BD9B41ED2B4CA00911346 /* ParallelWriteHandle.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 490BD9B21ED2B4CA00911346 /* ParallelWriteHandle.cpp */; };
+		490BD9AF1ED2B40C00911346 /* ComposeReadHandle.h in Headers */ = {isa = PBXBuildFile; fileRef = 490BD9AD1ED2B40C00911346 /* ComposeReadHandle.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		490BD9B01ED2B40C00911346 /* ComposeReadHandle.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 490BD9AE1ED2B40C00911346 /* ComposeReadHandle.cpp */; };
+		490BD9B31ED2B4CA00911346 /* ComposeWriteHandle.h in Headers */ = {isa = PBXBuildFile; fileRef = 490BD9B11ED2B4CA00911346 /* ComposeWriteHandle.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		490BD9B41ED2B4CA00911346 /* ComposeWriteHandle.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 490BD9B21ED2B4CA00911346 /* ComposeWriteHandle.cpp */; };
 		49C271561EC8959800B27DB7 /* PrefixHeader.pch in Headers */ = {isa = PBXBuildFile; fileRef = 49C271551EC8959800B27DB7 /* PrefixHeader.pch */; };
 		49C2715C1EC896E900B27DB7 /* CommonReadHandleTest.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 49C271571EC896E900B27DB7 /* CommonReadHandleTest.cpp */; };
 		49C2715D1EC896E900B27DB7 /* CommonWriteHandleTest.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 49C271581EC896E900B27DB7 /* CommonWriteHandleTest.cpp */; };
@@ -79,10 +79,10 @@
 		490A77191EB9BF1000C1564F /* DataHandleTestsRunner */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = DataHandleTestsRunner; sourceTree = BUILT_PRODUCTS_DIR; };
 		490A77221EB9CEED00C1564F /* PrefixHeader.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PrefixHeader.pch; path = include/DataHandle/internal/PrefixHeader.pch; sourceTree = "<group>"; };
 		490A772F1EBDC45500C1564F /* TestData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TestData.h; path = ../DataHandleTests/TestData.h; sourceTree = "<group>"; };
-		490BD9AD1ED2B40C00911346 /* SequentialReadHandle.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SequentialReadHandle.h; path = include/DataHandle/SequentialReadHandle.h; sourceTree = "<group>"; };
-		490BD9AE1ED2B40C00911346 /* SequentialReadHandle.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = SequentialReadHandle.cpp; path = src/SequentialReadHandle.cpp; sourceTree = "<group>"; };
-		490BD9B11ED2B4CA00911346 /* ParallelWriteHandle.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ParallelWriteHandle.h; path = include/DataHandle/ParallelWriteHandle.h; sourceTree = "<group>"; };
-		490BD9B21ED2B4CA00911346 /* ParallelWriteHandle.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = ParallelWriteHandle.cpp; path = src/ParallelWriteHandle.cpp; sourceTree = "<group>"; };
+		490BD9AD1ED2B40C00911346 /* ComposeReadHandle.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ComposeReadHandle.h; path = include/DataHandle/ComposeReadHandle.h; sourceTree = "<group>"; };
+		490BD9AE1ED2B40C00911346 /* ComposeReadHandle.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = ComposeReadHandle.cpp; path = src/ComposeReadHandle.cpp; sourceTree = "<group>"; };
+		490BD9B11ED2B4CA00911346 /* ComposeWriteHandle.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ComposeWriteHandle.h; path = include/DataHandle/ComposeWriteHandle.h; sourceTree = "<group>"; };
+		490BD9B21ED2B4CA00911346 /* ComposeWriteHandle.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = ComposeWriteHandle.cpp; path = src/ComposeWriteHandle.cpp; sourceTree = "<group>"; };
 		492707151DDAF63900450519 /* libDataHandle.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libDataHandle.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		49ACA6E91EC88BD00045A496 /* Tests.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Tests.xcconfig; sourceTree = "<group>"; };
 		49C271421EC894AF00B27DB7 /* libDataHandleTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libDataHandleTests.a; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -158,8 +158,8 @@
 				49C272021ECA558700B27DB7 /* StreamWriteHandle.h */,
 				49C272001ECA558700B27DB7 /* SharedDataHandle.h */,
 				49C272031ECA558700B27DB7 /* SubReadHandle.h */,
-				490BD9AD1ED2B40C00911346 /* SequentialReadHandle.h */,
-				490BD9B11ED2B4CA00911346 /* ParallelWriteHandle.h */,
+				490BD9AD1ED2B40C00911346 /* ComposeReadHandle.h */,
+				490BD9B11ED2B4CA00911346 /* ComposeWriteHandle.h */,
 			);
 			name = "Public Headers";
 			sourceTree = "<group>";
@@ -173,8 +173,8 @@
 				49C271F11ECA557C00B27DB7 /* StreamReadHandle.cpp */,
 				49C271F21ECA557C00B27DB7 /* StreamWriteHandle.cpp */,
 				49C271F31ECA557C00B27DB7 /* SubReadHandle.cpp */,
-				490BD9AE1ED2B40C00911346 /* SequentialReadHandle.cpp */,
-				490BD9B21ED2B4CA00911346 /* ParallelWriteHandle.cpp */,
+				490BD9AE1ED2B40C00911346 /* ComposeReadHandle.cpp */,
+				490BD9B21ED2B4CA00911346 /* ComposeWriteHandle.cpp */,
 			);
 			name = Sources;
 			sourceTree = "<group>";
@@ -282,8 +282,8 @@
 				49C2720C1ECA558700B27DB7 /* StreamWriteHandle.h in Headers */,
 				49C2720D1ECA558700B27DB7 /* SubReadHandle.h in Headers */,
 				49C2720A1ECA558700B27DB7 /* SharedDataHandle.h in Headers */,
-				490BD9AF1ED2B40C00911346 /* SequentialReadHandle.h in Headers */,
-				490BD9B31ED2B4CA00911346 /* ParallelWriteHandle.h in Headers */,
+				490BD9AF1ED2B40C00911346 /* ComposeReadHandle.h in Headers */,
+				490BD9B31ED2B4CA00911346 /* ComposeWriteHandle.h in Headers */,
 				490A77231EB9CEED00C1564F /* PrefixHeader.pch in Headers */,
 				49C272101ECA559600B27DB7 /* DataHandleBase.h in Headers */,
 				49C272111ECA559600B27DB7 /* StreamHandleBase.h in Headers */,
@@ -413,10 +413,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				49C271F41ECA557C00B27DB7 /* DataHandleBase.cpp in Sources */,
-				490BD9B01ED2B40C00911346 /* SequentialReadHandle.cpp in Sources */,
+				490BD9B01ED2B40C00911346 /* ComposeReadHandle.cpp in Sources */,
 				49C271F71ECA557C00B27DB7 /* StreamReadHandle.cpp in Sources */,
 				49C271F91ECA557C00B27DB7 /* SubReadHandle.cpp in Sources */,
-				490BD9B41ED2B4CA00911346 /* ParallelWriteHandle.cpp in Sources */,
+				490BD9B41ED2B4CA00911346 /* ComposeWriteHandle.cpp in Sources */,
 				49C271F61ECA557C00B27DB7 /* DataWriteHandle.cpp in Sources */,
 				49C271F81ECA557C00B27DB7 /* StreamWriteHandle.cpp in Sources */,
 				49C271F51ECA557C00B27DB7 /* DataReadHandle.cpp in Sources */,

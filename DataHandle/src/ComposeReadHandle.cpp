@@ -1,12 +1,12 @@
 //
-//  SequentialReadHandle.m
+//  ComposeReadHandle.m
 //  DataHandle
 //
 //  Created by alk on 5/22/17.
 //
 //
 
-#import "SequentialReadHandle.h"
+#import "ComposeReadHandle.h"
 
 namespace
 {
@@ -39,7 +39,7 @@ namespace
     }
 }
 
-datarw::SequentialReadHandle::SequentialReadHandle(std::initializer_list<std::reference_wrapper<DataReadHandle>> readers)
+datarw::ComposeReadHandle::ComposeReadHandle(std::initializer_list<std::reference_wrapper<DataReadHandle>> readers)
 : DataReadHandle()
 , m_readers(readers)
 , m_readerRanges(readers.size())
@@ -47,12 +47,12 @@ datarw::SequentialReadHandle::SequentialReadHandle(std::initializer_list<std::re
     updateReaderRanges();
 }
 
-uint64_t datarw::SequentialReadHandle::getDataSizeImpl()
+uint64_t datarw::ComposeReadHandle::getDataSizeImpl()
 {
     return updateReaderRanges();
 }
 
-void datarw::SequentialReadHandle::peekDataImpl(const datarw::Range& range, unsigned char* buffer)
+void datarw::ComposeReadHandle::peekDataImpl(const datarw::Range& range, unsigned char* buffer)
 {
     if (!range.length)
     {
@@ -96,7 +96,7 @@ void datarw::SequentialReadHandle::peekDataImpl(const datarw::Range& range, unsi
     lastReader.peekData(lastRange, buffer + readSize);
 }
 
-uint64_t datarw::SequentialReadHandle::updateReaderRanges()
+uint64_t datarw::ComposeReadHandle::updateReaderRanges()
 {
     const size_t readerCount = m_readers.size();
     

@@ -1,5 +1,5 @@
 //
-//  SequentialReadHandle.h
+//  ComposeReadHandle.h
 //  DataHandle
 //
 //  Created by alk on 5/22/17.
@@ -12,10 +12,10 @@
 
 namespace datarw
 {
-    class SequentialReadHandle : public DataReadHandle
+    class ComposeReadHandle : public DataReadHandle
     {
     public:
-        explicit SequentialReadHandle(std::initializer_list<std::reference_wrapper<DataReadHandle>> readers);
+        explicit ComposeReadHandle(std::initializer_list<std::reference_wrapper<DataReadHandle>> readers);
         
     private:
         virtual uint64_t getDataSizeImpl() final;

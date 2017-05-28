@@ -1,19 +1,19 @@
 //
-//  ParallelWriteHandle.m
+//  ComposeWriteHandle.m
 //  DataHandle
 //
 //  Created by alk on 5/22/17.
 //
 //
 
-#import "ParallelWriteHandle.h"
+#import "ComposeWriteHandle.h"
 
-datarw::ParallelWriteHandle::ParallelWriteHandle(std::initializer_list<std::reference_wrapper<DataWriteHandle>> writers)
+datarw::ComposeWriteHandle::ComposeWriteHandle(std::initializer_list<std::reference_wrapper<DataWriteHandle>> writers)
 : datarw::DataWriteHandle()
 , m_writers(writers)
 {}
 
-uint64_t datarw::ParallelWriteHandle::getDataSizeImpl()
+uint64_t datarw::ComposeWriteHandle::getDataSizeImpl()
 {
     uint64_t maxWriterSize = 0;
     for (DataWriteHandle& writer : m_writers)
@@ -24,7 +24,7 @@ uint64_t datarw::ParallelWriteHandle::getDataSizeImpl()
     return maxWriterSize;
 }
 
-void datarw::ParallelWriteHandle::writeDataImpl(const unsigned char* data, const Range& range)
+void datarw::ComposeWriteHandle::writeDataImpl(const unsigned char* data, const Range& range)
 {
     for (DataWriteHandle& writer : m_writers)
     {

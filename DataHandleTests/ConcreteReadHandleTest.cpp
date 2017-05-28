@@ -11,7 +11,7 @@
 #include <DataHandle/SubReadHandle.h>
 #include <DataHandle/SharedDataHandle.h>
 #include <DataHandle/StreamReadHandle.h>
-#include <DataHandle/SequentialReadHandle.h>
+#include <DataHandle/ComposeReadHandle.h>
 
 #include "TestData.h"
 
@@ -261,10 +261,10 @@ TEST(StreamReadHandle, Mixed_Seek_Peek_ReadNext)
     EXPECT_EQ(reader.getRemainingSize(), 7);
 }
 
-TEST(SequentialReadHandle, OneEntry)
+TEST(ComposeReadHandle, OneEntry)
 {
     datarw::VectorReadHandle reader(datarw::testing::g_testData);
-    datarw::SequentialReadHandle seqReader({reader});
+    datarw::ComposeReadHandle seqReader({reader});
     
     ASSERT_EQ(seqReader.getDataSize(), datarw::testing::g_testData.size());
     
@@ -273,12 +273,12 @@ TEST(SequentialReadHandle, OneEntry)
     EXPECT_EQ(seqReader.readData<datarw::ByteBuffer>(6), datarw::ByteBuffer({ 0xF6, 0xB3, 0xF3, 0x8F, 0x79, 0xE6 }));
 }
 
-TEST(SequentialReadHandle, TwoOverlapping)
+TEST(ComposeReadHandle, TwoOverlapping)
 {
     datarw::VectorReadHandle reader1({ 0x00, 0x01, 0x02, 0x03 });
     datarw::VectorReadHandle reader2({ 0x04, 0x05, 0x06, 0x07 });
     
-    datarw::SequentialReadHandle seqReader({reader1, reader2});
+    datarw::ComposeReadHandle seqReader({reader1, reader2});
     
     ASSERT_EQ(seqReader.getDataSize(), 8);
     
@@ -288,7 +288,7 @@ TEST(SequentialReadHandle, TwoOverlapping)
     EXPECT_EQ(seqReader.readData<datarw::ByteBuffer>(2), datarw::ByteBuffer({ 0x06, 0x07 }));
 }
 
-TEST(SequentialReadHandle, MultipleEntries)
+TEST(ComposeReadHandle, MultipleEntries)
 {
     unsigned char data1[] = { 0x00, 0x01, 0x02, 0x03 };
     datarw::RawBytesReadHandle reader1(data1, sizeof(data1));
@@ -299,7 +299,7 @@ TEST(SequentialReadHandle, MultipleEntries)
     std::stringstream ss(std::string(data3.begin(), data3.end()));
     datarw::StreamReadHandle reader3(ss);
     
-    datarw::SequentialReadHandle seqReader({ reader1, reader2, reader3 });
+    datarw::ComposeReadHandle seqReader({ reader1, reader2, reader3 });
     ASSERT_EQ(seqReader.getDataSize(), 12);
     
     EXPECT_EQ(seqReader.readData<datarw::ByteBuffer>(2), datarw::ByteBuffer({ 0x00, 0x01 }));
@@ -313,13 +313,13 @@ TEST(SequentialReadHandle, MultipleEntries)
     EXPECT_EQ(seqReader.readAllData<datarw::ByteBuffer>(), datarw::ByteBuffer({ 0x00, 0x01, 0x02, 0x03, 0x04, 0x05, 0x06, 0x07, 0x08, 0x09, 0x0A, 0x0B }));
 }
 
-TEST(SequentialReadHandle, OnBounds)
+TEST(ComposeReadHandle, OnBounds)
 {
     datarw::VectorReadHandle reader1({ 0x00, 0x01, 0x02, 0x03 });
     datarw::VectorReadHandle reader2({ 0x04, 0x05, 0x06, 0x07 });
     datarw::VectorReadHandle reader3({ 0x08, 0x09, 0x0A, 0x0B });
     
-    datarw::SequentialReadHandle seqReader({reader1, reader2, reader3});
+    datarw::ComposeReadHandle seqReader({reader1, reader2, reader3});
     
     ASSERT_EQ(seqReader.getDataSize(), 12);
     
