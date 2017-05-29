@@ -21,32 +21,32 @@ namespace datarw
         
         uint64_t getDataSize();
         
-        template <typename Data, typename = ByteTypename<Data>>
+        template <TYPE_RAW_BYTES(Data)>
         void peekData(const Range& range, Data* data);
-        template <typename Buffer, typename = BufferTypename<Buffer>>
+        template <TYPE_BYTE_BUFFER(Buffer)>
         void peekData(const Range& range, Buffer& buffer);
-        template <typename Buffer, typename = BufferTypename<Buffer>>
+        template <TYPE_BYTE_BUFFER(Buffer)>
         void peekAppendData(const Range& range, Buffer& buffer);
-        template <typename Buffer>
-        BufferTypename<Buffer> peekData(const Range& range);
+        template <TYPE_BYTE_BUFFER(Result)>
+        Result peekData(const Range& range);
         
-        template <typename Data, typename = ByteTypename<Data>>
+        template <TYPE_RAW_BYTES(Data)>
         void readData(const uint64_t dataSize, Data* data);
-        template <typename Buffer, typename = BufferTypename<Buffer>>
+        template <TYPE_BYTE_BUFFER(Buffer)>
         void readData(const uint64_t dataSize, Buffer& buffer);
-        template <typename Buffer, typename = BufferTypename<Buffer>>
+        template <TYPE_BYTE_BUFFER(Buffer)>
         void appendData(const uint64_t dataSize, Buffer& buffer);
-        template <typename Buffer>
-        BufferTypename<Buffer> readData(const uint64_t dataSize);
+        template <TYPE_BYTE_BUFFER(Result)>
+        Result readData(const uint64_t dataSize);
         
-        template <typename Data, typename = ByteTypename<Data>>
+        template <TYPE_RAW_BYTES(Data)>
         void readAllData(Data* data);
-        template <typename Buffer, typename = BufferTypename<Buffer>>
+        template <TYPE_BYTE_BUFFER(Buffer)>
         void readAllData(Buffer& buffer);
-        template <typename Buffer, typename = BufferTypename<Buffer>>
+        template <TYPE_BYTE_BUFFER(Buffer)>
         void appendAllData(Buffer& buffer);
-        template <typename Buffer>
-        BufferTypename<Buffer> readAllData();
+        template <TYPE_BYTE_BUFFER(Result)>
+        Result readAllData();
         
         template<typename T>
         T peekValueLE(int64_t offset);

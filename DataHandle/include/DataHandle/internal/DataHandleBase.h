@@ -24,7 +24,7 @@ namespace datarw
         virtual uint64_t getDataSizeImpl() = 0;
         
         /* Some data sources (e.g. streams, files) have native implementation of seeking / reading consistent data.
-         * Overriding 'seekPositionOptimized' allows derived classes to ignore range.position in 'peekDataImpl' implementation.
+         * Overriding 'seekPositionOptimized' allows derived classes to ignore range.position in 'peekDataImpl / writeDataImpl' methods.
          * That allows native seek implmenetation to be called only when needed. */
         virtual void seekPositionOptimized(const uint64_t position);
     };

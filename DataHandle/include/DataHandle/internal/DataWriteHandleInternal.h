@@ -8,25 +8,25 @@
 
 #pragma once
     
-template <typename Data, typename>
+template <TYPE_RAW_BYTES_IMPL(Data)>
 void datarw::DataWriteHandle::writeData(const Data* data, const uint64_t dataSize, const uint64_t offset)
 {
     insertDataInternal(reinterpret_cast<const unsigned char*>(data), dataSize, offset, false);
 }
 
-template <typename Buffer, typename>
+template <TYPE_BYTE_BUFFER_IMPL(Buffer)>
 void datarw::DataWriteHandle::writeData(const Buffer& buffer, int64_t offset)
 {
     writeData(buffer.data(), buffer.size(), offset);
 }
 
-template <typename Data, typename>
+template <TYPE_RAW_BYTES_IMPL(Data)>
 void datarw::DataWriteHandle::writeData(const Data* data, const uint64_t dataSize)
 {
     insertDataInternal(reinterpret_cast<const unsigned char*>(data), dataSize, 0, true);
 }
 
-template <typename Buffer, typename>
+template <TYPE_BYTE_BUFFER_IMPL(Buffer)>
 void datarw::DataWriteHandle::writeData(const Buffer& buffer)
 {
     writeData(buffer.data(), buffer.size());

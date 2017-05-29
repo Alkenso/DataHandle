@@ -8,20 +8,20 @@
 
 #pragma once
 
-template <typename Data, typename>
+template <TYPE_RAW_BYTES_IMPL(Data)>
 void datarw::DataReadHandle::peekData(const Range& range, Data* data)
 {
     peekDataInternal(range, reinterpret_cast<unsigned char*>(data), false);
 }
 
-template <typename Buffer, typename>
+template <TYPE_BYTE_BUFFER_IMPL(Buffer)>
 void datarw::DataReadHandle::peekData(const Range& range, Buffer& buffer)
 {
     buffer.resize(static_cast<size_t>(range.length));
     peekData(range, &buffer[0]);
 }
 
-template <typename Buffer, typename>
+template <TYPE_BYTE_BUFFER_IMPL(Buffer)>
 void datarw::DataReadHandle::peekAppendData(const Range& range, Buffer& buffer)
 {
     const size_t currentBufferSize = buffer.size();
@@ -29,29 +29,29 @@ void datarw::DataReadHandle::peekAppendData(const Range& range, Buffer& buffer)
     peekData(range, &buffer[currentBufferSize]);
 }
 
-template <typename Buffer>
-datarw::BufferTypename<Buffer> datarw::DataReadHandle::peekData(const Range& range)
+template <TYPE_BYTE_BUFFER_IMPL(Result)>
+Result datarw::DataReadHandle::peekData(const Range& range)
 {
-    Buffer buffer;
+    Result buffer;
     peekData(range, buffer);
     
     return buffer;
 }
 
-template <typename Data, typename>
+template <TYPE_RAW_BYTES_IMPL(Data)>
 void datarw::DataReadHandle::readData(const uint64_t dataSize, Data* data)
 {
     readDataInternal(dataSize, reinterpret_cast<unsigned char*>(data));
 }
 
-template <typename Buffer, typename>
+template <TYPE_BYTE_BUFFER_IMPL(Buffer)>
 void datarw::DataReadHandle::readData(const uint64_t dataSize, Buffer& buffer)
 {
     buffer.resize(static_cast<size_t>(dataSize));
     readData(dataSize, &buffer[0]);
 }
 
-template <typename Buffer, typename>
+template <TYPE_BYTE_BUFFER_IMPL(Buffer)>
 void datarw::DataReadHandle::appendData(const uint64_t dataSize, Buffer& buffer)
 {
     const size_t currentBufferSize = buffer.size();
@@ -59,29 +59,29 @@ void datarw::DataReadHandle::appendData(const uint64_t dataSize, Buffer& buffer)
     readData(dataSize, &buffer[currentBufferSize]);
 }
 
-template <typename Buffer>
-datarw::BufferTypename<Buffer> datarw::DataReadHandle::readData(const uint64_t dataSize)
+template <TYPE_BYTE_BUFFER_IMPL(Result)>
+Result datarw::DataReadHandle::readData(const uint64_t dataSize)
 {
-    Buffer buffer;
+    Result buffer;
     readData(dataSize, buffer);
     
     return buffer;
 }
 
-template <typename Data, typename>
+template <TYPE_RAW_BYTES_IMPL(Data)>
 void datarw::DataReadHandle::readAllData(Data* data)
 {
     peekData(datarw::Range(0, getDataSize()), data);
 }
 
-template <typename Buffer, typename>
+template <TYPE_BYTE_BUFFER_IMPL(Buffer)>
 void datarw::DataReadHandle::readAllData(Buffer& buffer)
 {
     buffer.resize(getDataSize());
     readAllData(&buffer[0]);
 }
 
-template <typename Buffer, typename>
+template <TYPE_BYTE_BUFFER_IMPL(Buffer)>
 void datarw::DataReadHandle::appendAllData(Buffer& buffer)
 {
     const size_t currentBufferSize = buffer.size();
@@ -89,10 +89,10 @@ void datarw::DataReadHandle::appendAllData(Buffer& buffer)
     readAllData(&buffer[currentBufferSize]);
 }
 
-template <typename Buffer>
-datarw::BufferTypename<Buffer> datarw::DataReadHandle::readAllData()
+template <TYPE_BYTE_BUFFER_IMPL(Result)>
+Result datarw::DataReadHandle::readAllData()
 {
-    Buffer buffer;
+    Result buffer;
     readAllData(buffer);
     
     return buffer;
