@@ -84,7 +84,7 @@
 		490BD9B11ED2B4CA00911346 /* ComposeWriteHandle.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ComposeWriteHandle.h; path = include/DataHandle/ComposeWriteHandle.h; sourceTree = "<group>"; };
 		490BD9B21ED2B4CA00911346 /* ComposeWriteHandle.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = ComposeWriteHandle.cpp; path = src/ComposeWriteHandle.cpp; sourceTree = "<group>"; };
 		492707151DDAF63900450519 /* libDataHandle.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libDataHandle.a; sourceTree = BUILT_PRODUCTS_DIR; };
-		49ACA6E91EC88BD00045A496 /* Tests.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Tests.xcconfig; sourceTree = "<group>"; };
+		49ACA6E91EC88BD00045A496 /* Tests.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; name = Tests.xcconfig; path = Configuration/Tests.xcconfig; sourceTree = "<group>"; };
 		49C271421EC894AF00B27DB7 /* libDataHandleTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libDataHandleTests.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		49C271551EC8959800B27DB7 /* PrefixHeader.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PrefixHeader.pch; path = DataHandleTests/PrefixHeader.pch; sourceTree = SOURCE_ROOT; };
 		49C271571EC896E900B27DB7 /* CommonReadHandleTest.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = CommonReadHandleTest.cpp; path = DataHandleTests/CommonReadHandleTest.cpp; sourceTree = SOURCE_ROOT; };
