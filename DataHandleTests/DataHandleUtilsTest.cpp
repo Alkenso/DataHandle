@@ -7,7 +7,7 @@
 //
 
 #include <DataHandle/DataTypes.h>
-#include <DataHandle/DataHandleBase.h>
+#include <DataHandle/internal/DataHandleBase.h>
 
 #include "TestData.h"
 

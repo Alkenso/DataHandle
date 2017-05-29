@@ -8,7 +8,7 @@
 
 #pragma once
 
-#include "DataTypes.h"
+#include <DataHandle/DataTypes.h>
 
 namespace datarw
 {
