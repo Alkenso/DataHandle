@@ -30,7 +30,7 @@ uint64_t datarw::DataWriteHandle::getDataSize()
     return m_position;
 }
 
-void datarw::DataWriteHandle::writeString(const std::string& str, int64_t offset, const bool withNullTerminator /* = false */)
+void datarw::DataWriteHandle::writeString(const std::string& str, uint64_t offset, const bool withNullTerminator /* = false */)
 {
     writeData(reinterpret_cast<const unsigned char*>(str.data()), str.size(), offset);
     if (withNullTerminator)

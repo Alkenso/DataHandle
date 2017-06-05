@@ -6,7 +6,7 @@
 //
 //
 
-#import "ComposeWriteHandle.h"
+#include "ComposeWriteHandle.h"
 
 datarw::ComposeWriteHandle::ComposeWriteHandle(std::initializer_list<std::reference_wrapper<DataWriteHandle>> writers)
 : datarw::DataWriteHandle()

@@ -15,7 +15,7 @@ void datarw::DataWriteHandle::writeData(const Data* data, const uint64_t dataSiz
 }
 
 template <TYPE_BYTE_BUFFER_IMPL(Buffer)>
-void datarw::DataWriteHandle::writeData(const Buffer& buffer, int64_t offset)
+void datarw::DataWriteHandle::writeData(const Buffer& buffer, uint64_t offset)
 {
     writeData(buffer.data(), buffer.size(), offset);
 }

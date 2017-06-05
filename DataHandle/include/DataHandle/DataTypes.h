@@ -8,6 +8,7 @@
 
 #pragma once
 
+#include <type_traits>
 #include <vector>
 
 #define IS_BIG_ENDIAN (*(uint16_t *)"\0\xff" < 0x100)
@@ -41,12 +42,15 @@ namespace datarw
 #endif
         std::is_same<T, unsigned char>::value;
     };
-    
+
+    template <typename T>
+    using IsVector = std::is_same<T, std::vector<typename T::value_type, typename T::allocator_type>>;
+
     template <typename T>
     struct IsContiguousContainer
     {
         static const bool value =
-        std::is_same<T, std::vector<typename T::value_type>>::value ||
+        IsVector<T>::value ||
         std::is_same<T, std::string>::value;
     };
     

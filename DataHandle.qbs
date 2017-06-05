@@ -58,11 +58,15 @@ Project {
 
         files: ["DataHandleTests/*"]
 
-        cpp.cxxFlags: ["-Wno-sign-compare"]
         cpp.useCxxPrecompiledHeader : true
         FileTagger {
             patterns : "PrefixHeader.pch"
             fileTags : ["cpp_pch_src"]
+        }
+
+        Properties {
+            condition: qbs.targetOS.contains("darwin")
+            cpp.cxxFlags: ["-Wno-sign-compare"]
         }
     }
 

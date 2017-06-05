@@ -9,10 +9,17 @@
 #ifndef PrefixHeader_pch
 #define PrefixHeader_pch
 
+#ifdef _WIN32
+#define NOMINMAX
+#include <Windows.h>
+#endif
+
 #include <string>
 #include <vector>
 #include <map>
 #include <assert.h>
 #include <mutex>
+#include <algorithm>
+#include <ios>
 
 #endif /* PrefixHeader_pch */

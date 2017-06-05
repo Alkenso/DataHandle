@@ -25,8 +25,8 @@ namespace datarw
         template <TYPE_RAW_BYTES(Data)>
         void writeData(const Data* data, const uint64_t dataSize, const uint64_t offset);
         template <TYPE_BYTE_BUFFER(Buffer)>
-        void writeData(const Buffer& buffer, int64_t offset);
-        void writeString(const std::string& str, int64_t offset, const bool withNullTerminator = false);
+        void writeData(const Buffer& buffer, uint64_t offset);
+        void writeString(const std::string& str, uint64_t offset, const bool withNullTerminator = false);
         
         template <TYPE_RAW_BYTES(Data)>
         void writeData(const Data* data, const uint64_t dataSize);

@@ -48,7 +48,7 @@ void datarw::StreamHandleBase<Parent, StreamType>::resetStreamIfNeeded(const boo
     if (force || m_streamIsDirty)
     {
         m_stream.clear();
-        seek(m_stream, position, std::ios::seekdir::beg);
+        seek(m_stream, position, std::ios::beg);
     }
 }
 
@@ -58,9 +58,9 @@ uint64_t datarw::StreamHandleBase<Parent, StreamType>::getDataSizeImpl()
     resetStreamIfNeeded(false, Parent::tellPosition());
     
     const auto currentPos = tell(m_stream);
-    seek(m_stream, 0, std::ios::seekdir::end);
+    seek(m_stream, 0, std::ios::end);
     const auto size = tell(m_stream);
-    seek(m_stream, currentPos, std::ios::seekdir::beg);
+    seek(m_stream, currentPos, std::ios::beg);
     
     return size;
 }
@@ -70,5 +70,5 @@ void datarw::StreamHandleBase<Parent, StreamType>::seekPositionOptimized(const u
 {
     resetStreamIfNeeded(false, position);
     
-    seek(m_stream, position, std::ios::seekdir::beg);
+    seek(m_stream, position, std::ios::beg);
 }

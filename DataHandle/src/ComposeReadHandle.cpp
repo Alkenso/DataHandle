@@ -6,7 +6,7 @@
 //
 //
 
-#import "ComposeReadHandle.h"
+#include "ComposeReadHandle.h"
 
 namespace
 {
@@ -17,7 +17,7 @@ namespace
         const uint64_t readRangeEnd = readRangeBegin + readRange.length;
         
         bool firstIsSet = false;
-        for (uint64_t i = 0; i < readerCount; i++)
+        for (size_t i = 0; i < readerCount; i++)
         {
             const uint64_t readerBegin = readerRanges[i].position;
             const uint64_t readerEnd = readerBegin + readerRanges[i].length;
@@ -31,7 +31,6 @@ namespace
             else if (firstIsSet && (readRangeEnd >= readerBegin) && (readRangeEnd <= readerEnd))
             {
                 lastReaderIdx = i;
-//                lastReaderIdx++;
             }
         }
         
@@ -79,15 +78,14 @@ void datarw::ComposeReadHandle::peekDataImpl(const datarw::Range& range, unsigne
         return;
     }
     
-    size_t readSize = firstRange.length;
+    uint64_t readSize = firstRange.length;
     for (size_t i = firstReaderIdx + 1; i < lastReaderIdx; i++) // All intermediate pieces
     {
         DataReadHandle& reader = m_readers[i];
         reader.readAllData(buffer + readSize);
         readSize += m_readerRanges[i].length;
     }
-    
-    // Read last piece
+
     Range lastRange;
     lastRange.position = 0;
     lastRange.length = range.position + range.length - m_readerRanges[lastReaderIdx].position;
