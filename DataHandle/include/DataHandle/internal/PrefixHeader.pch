@@ -21,5 +21,7 @@
 #include <mutex>
 #include <algorithm>
 #include <ios>
+#include <istream>
+#include <ostream>
 
 #endif /* PrefixHeader_pch */
