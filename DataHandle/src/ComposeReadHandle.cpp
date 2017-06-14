@@ -61,11 +61,6 @@ uint64_t datarw::ComposeReadHandle::getDataSizeImpl()
 
 void datarw::ComposeReadHandle::peekDataImpl(const datarw::Range& range, unsigned char* buffer)
 {
-    if (!range.length)
-    {
-        return;
-    }
-    
     size_t firstReaderIdx = 0;
     size_t lastReaderIdx = 0;
     if (!FindReadRange(m_readerRanges, range, firstReaderIdx, lastReaderIdx))
