@@ -54,6 +54,9 @@ namespace datarw
         
     protected:
         DataWriteHandle();
+        DataWriteHandle(DataWriteHandle&& r) = default;
+        DataWriteHandle& operator=(DataWriteHandle&& r) = default;
+        
         virtual uint64_t tellPosition() final;
         
     private:

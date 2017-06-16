@@ -28,6 +28,9 @@ namespace datarw
     public:
         explicit StreamWriteHandle(std::ostream& stream, const bool streamIsDirty = false);
         
+        StreamWriteHandle(StreamWriteHandle&& r) = default;
+        StreamWriteHandle& operator=(StreamWriteHandle&& r) = default;
+        
     private:
         virtual void writeDataImpl(const unsigned char* data, const Range& range) final;
         

@@ -26,6 +26,9 @@ namespace datarw
         template <typename T>
         RawBytesReadHandle(const T* ptr, const uint64_t sizeInBytes, bool copyData = false);
         
+        RawBytesReadHandle(RawBytesReadHandle&& r) = default;
+        RawBytesReadHandle& operator=(RawBytesReadHandle&& r) = default;
+        
     private:
         virtual void peekDataImpl(const Range& range, unsigned char* buffer) final;
         virtual uint64_t getDataSizeImpl() final;

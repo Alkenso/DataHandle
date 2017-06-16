@@ -28,13 +28,16 @@ namespace datarw
     public:
         explicit ContainerReadHandle(const Container& bufferData, bool copyData = false);
         explicit ContainerReadHandle(Container&& bufferData);
+        
+        ContainerReadHandle(ContainerReadHandle&& r);
+        ContainerReadHandle& operator=(ContainerReadHandle&& r);
 
     private:
         virtual void peekDataImpl(const Range& range, unsigned char* buffer) final;
         virtual uint64_t getDataSizeImpl() final;
 
     private:
-        const Container m_bufferData;
+        Container m_bufferData;
         const Container& m_bufferDataRef;
     };
     

@@ -24,6 +24,9 @@ namespace datarw
     public:
         StreamHandleBase(StreamType& stream, const bool streamIsDirty);
         
+        StreamHandleBase(StreamHandleBase&& r) = default;
+        StreamHandleBase& operator=(StreamHandleBase&& r) = default;
+        
         virtual ~StreamHandleBase() {}
         
     protected:

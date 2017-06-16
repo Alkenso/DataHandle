@@ -63,6 +63,22 @@ TEST(ContainerReadHandle, CreateWithBufferNoCopy)
     EXPECT_EQ(actualReadData, dataToRead);
 }
 
+TEST(ContainerReadHandle, MoveSemantics)
+{
+    datarw::ByteBuffer dataToRead = datarw::testing::g_testData;
+    
+    auto fn = []() { return datarw::VectorReadHandle(datarw::testing::g_testData, true); };
+    
+    datarw::VectorReadHandle readerCreatedMoved(fn());
+    
+    EXPECT_EQ(readerCreatedMoved.readAllData<datarw::ByteBuffer>(), datarw::testing::g_testData);
+    
+    datarw::VectorReadHandle readerAssignedMoved(std::move(readerCreatedMoved));
+    
+    EXPECT_EQ(readerCreatedMoved.getDataSize(), 0);
+    EXPECT_EQ(readerAssignedMoved.readAllData<datarw::ByteBuffer>(), datarw::testing::g_testData);
+}
+
 TEST(RawBytesReadHandle, CreateWithBufferCopy)
 {
     datarw::ByteBuffer dataToRead = datarw::testing::g_testData;

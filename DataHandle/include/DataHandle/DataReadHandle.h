@@ -76,6 +76,9 @@ namespace datarw
         
     protected:
         DataReadHandle();
+        DataReadHandle(DataReadHandle&& r) = default;
+        DataReadHandle& operator=(DataReadHandle&& r) = default;
+        
         virtual uint64_t tellPosition() final;
         
     private:

@@ -25,6 +25,9 @@ namespace datarw
     public:
         explicit ComposeReadHandle(std::initializer_list<std::reference_wrapper<DataReadHandle>> readers);
         
+        ComposeReadHandle(ComposeReadHandle&& r) = default;
+        ComposeReadHandle& operator=(ComposeReadHandle&& r) = default;
+        
     private:
         virtual uint64_t getDataSizeImpl() final;
         virtual void peekDataImpl(const Range& range, unsigned char* buffer) final;

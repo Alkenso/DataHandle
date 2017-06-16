@@ -28,6 +28,9 @@ namespace datarw
         explicit ContainerWriteHandle(Container& container, const bool copyData = false);
         explicit ContainerWriteHandle(const Container& container);
         explicit ContainerWriteHandle(Container&& container);
+        
+        ContainerWriteHandle(ContainerWriteHandle&& r) = default;
+        ContainerWriteHandle& operator=(ContainerWriteHandle&& r) = default;
 
         const Container& getContainer();
 
