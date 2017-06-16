@@ -151,5 +151,4 @@ The data source class MUST redefine only 2 methods:
  - read / write data from Range (position; length) to a specific address
 
 ## Future plans
- - add project files of popular IDEs: Visual Studio, Qt Creator (in progress)
- - add building with Cmake
+ - Implement move semantics
