@@ -17,6 +17,7 @@
 #pragma once
 
 #include <mutex>
+#include <memory>
 
 #include <DataHandle/internal/DataHandleBase.h>
 
@@ -51,8 +52,8 @@ namespace datarw
         
     protected:
         DataWriteHandle();
-        DataWriteHandle(DataWriteHandle&& r) = default;
-        DataWriteHandle& operator=(DataWriteHandle&& r) = default;
+        DataWriteHandle(DataWriteHandle&& r);
+        DataWriteHandle& operator=(DataWriteHandle&& r);
         
         virtual uint64_t tellPosition() final;
         

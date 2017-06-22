@@ -20,6 +20,17 @@ datarw::StreamWriteHandle::StreamWriteHandle(std::ostream& stream, const bool st
 : StreamHandleBase<datarw::DataWriteHandle, std::ostream>(stream, streamIsDirty)
 {}
 
+datarw::StreamWriteHandle::StreamWriteHandle(StreamWriteHandle&& r)
+: StreamHandleBase<datarw::DataWriteHandle, std::ostream>(std::move(r))
+{}
+
+datarw::StreamWriteHandle& datarw::StreamWriteHandle::operator=(StreamWriteHandle&& r)
+{
+    StreamHandleBase<datarw::DataWriteHandle, std::ostream>::operator=(std::move(r));
+
+    return *this;
+}
+
 void datarw::StreamWriteHandle::writeDataImpl(const void* data, const Range& range)
 {
     resetStreamIfNeeded(false, range.position);

@@ -27,6 +27,21 @@ datarw::DataWriteHandle::DataWriteHandle()
 , m_inited(new std::once_flag)
 {}
 
+datarw::DataWriteHandle::DataWriteHandle(DataWriteHandle&& r)
+: m_position(r.m_position)
+, m_usePositionIsSet(r.m_usePositionIsSet)
+, m_inited(std::move(r.m_inited))
+{}
+
+datarw::DataWriteHandle& datarw::DataWriteHandle::operator=(DataWriteHandle&& r)
+{
+    m_position = r.m_position;
+    m_usePositionIsSet = r.m_usePositionIsSet;
+    m_inited = std::move(r.m_inited);
+
+    return *this;
+}
+
 uint64_t datarw::DataWriteHandle::tellPosition()
 {
     return m_position;

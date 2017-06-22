@@ -27,6 +27,7 @@
 #include <map>
 #include <assert.h>
 #include <mutex>
+#include <memory>
 #include <algorithm>
 #include <ios>
 #include <istream>

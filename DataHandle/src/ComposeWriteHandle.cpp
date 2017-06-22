@@ -21,6 +21,19 @@ datarw::ComposeWriteHandle::ComposeWriteHandle(std::initializer_list<std::refere
 , m_writers(writers)
 {}
 
+datarw::ComposeWriteHandle::ComposeWriteHandle(ComposeWriteHandle&& r)
+: datarw::DataWriteHandle(std::move(r))
+, m_writers(std::move(r.m_writers))
+{}
+
+datarw::ComposeWriteHandle& datarw::ComposeWriteHandle::operator=(ComposeWriteHandle&& r)
+{
+    DataWriteHandle::operator=(std::move(r));
+    m_writers = std::move(r.m_writers);
+
+    return *this;
+}
+
 uint64_t datarw::ComposeWriteHandle::getDataSizeImpl()
 {
     uint64_t maxWriterSize = 0;

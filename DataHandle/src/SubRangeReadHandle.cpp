@@ -46,6 +46,21 @@ datarw::SubRangeReadHandle::SubRangeReadHandle(DataReadHandle& parentReader, con
     m_dataRange = datarw::Range(subPosition, totalDataSize - subPosition);
 }
 
+datarw::SubRangeReadHandle::SubRangeReadHandle(SubRangeReadHandle&& r)
+: DataReadHandle(std::move(r))
+, m_parentReader(std::move(r.m_parentReader))
+, m_dataRange(std::move(r.m_dataRange))
+{}
+
+datarw::SubRangeReadHandle& datarw::SubRangeReadHandle::operator=(SubRangeReadHandle&& r)
+{
+    DataReadHandle::operator=(std::move(r));
+    m_parentReader = std::move(r.m_parentReader);
+    m_dataRange = std::move(r.m_dataRange);
+
+    return *this;
+}
+
 void datarw::SubRangeReadHandle::peekDataImpl(const Range& range, void* buffer)
 {
     const Range subRange(range.position + m_dataRange.position, range.length);

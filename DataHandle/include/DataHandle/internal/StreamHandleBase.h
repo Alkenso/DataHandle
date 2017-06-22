@@ -24,8 +24,8 @@ namespace datarw
     public:
         StreamHandleBase(StreamType& stream, const bool streamIsDirty);
         
-        StreamHandleBase(StreamHandleBase&& r) = default;
-        StreamHandleBase& operator=(StreamHandleBase&& r) = default;
+        StreamHandleBase(StreamHandleBase&& r);
+        StreamHandleBase& operator=(StreamHandleBase&& r);
         
         virtual ~StreamHandleBase() {}
         
@@ -52,6 +52,23 @@ datarw::StreamHandleBase<Parent, StreamType>::StreamHandleBase(StreamType& strea
 , m_stream(stream)
 , m_streamIsDirty(streamIsDirty)
 {}
+
+template <typename Parent, typename StreamType>
+datarw::StreamHandleBase<Parent, StreamType>::StreamHandleBase(StreamHandleBase&& r)
+: Parent(std::move(r))
+, m_stream(std::move(r.m_stream))
+, m_streamIsDirty(r.m_streamIsDirty)
+{}
+
+template <typename Parent, typename StreamType>
+datarw::StreamHandleBase<Parent, StreamType>& datarw::StreamHandleBase<Parent, StreamType>::operator=(StreamHandleBase&& r)
+{
+    Parent::operator=(std::move(r));
+    m_stream = std::move(r.m_stream);
+    m_streamIsDirty = r.m_streamIsDirty;
+
+    return *this;
+}
 
 template <typename Parent, typename StreamType>
 void datarw::StreamHandleBase<Parent, StreamType>::resetStreamIfNeeded(const bool force, const uint64_t position)

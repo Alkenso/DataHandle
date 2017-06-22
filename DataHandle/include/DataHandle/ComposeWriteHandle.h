@@ -25,8 +25,8 @@ namespace datarw
     public:
         explicit ComposeWriteHandle(std::initializer_list<std::reference_wrapper<DataWriteHandle>> writers);
         
-        ComposeWriteHandle(ComposeWriteHandle&& r) = default;
-        ComposeWriteHandle& operator=(ComposeWriteHandle&& r) = default;
+        ComposeWriteHandle(ComposeWriteHandle&& r);
+        ComposeWriteHandle& operator=(ComposeWriteHandle&& r);
         
     private:
         virtual uint64_t getDataSizeImpl() final;

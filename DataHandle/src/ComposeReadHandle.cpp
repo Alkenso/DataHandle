@@ -54,6 +54,21 @@ datarw::ComposeReadHandle::ComposeReadHandle(std::initializer_list<std::referenc
     updateReaderRanges();
 }
 
+datarw::ComposeReadHandle::ComposeReadHandle(ComposeReadHandle&& r)
+: DataReadHandle(std::move(r))
+, m_readers(std::move(r.m_readers))
+, m_readerRanges(std::move(r.m_readerRanges))
+{}
+
+datarw::ComposeReadHandle& datarw::ComposeReadHandle::operator=(ComposeReadHandle&& r)
+{
+    DataReadHandle::operator =(std::move(r));
+    m_readers = std::move(r.m_readers);
+    m_readerRanges = std::move(r.m_readerRanges);
+
+    return *this;
+}
+
 uint64_t datarw::ComposeReadHandle::getDataSizeImpl()
 {
     return updateReaderRanges();

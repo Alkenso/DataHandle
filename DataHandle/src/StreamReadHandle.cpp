@@ -20,6 +20,17 @@ datarw::StreamReadHandle::StreamReadHandle(std::istream& stream, const bool stre
 : StreamHandleBase<datarw::DataReadHandle, std::istream>(stream, streamIsDirty)
 {}
 
+datarw::StreamReadHandle::StreamReadHandle(StreamReadHandle&& r)
+: StreamHandleBase<datarw::DataReadHandle, std::istream>(std::move(r))
+{}
+
+datarw::StreamReadHandle& datarw::StreamReadHandle::operator=(StreamReadHandle&& r)
+{
+    StreamHandleBase<datarw::DataReadHandle, std::istream>::operator =(std::move(r));
+
+    return *this;
+}
+
 void datarw::StreamReadHandle::peekDataImpl(const Range& range, void* buffer)
 {
     resetStreamIfNeeded(false, range.position);

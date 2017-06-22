@@ -28,8 +28,8 @@ namespace datarw
     public:
         explicit StreamReadHandle(std::istream& stream, const bool streamIsDirty = false);
         
-        StreamReadHandle(StreamReadHandle&& r) = default;
-        StreamReadHandle& operator=(StreamReadHandle&& r) = default;
+        StreamReadHandle(StreamReadHandle&& r);
+        StreamReadHandle& operator=(StreamReadHandle&& r);
 
     private:
         virtual void peekDataImpl(const Range& range, void* buffer) final;

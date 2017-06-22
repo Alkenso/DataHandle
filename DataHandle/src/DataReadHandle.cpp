@@ -17,12 +17,29 @@
 #include "DataReadHandle.h"
 
 datarw::DataReadHandle::DataReadHandle()
-: DataHandleBase()
-, m_sizePosition(0)
+: m_sizePosition(0)
 , m_sizePositionIsSet(false)
 , m_currentPosition(0)
 , m_usePositionIsSet(false)
 {}
+
+
+datarw::DataReadHandle::DataReadHandle(DataReadHandle&& r)
+: m_sizePosition(r.m_sizePosition)
+, m_sizePositionIsSet(r.m_sizePositionIsSet)
+, m_currentPosition(r.m_currentPosition)
+, m_usePositionIsSet(r.m_usePositionIsSet)
+{}
+
+datarw::DataReadHandle& datarw::DataReadHandle::operator=(DataReadHandle&& r)
+{
+    m_sizePosition = r.m_sizePosition;
+    m_sizePositionIsSet = r.m_sizePositionIsSet;
+    m_currentPosition = r.m_currentPosition;
+    m_usePositionIsSet = r.m_usePositionIsSet;
+
+    return *this;
+}
 
 uint64_t datarw::DataReadHandle::getDataSize()
 {

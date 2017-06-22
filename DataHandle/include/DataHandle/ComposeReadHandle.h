@@ -25,8 +25,8 @@ namespace datarw
     public:
         explicit ComposeReadHandle(std::initializer_list<std::reference_wrapper<DataReadHandle>> readers);
         
-        ComposeReadHandle(ComposeReadHandle&& r) = default;
-        ComposeReadHandle& operator=(ComposeReadHandle&& r) = default;
+        ComposeReadHandle(ComposeReadHandle&& r);
+        ComposeReadHandle& operator=(ComposeReadHandle&& r);
         
     private:
         virtual uint64_t getDataSizeImpl() final;

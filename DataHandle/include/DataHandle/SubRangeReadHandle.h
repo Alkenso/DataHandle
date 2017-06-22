@@ -26,8 +26,8 @@ namespace datarw
         SubRangeReadHandle(DataReadHandle& parentReader, const Range dataRange);
         SubRangeReadHandle(DataReadHandle& parentReader, const uint64_t additionalOffset, const bool relativeToParent = false);
         
-        SubRangeReadHandle(SubRangeReadHandle&& r) = default;
-        SubRangeReadHandle& operator=(SubRangeReadHandle&& r) = default;
+        SubRangeReadHandle(SubRangeReadHandle&& r);
+        SubRangeReadHandle& operator=(SubRangeReadHandle&& r);
 
     private:
         virtual void peekDataImpl(const Range& range, void* buffer) final;
