@@ -23,20 +23,20 @@ namespace datarw
     class RawBytesReadHandle : public DataReadHandle
     {
     public:
-        template <typename T>
-        RawBytesReadHandle(const T* ptr, const uint64_t sizeInBytes, bool copyData = false);
+        RawBytesReadHandle(const void* ptr, const uint64_t sizeInBytes, bool copyData = false);
         
-        RawBytesReadHandle(RawBytesReadHandle&& r) = default;
-        RawBytesReadHandle& operator=(RawBytesReadHandle&& r) = default;
+        RawBytesReadHandle(RawBytesReadHandle&& r);
+        RawBytesReadHandle& operator=(RawBytesReadHandle&& r);
         
     private:
-        virtual void peekDataImpl(const Range& range, unsigned char* buffer) final;
+        virtual void peekDataImpl(const Range& range, void* buffer) final;
         virtual uint64_t getDataSizeImpl() final;
         
     private:
-        const datarw::ByteBuffer m_bufferData;
+        bool m_copyData;
+        datarw::ByteBuffer m_bufferData;
         const unsigned char* m_constPtr;
-        const uint64_t m_size;
+        uint64_t m_size;
     };
 }
 

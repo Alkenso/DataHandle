@@ -14,8 +14,8 @@
  * TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 
-#include <DataHandle/DataTypes.h>
-#include <DataHandle/internal/DataHandleBase.h>
+#include "DataTypes.h"
+#include "DataHandleBase.h"
 
 #include "TestData.h"
 

@@ -20,11 +20,12 @@ datarw::StreamWriteHandle::StreamWriteHandle(std::ostream& stream, const bool st
 : StreamHandleBase<datarw::DataWriteHandle, std::ostream>(stream, streamIsDirty)
 {}
 
-void datarw::StreamWriteHandle::writeDataImpl(const unsigned char* data, const Range& range)
+void datarw::StreamWriteHandle::writeDataImpl(const void* data, const Range& range)
 {
     resetStreamIfNeeded(false, range.position);
     
-    m_stream.write(reinterpret_cast<const char*>(data), range.length);
+    const char* dataPtr = static_cast<const char*>(data);
+    m_stream.get().write(reinterpret_cast<const char*>(dataPtr), range.length);
 }
 
 void datarw::StreamWriteHandle::seek(std::ostream& stream, const int64_t pos, const std::ios::seekdir dir)

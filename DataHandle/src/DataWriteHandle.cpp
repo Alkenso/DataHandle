@@ -24,6 +24,7 @@ namespace
 datarw::DataWriteHandle::DataWriteHandle()
 : m_position(0)
 , m_usePositionIsSet(false)
+, m_inited(new std::once_flag)
 {}
 
 uint64_t datarw::DataWriteHandle::tellPosition()
@@ -36,6 +37,16 @@ uint64_t datarw::DataWriteHandle::getDataSize()
     initPosition();
     
     return m_position;
+}
+
+void datarw::DataWriteHandle::writeData(const void* data, const uint64_t sizeInBytes, const uint64_t offset)
+{
+    insertDataInternal(reinterpret_cast<const unsigned char*>(data), sizeInBytes, offset, false);
+}
+
+void datarw::DataWriteHandle::writeData(const void* data, const uint64_t sizeInBytes)
+{
+    insertDataInternal(reinterpret_cast<const unsigned char*>(data), sizeInBytes, 0, true);
 }
 
 void datarw::DataWriteHandle::writeString(const std::string& str, uint64_t offset, const bool withNullTerminator /* = false */)
@@ -59,9 +70,9 @@ void datarw::DataWriteHandle::writeString(const std::string& str, const bool wit
 void datarw::DataWriteHandle::seekPositionOptimized(const uint64_t)
 {}
 
-void datarw::DataWriteHandle::insertDataInternal(const unsigned char* data, const uint64_t dataSize, const uint64_t offset, const bool usePosition)
+void datarw::DataWriteHandle::insertDataInternal(const void* data, const uint64_t sizeInBytes, const uint64_t offset, const bool usePosition)
 {
-    if (!dataSize)
+    if (!sizeInBytes)
     {
         return;
     }
@@ -73,8 +84,8 @@ void datarw::DataWriteHandle::insertDataInternal(const unsigned char* data, cons
     initPosition();
     
     const uint64_t currentPosition = seekPosition(offset, usePosition);
-    writeDataImpl(data, Range(currentPosition, dataSize));
-    m_position = std::max(m_position, currentPosition + dataSize);
+    writeDataImpl(data, Range(currentPosition, sizeInBytes));
+    m_position = std::max(m_position, currentPosition + sizeInBytes);
 }
 
 uint64_t datarw::DataWriteHandle::seekPosition(const uint64_t offset, const bool usePosition)
@@ -97,7 +108,7 @@ uint64_t datarw::DataWriteHandle::seekPosition(const uint64_t offset, const bool
 
 void datarw::DataWriteHandle::initPosition()
 {
-    std::call_once(m_inited, [this]()
+    std::call_once(*m_inited, [this]()
                    {
                        m_position = getDataSizeImpl();
                    });

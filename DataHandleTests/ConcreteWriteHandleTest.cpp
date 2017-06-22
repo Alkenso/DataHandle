@@ -14,9 +14,9 @@
  * TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 
-#include <DataHandle/ContainerWriteHandle.h>
-#include <DataHandle/StreamWriteHandle.h>
-#include <DataHandle/ComposeWriteHandle.h>
+#include "ContainerWriteHandle.h"
+#include "StreamWriteHandle.h"
+#include "ComposeWriteHandle.h"
 
 #include "TestData.h"
 
@@ -78,6 +78,32 @@ TEST(ContainerWriteHandle, CtorMove)
     
     writer.writeData(datarw::ByteBuffer({ 0x00, 0x01, 0x02, 0x03 }));
     EXPECT_EQ(writer.getContainer(), datarw::ByteBuffer({ 0xf0, 0xf1, 0xf2, 0xf3, 0x00, 0x01, 0x02, 0x03 }));
+}
+
+TEST(ContainerWriteHandle, MoveSemantics)
+{
+    auto fn = []()
+    {
+        auto writer = datarw::VectorWriteHandle({ 0x00 });
+        writer.writeData(datarw::ByteBuffer{ 0x01 });
+        
+        return writer;
+    };
+    
+    datarw::VectorWriteHandle writerCreatedMoved(fn());
+    
+    EXPECT_EQ(writerCreatedMoved.getContainer(), datarw::ByteBuffer({ 0x00, 0x01 }));
+    
+    writerCreatedMoved.writeData(datarw::ByteBuffer{ 0x02 });
+    EXPECT_EQ(writerCreatedMoved.getContainer(), datarw::ByteBuffer({ 0x00, 0x01, 0x02 }));
+    
+    writerCreatedMoved.writeData(datarw::ByteBuffer{ 0x03 });
+    
+    datarw::VectorWriteHandle writerAssignedMoved({});
+    ASSERT_EQ(writerAssignedMoved.getDataSize(), 0);
+    
+    writerAssignedMoved = std::move(writerCreatedMoved);
+    EXPECT_EQ(writerAssignedMoved.getContainer(), datarw::ByteBuffer({ 0x00, 0x01, 0x02, 0x03 }));
 }
 
 TEST(StreamWriteHandle, GetDataSize)

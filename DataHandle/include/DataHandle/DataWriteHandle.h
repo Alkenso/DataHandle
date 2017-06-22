@@ -30,14 +30,12 @@ namespace datarw
         
         uint64_t getDataSize();
         
-        template <TYPE_RAW_BYTES(Data)>
-        void writeData(const Data* data, const uint64_t dataSize, const uint64_t offset);
+        void writeData(const void* data, const uint64_t sizeInBytes, const uint64_t offset);
         template <TYPE_BYTE_BUFFER(Buffer)>
         void writeData(const Buffer& buffer, uint64_t offset);
         void writeString(const std::string& str, uint64_t offset, const bool withNullTerminator = false);
         
-        template <TYPE_RAW_BYTES(Data)>
-        void writeData(const Data* data, const uint64_t dataSize);
+        void writeData(const void* data, const uint64_t sizeInBytes);
         template <TYPE_BYTE_BUFFER(Buffer)>
         void writeData(const Buffer& buffer);
         void writeString(const std::string& str, const bool withNullTerminator = false);
@@ -61,11 +59,11 @@ namespace datarw
         
     private:
         virtual uint64_t getDataSizeImpl() override = 0;
-        virtual void writeDataImpl(const unsigned char* data, const Range& range) = 0;
+        virtual void writeDataImpl(const void* data, const Range& range) = 0;
         virtual void seekPositionOptimized(const uint64_t position) override;
         
     private:
-        void insertDataInternal(const unsigned char* data, const uint64_t dataSize, const uint64_t offset, const bool usePosition);
+        void insertDataInternal(const void* data, const uint64_t sizeInBytes, const uint64_t offset, const bool usePosition);
         uint64_t seekPosition(const uint64_t offset, const bool usePosition);
         void initPosition();
         
@@ -77,7 +75,7 @@ namespace datarw
     private:
         uint64_t m_position;
         bool m_usePositionIsSet;
-        std::once_flag m_inited;
+        std::unique_ptr<std::once_flag> m_inited;
     };
 }
 

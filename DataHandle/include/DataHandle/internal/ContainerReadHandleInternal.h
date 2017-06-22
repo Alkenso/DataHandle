@@ -17,27 +17,51 @@
 #pragma once
 
 template <typename Container>
-datarw::ContainerReadHandle<Container>::ContainerReadHandle(const Container& bufferData, bool copyData)
+datarw::ContainerReadHandle<Container>::ContainerReadHandle(const IsByteContainer<Container>& container, bool copyData)
 : DataReadHandle()
-, m_bufferData(copyData ? bufferData : Container())
-, m_bufferDataRef(copyData ? m_bufferData : bufferData)
+, m_copyData(copyData)
+, m_container(copyData ? container : Container())
+, m_containerRef(copyData ? m_container : container)
 {}
 
 template <typename Container>
-datarw::ContainerReadHandle<Container>::ContainerReadHandle(Container&& bufferData)
+datarw::ContainerReadHandle<Container>::ContainerReadHandle(IsByteContainer<Container>&& container)
 : DataReadHandle()
-, m_bufferData(bufferData)
-, m_bufferDataRef(m_bufferData)
+, m_copyData(true)
+, m_container(container)
+, m_containerRef(m_container)
+{}
+
+
+template <typename Container>
+datarw::ContainerReadHandle<Container>::ContainerReadHandle(ContainerReadHandle&& r)
+: DataReadHandle()
+, m_copyData(r.m_copyData)
+, m_container(m_copyData ? std::move(r.m_container) : Container())
+, m_containerRef(m_copyData ? std::cref(m_container) : r.m_containerRef)
 {}
 
 template <typename Container>
-void datarw::ContainerReadHandle<Container>::peekDataImpl(const Range& range, unsigned char* buffer)
+datarw::ContainerReadHandle<Container>& datarw::ContainerReadHandle<Container>::operator=(ContainerReadHandle&& r)
 {
-    std::copy(m_bufferDataRef.begin() + static_cast<size_t>(range.position), m_bufferDataRef.begin() + static_cast<size_t>(range.position + range.length), buffer);
+    DataReadHandle::operator=(std::move(r));
+    
+    m_copyData = r.m_copyData;
+    m_container = m_copyData ? std::move(r.m_container) : Container();
+    m_containerRef = m_copyData ? std::cref(m_container) : r.m_containerRef;
+    
+    return *this;
+}
+
+template <typename Container>
+void datarw::ContainerReadHandle<Container>::peekDataImpl(const Range& range, void* buffer)
+{
+    const Container& containerRef = m_containerRef.get();
+    std::copy(containerRef.begin() + static_cast<size_t>(range.position), containerRef.begin() + static_cast<size_t>(range.position + range.length), static_cast<typename Container::value_type*>(buffer));
 }
 
 template <typename Container>
 uint64_t datarw::ContainerReadHandle<Container>::getDataSizeImpl()
 {
-    return m_bufferDataRef.size();
+    return m_containerRef.get().size();
 }

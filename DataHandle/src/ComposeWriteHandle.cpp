@@ -32,7 +32,7 @@ uint64_t datarw::ComposeWriteHandle::getDataSizeImpl()
     return maxWriterSize;
 }
 
-void datarw::ComposeWriteHandle::writeDataImpl(const unsigned char* data, const Range& range)
+void datarw::ComposeWriteHandle::writeDataImpl(const void* data, const Range& range)
 {
     for (DataWriteHandle& writer : m_writers)
     {

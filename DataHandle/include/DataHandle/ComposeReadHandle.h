@@ -30,7 +30,7 @@ namespace datarw
         
     private:
         virtual uint64_t getDataSizeImpl() final;
-        virtual void peekDataImpl(const Range& range, unsigned char* buffer) final;
+        virtual void peekDataImpl(const Range& range, void* buffer) final;
         
     private:
         uint64_t updateReaderRanges();

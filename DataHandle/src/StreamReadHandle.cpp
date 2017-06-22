@@ -20,11 +20,11 @@ datarw::StreamReadHandle::StreamReadHandle(std::istream& stream, const bool stre
 : StreamHandleBase<datarw::DataReadHandle, std::istream>(stream, streamIsDirty)
 {}
 
-void datarw::StreamReadHandle::peekDataImpl(const Range& range, unsigned char* buffer)
+void datarw::StreamReadHandle::peekDataImpl(const Range& range, void* buffer)
 {
     resetStreamIfNeeded(false, range.position);
     
-    m_stream.read(reinterpret_cast<char*>(buffer), range.length);
+    m_stream.get().read(static_cast<char*>(buffer), range.length);
 }
 
 void datarw::StreamReadHandle::seek(std::istream& stream, const int64_t pos, const std::ios::seekdir dir)

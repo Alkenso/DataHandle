@@ -59,8 +59,10 @@ uint64_t datarw::ComposeReadHandle::getDataSizeImpl()
     return updateReaderRanges();
 }
 
-void datarw::ComposeReadHandle::peekDataImpl(const datarw::Range& range, unsigned char* buffer)
+void datarw::ComposeReadHandle::peekDataImpl(const datarw::Range& range, void* buffer)
 {
+    unsigned char* bufferPtr = static_cast<unsigned char*>(buffer);
+    
     size_t firstReaderIdx = 0;
     size_t lastReaderIdx = 0;
     if (!FindReadRange(m_readerRanges, range, firstReaderIdx, lastReaderIdx))
@@ -74,7 +76,7 @@ void datarw::ComposeReadHandle::peekDataImpl(const datarw::Range& range, unsigne
     Range firstRange;
     firstRange.position = range.position - firstReaderRange.position;
     firstRange.length = std::min(range.length, firstReaderRange.length - firstRange.position);
-    firstReader.peekData(firstRange, buffer);
+    firstReader.peekData(firstRange, bufferPtr);
     
     if (firstReaderIdx >= lastReaderIdx)
     {
@@ -85,7 +87,7 @@ void datarw::ComposeReadHandle::peekDataImpl(const datarw::Range& range, unsigne
     for (size_t i = firstReaderIdx + 1; i < lastReaderIdx; i++) // All intermediate pieces
     {
         DataReadHandle& reader = m_readers[i];
-        reader.readAllData(buffer + readSize);
+        reader.readAllData(bufferPtr + readSize);
         readSize += m_readerRanges[i].length;
     }
 
@@ -94,7 +96,7 @@ void datarw::ComposeReadHandle::peekDataImpl(const datarw::Range& range, unsigne
     lastRange.length = range.position + range.length - m_readerRanges[lastReaderIdx].position;
     
     DataReadHandle& lastReader = m_readers[lastReaderIdx];
-    lastReader.peekData(lastRange, buffer + readSize);
+    lastReader.peekData(lastRange, bufferPtr + readSize);
 }
 
 uint64_t datarw::ComposeReadHandle::updateReaderRanges()

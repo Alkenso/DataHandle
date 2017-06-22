@@ -29,8 +29,7 @@ namespace datarw
         
         uint64_t getDataSize();
         
-        template <TYPE_RAW_BYTES(Data)>
-        void peekData(const Range& range, Data* data);
+        void peekData(const Range& range, void* data);
         template <TYPE_BYTE_BUFFER(Buffer)>
         void peekData(const Range& range, Buffer& buffer);
         template <TYPE_BYTE_BUFFER(Buffer)>
@@ -38,17 +37,15 @@ namespace datarw
         template <TYPE_BYTE_BUFFER(Result)>
         Result peekData(const Range& range);
         
-        template <TYPE_RAW_BYTES(Data)>
-        void readData(const uint64_t dataSize, Data* data);
+        void readData(const uint64_t sizeInBytes, void* data);
         template <TYPE_BYTE_BUFFER(Buffer)>
-        void readData(const uint64_t dataSize, Buffer& buffer);
+        void readData(const uint64_t sizeInBytes, Buffer& buffer);
         template <TYPE_BYTE_BUFFER(Buffer)>
-        void appendData(const uint64_t dataSize, Buffer& buffer);
+        void appendData(const uint64_t sizeInBytes, Buffer& buffer);
         template <TYPE_BYTE_BUFFER(Result)>
-        Result readData(const uint64_t dataSize);
+        Result readData(const uint64_t sizeInBytes);
         
-        template <TYPE_RAW_BYTES(Data)>
-        void readAllData(Data* data);
+        void readAllData(void* data);
         template <TYPE_BYTE_BUFFER(Buffer)>
         void readAllData(Buffer& buffer);
         template <TYPE_BYTE_BUFFER(Buffer)>
@@ -83,12 +80,12 @@ namespace datarw
         
     private:
         virtual uint64_t getDataSizeImpl() override = 0 ;
-        virtual void peekDataImpl(const Range& range, unsigned char* buffer) = 0;
+        virtual void peekDataImpl(const Range& range, void* buffer) = 0;
         virtual void seekPositionOptimized(const uint64_t position) override;
         
     private:
-        void peekDataInternal(const Range& range, unsigned char* buffer, const bool usePosition);
-        void readDataInternal(const uint64_t dataSize, unsigned char* buffer);
+        void peekDataInternal(const Range& range, void* buffer, const bool usePosition);
+        void readDataInternal(const uint64_t sizeInBytes, void* buffer);
         uint64_t seekPosition(const uint64_t offset, const bool usePosition, const bool seekForce = false);
         
         template<typename T>

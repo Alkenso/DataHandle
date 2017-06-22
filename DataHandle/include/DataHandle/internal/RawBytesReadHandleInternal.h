@@ -16,22 +16,41 @@
 
 #pragma once
 
-template <typename T>
-datarw::RawBytesReadHandle::RawBytesReadHandle(const T* ptr, const uint64_t sizeInBytes, bool copyData /* = false */)
+datarw::RawBytesReadHandle::RawBytesReadHandle(const void* ptr, const uint64_t sizeInBytes, bool copyData /* = false */)
 : DataReadHandle()
+, m_copyData(copyData)
 , m_bufferData(copyData ? datarw::ByteBuffer({ reinterpret_cast<const unsigned char*>(ptr), reinterpret_cast<const unsigned char*>(ptr) + sizeInBytes }) : datarw::ByteBuffer())
-, m_constPtr(copyData ? m_bufferData.data() : ptr)
+, m_constPtr(copyData ? m_bufferData.data() : reinterpret_cast<const unsigned char*>(ptr))
 , m_size(sizeInBytes)
 {
-    if (!m_constPtr)
+    if (!m_constPtr && m_size)
     {
         throw std::invalid_argument("Data pointer should not be null");
     }
 }
 
-void datarw::RawBytesReadHandle::peekDataImpl(const Range& range, unsigned char* buffer)
+datarw::RawBytesReadHandle::RawBytesReadHandle(RawBytesReadHandle&& r)
+: DataReadHandle()
+, m_copyData(r.m_copyData)
+, m_bufferData(std::move(r.m_bufferData))
+, m_constPtr(m_copyData ? m_bufferData.data() : r.m_constPtr)
+, m_size(r.m_size)
+{}
+
+datarw::RawBytesReadHandle& datarw::RawBytesReadHandle::operator=(RawBytesReadHandle&& r)
 {
-    std::copy(m_constPtr + static_cast<size_t>(range.position), m_constPtr + static_cast<size_t>(range.position + range.length), buffer);
+    DataReadHandle::operator=(std::move(r));
+    m_copyData = r.m_copyData;
+    m_bufferData = std::move(r.m_bufferData);
+    m_constPtr = m_copyData ? m_bufferData.data() : r.m_constPtr;
+    m_size = r.m_size;
+    
+    return *this;
+}
+
+void datarw::RawBytesReadHandle::peekDataImpl(const Range& range, void* buffer)
+{
+    std::copy(m_constPtr + static_cast<size_t>(range.position), m_constPtr + static_cast<size_t>(range.position + range.length), static_cast<unsigned char*>(buffer));
 }
 
 uint64_t datarw::RawBytesReadHandle::getDataSizeImpl()

@@ -30,11 +30,11 @@ namespace datarw
         SubRangeReadHandle& operator=(SubRangeReadHandle&& r) = default;
 
     private:
-        virtual void peekDataImpl(const Range& range, unsigned char* buffer) final;
+        virtual void peekDataImpl(const Range& range, void* buffer) final;
         virtual uint64_t getDataSizeImpl() final;
 
     private:
-        DataReadHandle& m_parentReader;
+        std::reference_wrapper<DataReadHandle> m_parentReader;
         Range m_dataRange;
     };
 }

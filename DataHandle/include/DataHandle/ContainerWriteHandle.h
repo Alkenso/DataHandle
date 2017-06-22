@@ -24,23 +24,23 @@ namespace datarw
     class ContainerWriteHandle : public DataWriteHandle
     {
     public:
-        ContainerWriteHandle();
-        explicit ContainerWriteHandle(Container& container, const bool copyData = false);
-        explicit ContainerWriteHandle(const Container& container);
-        explicit ContainerWriteHandle(Container&& container);
+        explicit ContainerWriteHandle(IsByteContainer<Container>& container, const bool copyData = false);
+        explicit ContainerWriteHandle(const IsByteContainer<Container>& container = {});
+        explicit ContainerWriteHandle(IsByteContainer<Container>&& container);
         
-        ContainerWriteHandle(ContainerWriteHandle&& r) = default;
-        ContainerWriteHandle& operator=(ContainerWriteHandle&& r) = default;
+        ContainerWriteHandle(ContainerWriteHandle&& r);
+        ContainerWriteHandle& operator=(ContainerWriteHandle&& r);
 
-        const Container& getContainer();
+        const IsByteContainer<Container>& getContainer();
 
     private:
-        virtual void writeDataImpl(const unsigned char* data, const datarw::Range& range) final;
+        virtual void writeDataImpl(const void* data, const datarw::Range& range) final;
         virtual uint64_t getDataSizeImpl() final;
 
     private:
-        Container m_container;
-        Container& m_containerRef;
+        bool m_copyData;
+        IsByteContainer<Container> m_container;
+        std::reference_wrapper<Container> m_containerRef;
     };
     
     using VectorWriteHandle = ContainerWriteHandle<datarw::ByteBuffer>;

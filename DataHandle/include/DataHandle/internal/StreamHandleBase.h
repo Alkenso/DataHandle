@@ -41,7 +41,7 @@ namespace datarw
         virtual int64_t tell(StreamType& stream) = 0;
         
     protected:
-        StreamType& m_stream;
+        std::reference_wrapper<StreamType> m_stream;
         bool m_streamIsDirty;
     };
 }
@@ -58,8 +58,9 @@ void datarw::StreamHandleBase<Parent, StreamType>::resetStreamIfNeeded(const boo
 {
     if (force || m_streamIsDirty)
     {
-        m_stream.clear();
-        seek(m_stream, position, std::ios::beg);
+        StreamType& streamRef = m_stream.get();
+        streamRef.clear();
+        seek(streamRef, position, std::ios::beg);
     }
 }
 
@@ -68,10 +69,11 @@ uint64_t datarw::StreamHandleBase<Parent, StreamType>::getDataSizeImpl()
 {
     resetStreamIfNeeded(false, Parent::tellPosition());
     
-    const auto currentPos = tell(m_stream);
-    seek(m_stream, 0, std::ios::end);
-    const auto size = tell(m_stream);
-    seek(m_stream, currentPos, std::ios::beg);
+    StreamType& streamRef = m_stream.get();
+    const auto currentPos = tell(streamRef);
+    seek(streamRef, 0, std::ios::end);
+    const auto size = tell(streamRef);
+    seek(streamRef, currentPos, std::ios::beg);
     
     return size;
 }
@@ -81,5 +83,5 @@ void datarw::StreamHandleBase<Parent, StreamType>::seekPositionOptimized(const u
 {
     resetStreamIfNeeded(false, position);
     
-    seek(m_stream, position, std::ios::beg);
+    seek(m_stream.get(), position, std::ios::beg);
 }

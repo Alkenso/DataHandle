@@ -30,7 +30,7 @@ namespace datarw
         
     private:
         virtual uint64_t getDataSizeImpl() final;
-        virtual void writeDataImpl(const unsigned char* data, const Range& range) final;
+        virtual void writeDataImpl(const void* data, const Range& range) final;
         
     private:
         std::vector<std::reference_wrapper<DataWriteHandle>> m_writers;

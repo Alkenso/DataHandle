@@ -14,12 +14,12 @@
  * TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 
-#include <DataHandle/ContainerReadHandle.h>
-#include <DataHandle/RawBytesReadHandle.h>
-#include <DataHandle/SubRangeReadHandle.h>
-#include <DataHandle/SharedDataHandle.h>
-#include <DataHandle/StreamReadHandle.h>
-#include <DataHandle/ComposeReadHandle.h>
+#include "ContainerReadHandle.h"
+#include "RawBytesReadHandle.h"
+#include "SubRangeReadHandle.h"
+#include "SharedDataHandle.h"
+#include "StreamReadHandle.h"
+#include "ComposeReadHandle.h"
 
 #include "TestData.h"
 
@@ -66,17 +66,27 @@ TEST(ContainerReadHandle, CreateWithBufferNoCopy)
 TEST(ContainerReadHandle, MoveSemantics)
 {
     datarw::ByteBuffer dataToRead = datarw::testing::g_testData;
-    
-    auto fn = []() { return datarw::VectorReadHandle(datarw::testing::g_testData, true); };
+
+    auto fn = []()
+    {
+        auto reader = datarw::VectorReadHandle(datarw::testing::g_testData, true);
+        reader.skipBytes(16);
+        
+        return reader;
+    };
     
     datarw::VectorReadHandle readerCreatedMoved(fn());
     
+    EXPECT_EQ(readerCreatedMoved.getRemainingSize(), datarw::testing::g_testData.size() - 16);
     EXPECT_EQ(readerCreatedMoved.readAllData<datarw::ByteBuffer>(), datarw::testing::g_testData);
+    readerCreatedMoved.skipBytes(4);
     
-    datarw::VectorReadHandle readerAssignedMoved(std::move(readerCreatedMoved));
+    datarw::VectorReadHandle readerAssignedMoved({});
+    ASSERT_EQ(readerAssignedMoved.getDataSize(), 0);
     
-    EXPECT_EQ(readerCreatedMoved.getDataSize(), 0);
+    readerAssignedMoved = std::move(readerCreatedMoved);
     EXPECT_EQ(readerAssignedMoved.readAllData<datarw::ByteBuffer>(), datarw::testing::g_testData);
+    EXPECT_EQ(readerAssignedMoved.getRemainingSize(), datarw::testing::g_testData.size() - 16 - 4);
 }
 
 TEST(RawBytesReadHandle, CreateWithBufferCopy)

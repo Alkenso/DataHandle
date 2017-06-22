@@ -46,10 +46,10 @@ datarw::SubRangeReadHandle::SubRangeReadHandle(DataReadHandle& parentReader, con
     m_dataRange = datarw::Range(subPosition, totalDataSize - subPosition);
 }
 
-void datarw::SubRangeReadHandle::peekDataImpl(const Range& range, unsigned char* buffer)
+void datarw::SubRangeReadHandle::peekDataImpl(const Range& range, void* buffer)
 {
     const Range subRange(range.position + m_dataRange.position, range.length);
-    m_parentReader.peekData(subRange, buffer);
+    m_parentReader.get().peekData(subRange, buffer);
 }
 
 uint64_t datarw::SubRangeReadHandle::getDataSizeImpl()

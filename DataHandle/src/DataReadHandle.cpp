@@ -35,6 +35,21 @@ uint64_t datarw::DataReadHandle::getDataSize()
     return m_sizePosition;
 }
 
+void datarw::DataReadHandle::peekData(const Range& range, void* data)
+{
+    peekDataInternal(range, reinterpret_cast<unsigned char*>(data), false);
+}
+
+void datarw::DataReadHandle::readData(const uint64_t dataSize, void* data)
+{
+    readDataInternal(dataSize, reinterpret_cast<unsigned char*>(data));
+}
+
+void datarw::DataReadHandle::readAllData(void* data)
+{
+    peekData(datarw::Range(0, getDataSize()), data);
+}
+
 void datarw::DataReadHandle::skipBytes(const uint64_t skipSize)
 {
     seekPosition(skipSize, true, true);
@@ -53,7 +68,7 @@ bool datarw::DataReadHandle::enshureRemainingSize(uint64_t expectedRemainingSize
 void datarw::DataReadHandle::seekPositionOptimized(const uint64_t)
 {}
 
-void datarw::DataReadHandle::peekDataInternal(const Range& range, unsigned char* buffer, const bool usePosition)
+void datarw::DataReadHandle::peekDataInternal(const Range& range, void* buffer, const bool usePosition)
 {
     if (!range.length)
     {
@@ -77,9 +92,9 @@ void datarw::DataReadHandle::peekDataInternal(const Range& range, unsigned char*
     }
 }
 
-void datarw::DataReadHandle::readDataInternal(const uint64_t dataSize, unsigned char* buffer)
+void datarw::DataReadHandle::readDataInternal(const uint64_t sizeInBytes, void* buffer)
 {
-    peekDataInternal(Range(0, dataSize), buffer, true);
+    peekDataInternal(Range(0, sizeInBytes), buffer, true);
 }
 
 uint64_t datarw::DataReadHandle::seekPosition(const uint64_t position, const bool usePosition, const bool seekForce /* = false */)

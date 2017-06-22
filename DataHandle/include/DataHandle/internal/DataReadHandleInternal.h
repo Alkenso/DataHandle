@@ -16,12 +16,6 @@
 
 #pragma once
 
-template <TYPE_RAW_BYTES_IMPL(Data)>
-void datarw::DataReadHandle::peekData(const Range& range, Data* data)
-{
-    peekDataInternal(range, reinterpret_cast<unsigned char*>(data), false);
-}
-
 template <TYPE_BYTE_BUFFER_IMPL(Buffer)>
 void datarw::DataReadHandle::peekData(const Range& range, Buffer& buffer)
 {
@@ -46,40 +40,28 @@ Result datarw::DataReadHandle::peekData(const Range& range)
     return buffer;
 }
 
-template <TYPE_RAW_BYTES_IMPL(Data)>
-void datarw::DataReadHandle::readData(const uint64_t dataSize, Data* data)
+template <TYPE_BYTE_BUFFER_IMPL(Buffer)>
+void datarw::DataReadHandle::readData(const uint64_t sizeInBytes, Buffer& buffer)
 {
-    readDataInternal(dataSize, reinterpret_cast<unsigned char*>(data));
+    buffer.resize(static_cast<size_t>(sizeInBytes));
+    readData(sizeInBytes, &buffer[0]);
 }
 
 template <TYPE_BYTE_BUFFER_IMPL(Buffer)>
-void datarw::DataReadHandle::readData(const uint64_t dataSize, Buffer& buffer)
-{
-    buffer.resize(static_cast<size_t>(dataSize));
-    readData(dataSize, &buffer[0]);
-}
-
-template <TYPE_BYTE_BUFFER_IMPL(Buffer)>
-void datarw::DataReadHandle::appendData(const uint64_t dataSize, Buffer& buffer)
+void datarw::DataReadHandle::appendData(const uint64_t sizeInBytes, Buffer& buffer)
 {
     const size_t currentBufferSize = buffer.size();
-    buffer.resize(static_cast<size_t>(currentBufferSize + dataSize));
-    readData(dataSize, &buffer[currentBufferSize]);
+    buffer.resize(static_cast<size_t>(currentBufferSize + sizeInBytes));
+    readData(sizeInBytes, &buffer[currentBufferSize]);
 }
 
 template <TYPE_BYTE_BUFFER_IMPL(Result)>
-Result datarw::DataReadHandle::readData(const uint64_t dataSize)
+Result datarw::DataReadHandle::readData(const uint64_t sizeInBytes)
 {
     Result buffer;
-    readData(dataSize, buffer);
+    readData(sizeInBytes, buffer);
     
     return buffer;
-}
-
-template <TYPE_RAW_BYTES_IMPL(Data)>
-void datarw::DataReadHandle::readAllData(Data* data)
-{
-    peekData(datarw::Range(0, getDataSize()), data);
 }
 
 template <TYPE_BYTE_BUFFER_IMPL(Buffer)>
@@ -109,37 +91,37 @@ Result datarw::DataReadHandle::readAllData()
 template<typename T>
 T datarw::DataReadHandle::peekValueLE(int64_t offset)
 {
-    return peekValue<T>(offset, IS_BIG_ENDIAN);
+    return peekValue<T>(offset, datarw::kIsBigEndian);
 }
 
 template<typename T>
 T datarw::DataReadHandle::peekValueFromCurrentLE(int64_t offset)
 {
-    return peekValueFromCurrent<T>(offset, IS_BIG_ENDIAN);
+    return peekValueFromCurrent<T>(offset, datarw::kIsBigEndian);
 }
 
 template<typename T>
 T datarw::DataReadHandle::readValueLE()
 {
-    return readValue<T>(IS_BIG_ENDIAN);
+    return readValue<T>(datarw::kIsBigEndian);
 }
 
 template<typename T>
 T datarw::DataReadHandle::peekValueBE(int64_t offset)
 {
-    return peekValue<T>(offset, !IS_BIG_ENDIAN);
+    return peekValue<T>(offset, !datarw::kIsBigEndian);
 }
 
 template<typename T>
 T datarw::DataReadHandle::peekValueFromCurrentBE(int64_t offset)
 {
-    return peekValueFromCurrent<T>(offset, !IS_BIG_ENDIAN);
+    return peekValueFromCurrent<T>(offset, !datarw::kIsBigEndian);
 }
 
 template<typename T>
 T datarw::DataReadHandle::readValueBE()
 {
-    return readValue<T>(!IS_BIG_ENDIAN);
+    return readValue<T>(!datarw::kIsBigEndian);
 }
 
 template<typename T>

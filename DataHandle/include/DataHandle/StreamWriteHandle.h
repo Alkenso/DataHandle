@@ -32,7 +32,7 @@ namespace datarw
         StreamWriteHandle& operator=(StreamWriteHandle&& r) = default;
         
     private:
-        virtual void writeDataImpl(const unsigned char* data, const Range& range) final;
+        virtual void writeDataImpl(const void* data, const Range& range) final;
         
     private:
         virtual void seek(std::ostream& stream, const int64_t pos, const std::ios::seekdir dir) final;

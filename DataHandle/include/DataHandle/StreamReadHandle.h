@@ -32,7 +32,7 @@ namespace datarw
         StreamReadHandle& operator=(StreamReadHandle&& r) = default;
 
     private:
-        virtual void peekDataImpl(const Range& range, unsigned char* buffer) final;
+        virtual void peekDataImpl(const Range& range, void* buffer) final;
         
     private:
         virtual void seek(std::istream& stream, const int64_t pos, const std::ios::seekdir dir) final;

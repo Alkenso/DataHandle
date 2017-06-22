@@ -16,8 +16,6 @@
 
 #pragma once
 
-#include <string>
-
 #include <DataHandle/DataReadHandle.h>
 
 namespace datarw
@@ -26,19 +24,20 @@ namespace datarw
     class ContainerReadHandle : public DataReadHandle
     {
     public:
-        explicit ContainerReadHandle(const Container& bufferData, bool copyData = false);
-        explicit ContainerReadHandle(Container&& bufferData);
+        explicit ContainerReadHandle(const IsByteContainer<Container>& container, bool copyData = false);
+        explicit ContainerReadHandle(IsByteContainer<Container>&& container);
         
         ContainerReadHandle(ContainerReadHandle&& r);
         ContainerReadHandle& operator=(ContainerReadHandle&& r);
 
     private:
-        virtual void peekDataImpl(const Range& range, unsigned char* buffer) final;
+        virtual void peekDataImpl(const Range& range, void* buffer) final;
         virtual uint64_t getDataSizeImpl() final;
 
     private:
-        Container m_bufferData;
-        const Container& m_bufferDataRef;
+        bool m_copyData;
+        IsByteContainer<Container> m_container;
+        std::reference_wrapper<const Container> m_containerRef;
     };
     
     using VectorReadHandle = ContainerReadHandle<datarw::ByteBuffer>;
