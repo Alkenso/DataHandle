@@ -35,7 +35,7 @@
 		49C272041ECA558700B27DB7 /* ContainerReadHandle.h in Headers */ = {isa = PBXBuildFile; fileRef = 49C271FA1ECA558700B27DB7 /* ContainerReadHandle.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		49C272051ECA558700B27DB7 /* ContainerWriteHandle.h in Headers */ = {isa = PBXBuildFile; fileRef = 49C271FB1ECA558700B27DB7 /* ContainerWriteHandle.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		49C272061ECA558700B27DB7 /* DataReadHandle.h in Headers */ = {isa = PBXBuildFile; fileRef = 49C271FC1ECA558700B27DB7 /* DataReadHandle.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		49C272071ECA558700B27DB7 /* DataTypes.h in Headers */ = {isa = PBXBuildFile; fileRef = 49C271FD1ECA558700B27DB7 /* DataTypes.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		49C272071ECA558700B27DB7 /* DataHandleTypes.h in Headers */ = {isa = PBXBuildFile; fileRef = 49C271FD1ECA558700B27DB7 /* DataHandleTypes.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		49C272081ECA558700B27DB7 /* DataWriteHandle.h in Headers */ = {isa = PBXBuildFile; fileRef = 49C271FE1ECA558700B27DB7 /* DataWriteHandle.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		49C272091ECA558700B27DB7 /* RawBytesReadHandle.h in Headers */ = {isa = PBXBuildFile; fileRef = 49C271FF1ECA558700B27DB7 /* RawBytesReadHandle.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		49C2720A1ECA558700B27DB7 /* SharedDataHandle.h in Headers */ = {isa = PBXBuildFile; fileRef = 49C272001ECA558700B27DB7 /* SharedDataHandle.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -107,7 +107,7 @@
 		49C271FA1ECA558700B27DB7 /* ContainerReadHandle.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ContainerReadHandle.h; path = include/DataHandle/ContainerReadHandle.h; sourceTree = "<group>"; };
 		49C271FB1ECA558700B27DB7 /* ContainerWriteHandle.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ContainerWriteHandle.h; path = include/DataHandle/ContainerWriteHandle.h; sourceTree = "<group>"; };
 		49C271FC1ECA558700B27DB7 /* DataReadHandle.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DataReadHandle.h; path = include/DataHandle/DataReadHandle.h; sourceTree = "<group>"; };
-		49C271FD1ECA558700B27DB7 /* DataTypes.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DataTypes.h; path = include/DataHandle/DataTypes.h; sourceTree = "<group>"; };
+		49C271FD1ECA558700B27DB7 /* DataHandleTypes.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DataHandleTypes.h; path = include/DataHandle/DataHandleTypes.h; sourceTree = "<group>"; };
 		49C271FE1ECA558700B27DB7 /* DataWriteHandle.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DataWriteHandle.h; path = include/DataHandle/DataWriteHandle.h; sourceTree = "<group>"; };
 		49C271FF1ECA558700B27DB7 /* RawBytesReadHandle.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = RawBytesReadHandle.h; path = include/DataHandle/RawBytesReadHandle.h; sourceTree = "<group>"; };
 		49C272001ECA558700B27DB7 /* SharedDataHandle.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SharedDataHandle.h; path = include/DataHandle/SharedDataHandle.h; sourceTree = "<group>"; };
@@ -148,7 +148,7 @@
 		3C7B2DFC1E9571490015E93A /* Public Headers */ = {
 			isa = PBXGroup;
 			children = (
-				49C271FD1ECA558700B27DB7 /* DataTypes.h */,
+				49C271FD1ECA558700B27DB7 /* DataHandleTypes.h */,
 				49C271FC1ECA558700B27DB7 /* DataReadHandle.h */,
 				49C271FE1ECA558700B27DB7 /* DataWriteHandle.h */,
 				49C271FA1ECA558700B27DB7 /* ContainerReadHandle.h */,
@@ -272,7 +272,7 @@
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				49C272071ECA558700B27DB7 /* DataTypes.h in Headers */,
+				49C272071ECA558700B27DB7 /* DataHandleTypes.h in Headers */,
 				49C272061ECA558700B27DB7 /* DataReadHandle.h in Headers */,
 				49C272081ECA558700B27DB7 /* DataWriteHandle.h in Headers */,
 				49C272041ECA558700B27DB7 /* ContainerReadHandle.h in Headers */,
