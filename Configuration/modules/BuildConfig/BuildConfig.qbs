@@ -8,7 +8,7 @@ Module {
     Properties {
         condition : qbs.targetOS.contains("darwin")
         cpp.minimumMacosVersion : "10.8"
-        cpp.cxxFlags: ["-Wall -pedantic"]
+        cpp.cxxFlags: ["-Wall", "-Wpedantic"]
     }
 
     Properties {
