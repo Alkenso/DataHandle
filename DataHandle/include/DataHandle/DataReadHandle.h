@@ -16,8 +16,6 @@
 
 #pragma once
 
-#include <string>
-
 #include <DataHandle/internal/DataHandleBase.h>
 
 namespace datarw
@@ -30,27 +28,27 @@ namespace datarw
         uint64_t getDataSize();
         
         void peekData(const Range& range, void* data);
-        template <TYPE_BYTE_BUFFER(Buffer)>
+        template <typename Buffer, typename = datarw::IsByteBuffer<Buffer>>
         void peekData(const Range& range, Buffer& buffer);
-        template <TYPE_BYTE_BUFFER(Buffer)>
+        template <typename Buffer, typename = datarw::IsByteBuffer<Buffer>>
         void peekAppendData(const Range& range, Buffer& buffer);
-        template <TYPE_BYTE_BUFFER(Result)>
+        template <typename Result, typename = datarw::IsByteBuffer<Result>>
         Result peekData(const Range& range);
         
         void readData(const uint64_t sizeInBytes, void* data);
-        template <TYPE_BYTE_BUFFER(Buffer)>
+        template <typename Buffer, typename = datarw::IsByteBuffer<Buffer>>
         void readData(const uint64_t sizeInBytes, Buffer& buffer);
-        template <TYPE_BYTE_BUFFER(Buffer)>
+        template <typename Buffer, typename = datarw::IsByteBuffer<Buffer>>
         void appendData(const uint64_t sizeInBytes, Buffer& buffer);
-        template <TYPE_BYTE_BUFFER(Result)>
+        template <typename Result, typename = datarw::IsByteBuffer<Result>>
         Result readData(const uint64_t sizeInBytes);
         
         void readAllData(void* data);
-        template <TYPE_BYTE_BUFFER(Buffer)>
+        template <typename Buffer, typename = datarw::IsByteBuffer<Buffer>>
         void readAllData(Buffer& buffer);
-        template <TYPE_BYTE_BUFFER(Buffer)>
+        template <typename Buffer, typename = datarw::IsByteBuffer<Buffer>>
         void appendAllData(Buffer& buffer);
-        template <TYPE_BYTE_BUFFER(Result)>
+        template <typename Result, typename = datarw::IsByteBuffer<Result>>
         Result readAllData();
         
         template<typename T>

@@ -16,14 +16,14 @@
 
 #pragma once
 
-template <TYPE_BYTE_BUFFER_IMPL(Buffer)>
+template <typename Buffer, typename>
 void datarw::DataReadHandle::peekData(const Range& range, Buffer& buffer)
 {
     buffer.resize(static_cast<size_t>(range.length));
     peekData(range, &buffer[0]);
 }
 
-template <TYPE_BYTE_BUFFER_IMPL(Buffer)>
+template <typename Buffer, typename>
 void datarw::DataReadHandle::peekAppendData(const Range& range, Buffer& buffer)
 {
     const size_t currentBufferSize = buffer.size();
@@ -31,7 +31,7 @@ void datarw::DataReadHandle::peekAppendData(const Range& range, Buffer& buffer)
     peekData(range, &buffer[currentBufferSize]);
 }
 
-template <TYPE_BYTE_BUFFER_IMPL(Result)>
+template <typename Result, typename>
 Result datarw::DataReadHandle::peekData(const Range& range)
 {
     Result buffer;
@@ -40,14 +40,14 @@ Result datarw::DataReadHandle::peekData(const Range& range)
     return buffer;
 }
 
-template <TYPE_BYTE_BUFFER_IMPL(Buffer)>
+template <typename Buffer, typename>
 void datarw::DataReadHandle::readData(const uint64_t sizeInBytes, Buffer& buffer)
 {
     buffer.resize(static_cast<size_t>(sizeInBytes));
     readData(sizeInBytes, &buffer[0]);
 }
 
-template <TYPE_BYTE_BUFFER_IMPL(Buffer)>
+template <typename Buffer, typename>
 void datarw::DataReadHandle::appendData(const uint64_t sizeInBytes, Buffer& buffer)
 {
     const size_t currentBufferSize = buffer.size();
@@ -55,7 +55,7 @@ void datarw::DataReadHandle::appendData(const uint64_t sizeInBytes, Buffer& buff
     readData(sizeInBytes, &buffer[currentBufferSize]);
 }
 
-template <TYPE_BYTE_BUFFER_IMPL(Result)>
+template <typename Result, typename>
 Result datarw::DataReadHandle::readData(const uint64_t sizeInBytes)
 {
     Result buffer;
@@ -64,14 +64,14 @@ Result datarw::DataReadHandle::readData(const uint64_t sizeInBytes)
     return buffer;
 }
 
-template <TYPE_BYTE_BUFFER_IMPL(Buffer)>
+template <typename Buffer, typename>
 void datarw::DataReadHandle::readAllData(Buffer& buffer)
 {
     buffer.resize(getDataSize());
     readAllData(&buffer[0]);
 }
 
-template <TYPE_BYTE_BUFFER_IMPL(Buffer)>
+template <typename Buffer, typename>
 void datarw::DataReadHandle::appendAllData(Buffer& buffer)
 {
     const size_t currentBufferSize = buffer.size();
@@ -79,7 +79,7 @@ void datarw::DataReadHandle::appendAllData(Buffer& buffer)
     readAllData(&buffer[currentBufferSize]);
 }
 
-template <TYPE_BYTE_BUFFER_IMPL(Result)>
+template <typename Result, typename>
 Result datarw::DataReadHandle::readAllData()
 {
     Result buffer;

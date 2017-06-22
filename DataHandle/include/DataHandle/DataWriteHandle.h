@@ -16,7 +16,6 @@
 
 #pragma once
 
-#include <string>
 #include <mutex>
 
 #include <DataHandle/internal/DataHandleBase.h>
@@ -31,12 +30,12 @@ namespace datarw
         uint64_t getDataSize();
         
         void writeData(const void* data, const uint64_t sizeInBytes, const uint64_t offset);
-        template <TYPE_BYTE_BUFFER(Buffer)>
+        template <typename Buffer, typename = datarw::IsByteBuffer<Buffer>>
         void writeData(const Buffer& buffer, uint64_t offset);
         void writeString(const std::string& str, uint64_t offset, const bool withNullTerminator = false);
         
         void writeData(const void* data, const uint64_t sizeInBytes);
-        template <TYPE_BYTE_BUFFER(Buffer)>
+        template <typename Buffer, typename = datarw::IsByteBuffer<Buffer>>
         void writeData(const Buffer& buffer);
         void writeString(const std::string& str, const bool withNullTerminator = false);
         

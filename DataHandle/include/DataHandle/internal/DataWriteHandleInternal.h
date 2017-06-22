@@ -16,13 +16,13 @@
 
 #pragma once
 
-template <TYPE_BYTE_BUFFER_IMPL(Buffer)>
+template <typename Buffer, typename>
 void datarw::DataWriteHandle::writeData(const Buffer& buffer, uint64_t offset)
 {
     writeData(buffer.data(), buffer.size(), offset);
 }
 
-template <TYPE_BYTE_BUFFER_IMPL(Buffer)>
+template <typename Buffer, typename>
 void datarw::DataWriteHandle::writeData(const Buffer& buffer)
 {
     writeData(buffer.data(), buffer.size());

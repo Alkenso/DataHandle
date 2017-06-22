@@ -19,9 +19,6 @@
 #include <vector>
 #include <string>
 
-#define TYPE_BYTE_BUFFER(BufferType) typename BufferType, typename = datarw::IsByteBuffer<BufferType>
-#define TYPE_BYTE_BUFFER_IMPL(BufferType) typename BufferType, typename
-
 namespace datarw
 {
     static const bool kIsBigEndian = *(uint16_t*)"\0\xff" < 0x100;
