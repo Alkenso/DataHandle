@@ -145,7 +145,7 @@ TEST(StreamWriteHandle, DirtyStream)
 {
     std::stringstream ss;
     ss << "abcde";
-    ASSERT_EQ(ss.tellp(), 5);
+    ASSERT_EQ(static_cast<int64_t>(ss.tellp()), 5);
     
     datarw::StreamWriteHandle writer(ss, true);
     EXPECT_EQ(writer.getDataSize(), 5);

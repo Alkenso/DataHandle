@@ -67,7 +67,7 @@ Result datarw::DataReadHandle::readData(const uint64_t sizeInBytes)
 template <typename Buffer, typename>
 void datarw::DataReadHandle::readAllData(Buffer& buffer)
 {
-    buffer.resize(getDataSize());
+    buffer.resize(static_cast<size_t>(getDataSize()));
     readAllData(&buffer[0]);
 }
 

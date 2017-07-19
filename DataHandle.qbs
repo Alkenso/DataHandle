@@ -58,6 +58,14 @@ Project {
 
         files: ["DataHandleTests/*"]
 
+        cpp.includePaths : {
+            var publicInc = FileInfo.joinPaths("DataHandle", "include")
+            var projectInc = FileInfo.joinPaths(publicInc, "DataHandle")
+            var projectInternalInc = FileInfo.joinPaths(projectInc, "internal")
+            var inc = [publicInc, projectInc, projectInternalInc]
+            return inc
+        }
+
         cpp.useCxxPrecompiledHeader : true
         FileTagger {
             patterns : "PrefixHeader.pch"
