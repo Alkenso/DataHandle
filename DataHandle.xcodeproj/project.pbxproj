@@ -44,6 +44,7 @@
 		49C2720D1ECA558700B27DB7 /* SubRangeReadHandle.h in Headers */ = {isa = PBXBuildFile; fileRef = 49C272031ECA558700B27DB7 /* SubRangeReadHandle.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		49C272101ECA559600B27DB7 /* DataHandleBase.h in Headers */ = {isa = PBXBuildFile; fileRef = 49C2720E1ECA559600B27DB7 /* DataHandleBase.h */; settings = {ATTRIBUTES = (Private, ); }; };
 		49C272111ECA559600B27DB7 /* StreamHandleBase.h in Headers */ = {isa = PBXBuildFile; fileRef = 49C2720F1ECA559600B27DB7 /* StreamHandleBase.h */; settings = {ATTRIBUTES = (Private, ); }; };
+		92431B2EE718C78D2B6B309B /* libPods-DataHandle.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 1A2D584AB1ABAAC682344916 /* libPods-DataHandle.a */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -76,6 +77,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		1A2D584AB1ABAAC682344916 /* libPods-DataHandle.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-DataHandle.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		490A77191EB9BF1000C1564F /* DataHandleTestsRunner */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = DataHandleTestsRunner; sourceTree = BUILT_PRODUCTS_DIR; };
 		490A77221EB9CEED00C1564F /* PrefixHeader.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PrefixHeader.pch; path = include/DataHandle/internal/PrefixHeader.pch; sourceTree = "<group>"; };
 		490A772F1EBDC45500C1564F /* TestData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TestData.h; path = ../DataHandleTests/TestData.h; sourceTree = "<group>"; };
@@ -116,6 +118,8 @@
 		49C272031ECA558700B27DB7 /* SubRangeReadHandle.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SubRangeReadHandle.h; path = include/DataHandle/SubRangeReadHandle.h; sourceTree = "<group>"; };
 		49C2720E1ECA559600B27DB7 /* DataHandleBase.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DataHandleBase.h; path = include/DataHandle/internal/DataHandleBase.h; sourceTree = "<group>"; };
 		49C2720F1ECA559600B27DB7 /* StreamHandleBase.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = StreamHandleBase.h; path = include/DataHandle/internal/StreamHandleBase.h; sourceTree = "<group>"; };
+		F2D2326CD762011ED97040A7 /* Pods-DataHandle.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-DataHandle.debug.xcconfig"; path = "Pods/Target Support Files/Pods-DataHandle/Pods-DataHandle.debug.xcconfig"; sourceTree = "<group>"; };
+		FC72D4F8AF11D6E20EF1D69F /* Pods-DataHandle.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-DataHandle.release.xcconfig"; path = "Pods/Target Support Files/Pods-DataHandle/Pods-DataHandle.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -132,6 +136,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				92431B2EE718C78D2B6B309B /* libPods-DataHandle.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -213,6 +218,8 @@
 				49C271431EC894AF00B27DB7 /* DataHandleTests */,
 				490A771A1EB9BF1000C1564F /* DataHandleTestsRunner */,
 				492707161DDAF63900450519 /* Products */,
+				F61DC9F97D435C913363B291 /* Pods */,
+				AB301BBCD0393A1C1430D7C1 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -263,6 +270,23 @@
 				49C2720F1ECA559600B27DB7 /* StreamHandleBase.h */,
 			);
 			name = "Private Headers";
+			sourceTree = "<group>";
+		};
+		AB301BBCD0393A1C1430D7C1 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				1A2D584AB1ABAAC682344916 /* libPods-DataHandle.a */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		F61DC9F97D435C913363B291 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				F2D2326CD762011ED97040A7 /* Pods-DataHandle.debug.xcconfig */,
+				FC72D4F8AF11D6E20EF1D69F /* Pods-DataHandle.release.xcconfig */,
+			);
+			name = Pods;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -328,9 +352,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 4927071E1DDAF63900450519 /* Build configuration list for PBXNativeTarget "DataHandle" */;
 			buildPhases = (
+				4A5A949A631F8A8AA66212BC /* [CP] Check Pods Manifest.lock */,
 				492707131DDAF63900450519 /* Headers */,
 				492707111DDAF63900450519 /* Sources */,
 				492707121DDAF63900450519 /* Frameworks */,
+				ADEC4F77A6C544789358E514 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -398,6 +424,42 @@
 			);
 		};
 /* End PBXProject section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		4A5A949A631F8A8AA66212BC /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-DataHandle-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		ADEC4F77A6C544789358E514 /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-DataHandle/Pods-DataHandle-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		490A77151EB9BF1000C1564F /* Sources */ = {
@@ -551,6 +613,7 @@
 				INTERMEDIATE_PCH_PATH = "";
 				MACOSX_DEPLOYMENT_TARGET = 10.8;
 				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = macosx;
 			};
 			name = Debug;
 		};
@@ -581,11 +644,13 @@
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				INTERMEDIATE_PCH_PATH = "";
 				MACOSX_DEPLOYMENT_TARGET = 10.8;
+				SDKROOT = macosx;
 			};
 			name = Release;
 		};
 		4927071F1DDAF63900450519 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = F2D2326CD762011ED97040A7 /* Pods-DataHandle.debug.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				CLANG_CXX_LIBRARY = "libc++";
@@ -620,16 +685,21 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
+				HEADER_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"${PODS_ROOT}/Headers/Public\"",
+					"${PROJECT_DIR}/${PRODUCT_NAME}/include",
+				);
 				INTERMEDIATE_PCH_PATH = "include/$(PRODUCT_NAME)/internal";
 				PRIVATE_HEADERS_FOLDER_PATH = "$(PUBLIC_HEADERS_FOLDER_PATH)/internal";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PUBLIC_HEADERS_FOLDER_PATH = "/include/$(PRODUCT_NAME)";
-				SDKROOT = macosx;
 			};
 			name = Debug;
 		};
 		492707201DDAF63900450519 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = FC72D4F8AF11D6E20EF1D69F /* Pods-DataHandle.release.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				CLANG_CXX_LIBRARY = "libc++";
@@ -659,11 +729,15 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
+				HEADER_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"${PODS_ROOT}/Headers/Public\"",
+					"${PROJECT_DIR}/${PRODUCT_NAME}/include",
+				);
 				INTERMEDIATE_PCH_PATH = "include/$(PRODUCT_NAME)/internal";
 				PRIVATE_HEADERS_FOLDER_PATH = "$(PUBLIC_HEADERS_FOLDER_PATH)/internal";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PUBLIC_HEADERS_FOLDER_PATH = "/include/$(PRODUCT_NAME)";
-				SDKROOT = macosx;
 			};
 			name = Release;
 		};
