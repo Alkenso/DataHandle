@@ -1,1 +1,2 @@
-DataHandle/Configuration/CMakeModules/* linguist-vendored
+Configuration/* linguist-vendored
+DataHandle/Configuration/* linguist-vendored
