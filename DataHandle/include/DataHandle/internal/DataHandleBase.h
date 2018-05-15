@@ -16,6 +16,8 @@
 
 #pragma once
 
+#include <algorithm>
+
 #include <DataHandle/DataHandleTypes.h>
 
 namespace datarw

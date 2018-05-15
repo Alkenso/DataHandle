@@ -16,6 +16,8 @@
 
 #pragma once
 
+#include <string.h>
+
 template <typename Buffer, typename>
 void datarw::DataReadHandle::peekData(const Range& range, Buffer& buffer)
 {
@@ -128,7 +130,7 @@ template<typename T>
 T datarw::DataReadHandle::peekValue(int64_t offset, const bool reverseByteOrder)
 {
     T value;
-    memset(&value, 0, sizeof(T));
+    ::memset(&value, 0, sizeof(T));
     peekData(Range(offset, sizeof(T)), reinterpret_cast<unsigned char*>(&value));
     
     return reverseByteOrder ? utils::ReverseValueByteOrder<T>(value) : value;
@@ -144,7 +146,7 @@ template<typename T>
 T datarw::DataReadHandle::readValue(const bool reverseByteOrder)
 {
     T value;
-    memset(&value, 0, sizeof(T));
+    ::memset(&value, 0, sizeof(T));
     readData(sizeof(T), reinterpret_cast<unsigned char*>(&value));
     
     return reverseByteOrder ? utils::ReverseValueByteOrder<T>(value) : value;
