@@ -52,7 +52,7 @@ namespace datarw
     template <typename Container>
     using IsByteContainer = typename std::enable_if<IsByte<typename Container::value_type>::value, Container>::type;
     
-    template <typename T>
+    template <typename T, typename = typename std::enable_if<std::is_class<T>::value, T>::type>
     using IsByteBuffer = typename std::enable_if<IsByte<typename T::value_type>::value && IsContiguousContainer<T>::value>::type;
     
     struct Range
