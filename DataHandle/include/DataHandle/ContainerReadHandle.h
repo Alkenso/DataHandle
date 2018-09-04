@@ -16,6 +16,7 @@
 
 #pragma once
 
+#include <functional>
 #include <DataHandle/DataReadHandle.h>
 
 namespace datarw
